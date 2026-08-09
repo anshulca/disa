@@ -293,19 +293,22 @@ function openMessages(){
  ov.classList.add('on');
  if(!FB_ON){document.getElementById('msgList').innerHTML='<div class="banner">Connect Firebase to see messages.</div>';return;}
  DB.collection('messages').get().then(function(snap){
-   const items=snap.docs.map(function(d){return d.data();}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+   const items=snap.docs.map(function(x){return Object.assign({_id:x.id},x.data());}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
    if(!items.length){document.getElementById('msgList').innerHTML='<div class="empty">No messages yet.</div>';return;}
    document.getElementById('msgList').innerHTML=items.map(function(m){
      var when=(m.date||'').slice(0,16).replace('T',' ');
-     return '<div style="border:1px solid var(--ring);border-radius:12px;padding:12px 14px;margin-bottom:10px">'
-       +'<div style="font-weight:800">'+esc(m.name||'Anonymous')+' <span style="color:var(--muted);font-weight:600;font-size:12px">&lt;'+esc(m.email||'')+'&gt;</span></div>'
-       +'<div style="color:var(--muted);font-size:12px;margin-bottom:6px">'+esc(when)+'</div>'
-       +'<div style="font-size:14px;line-height:1.5">'+esc(m.message||'')+'</div>'
-       +(m.email?'<a class="btn acc sm" style="margin-top:8px;display:inline-block" href="mailto:'+esc(m.email)+'">Reply</a>':'')
+     return '<div style="border:1px solid var(--ring);border-radius:14px;padding:14px 16px;margin-bottom:12px;background:#fff;box-shadow:var(--shadow)">'
+       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">'
+       +'<div><div style="font-weight:800;font-size:15px">'+esc(m.name||'Anonymous')+'</div>'
+       +'<div style="color:var(--muted);font-size:12px">'+esc(m.email||'no email')+' &middot; '+esc(when)+'</div></div>'
+       +'<button class="btn sm" style="background:#e11d48;color:#fff;flex-shrink:0" onclick="delMsg(\''+esc(m._id)+'\')">Delete</button></div>'
+       +'<div style="font-size:14px;line-height:1.6;margin-top:10px;white-space:pre-wrap;color:var(--ink)">'+esc(m.message||'')+'</div>'
+       +(m.email?'<a class="btn acc sm" style="margin-top:10px;display:inline-block" href="mailto:'+esc(m.email)+'?subject=Re:%20DISA%20Saarthi">Reply by email</a>':'')
        +'</div>';
    }).join('');
- }).catch(function(e){document.getElementById('msgList').innerHTML='<div class="banner">Could not load messages: '+e.message+'</div>';});
+ }).catch(function(e){document.getElementById('msgList').innerHTML='<div class="banner">Could not load messages: '+e.message+' - check your Firestore rules allow reading messages.</div>';});
 }
+function delMsg(id){ if(!confirm('Delete this message permanently?'))return; if(!FB_ON)return; DB.collection('messages').doc(id).delete().then(function(){openMessages();}).catch(function(e){alert('Delete failed: '+e.message);}); }
 </script>
 </body>
 </html>

@@ -1872,12 +1872,25 @@ function mountGoogle(){
 function decodeJwt(t){try{const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
  const json=decodeURIComponent(atob(p).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));
  return JSON.parse(json);}catch(e){return null;}}
+function clearLocalUser(email){try{const all=users();delete all[email];saveUsers(all);if(localStorage.getItem('disa_session')===email)localStorage.removeItem('disa_session');updNav();}catch(e){}}
+function ageFromDob(dob){const b=new Date(dob);if(isNaN(b.getTime()))return null;const t=new Date();let a=t.getFullYear()-b.getFullYear();const m=t.getMonth()-b.getMonth();if(m<0||(m===0&&t.getDate()<b.getDate()))a--;return a;}
+function loginLocalFallback(gname,email,gpic){const u=users()[email];if(u){if(gpic&&!u.photo)u.photo=gpic;saveUser(u);setSession(email);closeModal();toast('Welcome back!');}else{window._gpending={name:gname,email:email,photo:gpic};completeProfile();}}
 function onGoogle(resp){
- const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, use email instead');
- const email=d.email.toLowerCase(), all=users(), u=all[email];
- if(u){ if(d.picture&&!u.photo){u.photo=d.picture;} saveUser(u); setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); setTimeout(enforceAccess,1200); return; }
- window._gpending={name:d.name||'',email,photo:d.picture||null};
- completeProfile();
+ const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, please try again');
+ const email=d.email.toLowerCase(), gname=d.name||'', gpic=d.picture||null;
+ if(!ensureFB())return loginLocalFallback(gname,email,gpic);
+ SDB.collection('students').doc(email).get().then(function(doc){
+   if(doc.exists){
+     const data=doc.data();
+     if(data.blocked){clearLocalUser(email);alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.');return;}
+     const u={name:data.name||gname,email:email,membership:data.membership||'',phone:data.phone||'',address:data.address||'',dob:data.dob||'',pass:null,provider:'google',photo:data.photo||gpic||null,chapters:data.chapters||{},exams:data.exams||[],joined:data.joined||new Date().toISOString().slice(0,10)};
+     saveUser(u);setSession(email);closeModal();toast('Welcome back, '+((u.name||'').split(' ')[0]||'')+'!');
+   }else{
+     clearLocalUser(email); /* deleted or brand new -> fresh sign-up */
+     window._gpending={name:gname,email:email,photo:gpic};
+     completeProfile();
+   }
+ }).catch(function(){loginLocalFallback(gname,email,gpic);});
 }
 function completeProfile(){
  const g=window._gpending||{};
@@ -1903,6 +1916,7 @@ function finishGoogle(){
  if(!/^\d{6}$/.test(mem))return authErr('Membership number must be exactly 6 digits.');
  if(!/^\d{10}$/.test(phone))return authErr('Phone must be a 10-digit number.');
  if(!dob)return authErr('Please select your date of birth.');
+ var _age=ageFromDob(dob); if(_age===null||_age<18)return authErr('Sorry, we are unable to register this account with the details provided.');
  if(!addr)return authErr('Please enter your city / address.');
  if(!document.getElementById('gpAgree').checked)return authErr('Please accept the Privacy Policy & Terms to continue.');
  const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,dob:dob,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
@@ -1932,16 +1946,17 @@ function mirrorStudent(u){
  try{
   const done=Object.values(u.chapters||{}).filter(p=>p>=60).length;
   const best=(u.exams&&u.exams.length)?Math.max.apply(null,u.exams.map(e=>e.score)):null;
-  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',dob:u.dob||'',joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
+  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',dob:u.dob||'',photo:u.photo||'',chapters:u.chapters||{},joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
  }catch(e){}
 }
-/* if an admin has blocked this account, sign them out */
+/* sign out accounts the admin has deleted or blocked */
 function enforceAccess(){
  try{
   const u=currentUser(); if(!u)return;
   if(!ensureFB())return setTimeout(enforceAccess,1500);
   SDB.collection('students').doc(u.email).get().then(function(d){
-    if(d.exists && d.data().blocked){ try{logout();}catch(e){} alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.'); }
+    if(!d.exists){ clearLocalUser(u.email); return; } /* account removed -> reset to fresh sign-up */
+    if(d.data().blocked){ clearLocalUser(u.email); alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.'); }
   }).catch(function(){});
  }catch(e){}
 }
