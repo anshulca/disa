@@ -77,7 +77,7 @@ section{padding:26px 0}
 .tablewrap{background:#fff;border:1px solid var(--ring);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{padding:11px 13px;text-align:left;border-bottom:1px solid #eef1f9;white-space:nowrap}
-th{background:#f7f8fd;color:var(--muted);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:64px}
+th{background:#f7f8fd;color:var(--muted);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0}
 tr:hover td{background:#fafbff}
 .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:800}
 .pill.pass{background:#dcfce7;color:#15803d}
@@ -140,7 +140,12 @@ textarea.fld{min-height:140px;resize:vertical}
         <th>Joined</th><th>Chapters</th><th>Best score</th><th>Status</th><th></th>
       </tr></thead><tbody id="rows"></tbody></table>
     </div></div>
-    <p class="mini" style="margin-top:14px">Data source: Firebase Firestore collection <b>students</b>. This dashboard only reads it.</p>
+    <p class="mini" style="margin-top:14px">Data source: Firebase Firestore collection <b>students</b>.</p>
+    <div style="text-align:center;margin:24px 0 30px;color:var(--muted);font-size:13px">
+      <div style="font-weight:800;color:var(--ink)">Made by Anshul Karwa, CA, DISA, LLB</div>
+      <a href="https://www.linkedin.com/in/anshulkarwa" target="_blank" rel="noopener" style="color:#4f46e5;font-weight:700">linkedin.com/in/anshulkarwa</a>
+      <div style="font-size:11px;margin-top:6px;opacity:.8">DISA Saarthi admin console · for educational use only</div>
+    </div>
   </div></section>
 </div>
 
@@ -206,7 +211,7 @@ function render(){
      <td><b>${esc(s.name||'-')}</b></td><td>${esc(s.email||'-')}</td><td>${esc(s.membership||'-')}</td>
      <td>${esc(s.phone||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
      <td>${s.chaptersDone!=null?s.chaptersDone:'-'}</td><td>${s.bestScore!=null?s.bestScore+' / 200':'-'}</td>
-     <td>${st}</td><td style="white-space:nowrap"><button class="btn ghost sm" onclick="openEdit('${esc(s._id)}')">Edit</button> <button class="btn ghost sm" onclick="allowRetake('${esc(s._id)}')">+1 attempt</button> <button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
+     <td>${s.blocked?'<span class="pill fail">Blocked</span> ':''}${st}</td><td style="white-space:nowrap"><button class="btn ghost sm" onclick="openEdit('${esc(s._id)}')">Edit</button> <button class="btn ghost sm" onclick="allowRetake('${esc(s._id)}')">+1 attempt</button> <button class="btn ghost sm" onclick="blockStudent('${esc(s._id)}',${s.blocked?'true':'false'})">${s.blocked?'Unblock':'Block'}</button> <button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
  document.getElementById('rows').innerHTML=rows||'<tr><td colspan="10" class="empty">No students yet.</td></tr>';
 }
 function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -226,6 +231,12 @@ function delStudent(id){
  if(!confirm('Delete this student permanently? This cannot be undone.'))return;
  if(!FB_ON)return alert('Connect Firebase first.');
  DB.collection('students').doc(id).delete().then(function(){loadStudents();}).catch(function(e){alert('Delete failed: '+e.message);});
+}
+function blockStudent(id,cur){
+ const nb=!cur;
+ if(!confirm(nb?'Block this student from logging in? They will be signed out next time they open the site.':'Unblock this student?'))return;
+ if(!FB_ON)return alert('Connect Firebase first.');
+ DB.collection('students').doc(id).update({blocked:nb}).then(function(){loadStudents();}).catch(function(e){alert('Failed: '+e.message);});
 }
 function allowRetake(id){
  const s=STUDENTS.find(x=>x._id===id)||{};

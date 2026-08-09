@@ -1875,7 +1875,7 @@ function decodeJwt(t){try{const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g
 function onGoogle(resp){
  const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, use email instead');
  const email=d.email.toLowerCase(), all=users(), u=all[email];
- if(u){ if(d.picture&&!u.photo){u.photo=d.picture;} saveUser(u); setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); return; }
+ if(u){ if(d.picture&&!u.photo){u.photo=d.picture;} saveUser(u); setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); setTimeout(enforceAccess,1200); return; }
  window._gpending={name:d.name||'',email,photo:d.picture||null};
  completeProfile();
 }
@@ -1935,6 +1935,17 @@ function mirrorStudent(u){
   SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',dob:u.dob||'',joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
  }catch(e){}
 }
+/* if an admin has blocked this account, sign them out */
+function enforceAccess(){
+ try{
+  const u=currentUser(); if(!u)return;
+  if(!ensureFB())return setTimeout(enforceAccess,1500);
+  SDB.collection('students').doc(u.email).get().then(function(d){
+    if(d.exists && d.data().blocked){ try{logout();}catch(e){} alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.'); }
+  }).catch(function(){});
+ }catch(e){}
+}
+setTimeout(enforceAccess,1800);
 </script>
 </body>
 </html>
