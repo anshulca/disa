@@ -438,6 +438,23 @@ body.light .previewbar a,body.light .namelink{color:#4338ca;border-bottom-color:
 .cert a{color:#4f46e5 !important}
 /* softer, more studious cards */
 .mod:hover{transform:translateY(-5px)}
+
+/* --- readability fixes (esp. light theme) --- */
+.explain{color:var(--ink) !important}
+.explain b{color:var(--good) !important}
+.note-block{color:var(--ink) !important}
+.timeline .ti span{color:var(--muted) !important}
+.result p{color:var(--muted) !important}
+
+/* --- light-mode contrast fixes for chips / indexes --- */
+body.light .chip{color:#3730a3}
+body.light .concept{color:#312e81;background:rgba(99,102,241,.16)}
+body.light .ridx{color:#334155}
+body.light .ridx:hover{color:#0f172a}
+body.light .chsel .sub2{color:#5b6478}
+body.light .chsel b{color:#4338ca}
+body.light .palegend{color:#5b6478}
+body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
 </style>
 </head>
 <body>
@@ -449,7 +466,7 @@ body.light .previewbar a,body.light .namelink{color:#4338ca;border-bottom-color:
     <a href="#modules">Modules</a>
     <a href="#features">Features</a>
     <a href="#" onclick="if(currentUser()){startExam()}else{openAuth('login')};return false">Exam</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pricing" id="navPricing">Pricing</a>
     <button class="icobtn" id="themeBtn" onclick="toggleTheme()" title="Day / night">☀️</button>
     <span id="authArea"></span>
   </div>
@@ -497,10 +514,10 @@ body.light .previewbar a,body.light .namelink{color:#4338ca;border-bottom-color:
     <div class="plan"><h4>Starter</h4><div class="amt">FREE</div>
       <ul><li>Module 1 full access</li><li>Chapter tests</li><li>1 mock section</li></ul>
       <button class="btn ghost" style="width:100%" onclick="openLogin()">Start free</button></div>
-    <div class="plan pop"><h4>Full Access</h4><div class="amt"><s>Rs 1999</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
+    <div class="plan pop"><h4>Full Access</h4><div class="amt"><s>Rs 999</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
       <ul><li>All 7 modules + notes</li><li>1000+ chapter MCQs</li><li>Unlimited 200-mark mocks</li><li>Weak-area analytics</li></ul>
       <button class="btn grad" style="width:100%" onclick="openPay()">Unlock everything free</button></div>
-    <div class="plan"><h4>Mentor Plus</h4><div class="amt"><s>Rs 2199</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
+    <div class="plan"><h4>Mentor Plus</h4><div class="amt"><s>Rs 1199</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
       <ul><li>Everything in Full</li><li>Doubt-solving support</li><li>Passing certificate</li></ul>
       <button class="btn ghost" style="width:100%" onclick="openPay()">Go Plus free</button></div>
   </div>
@@ -515,7 +532,6 @@ body.light .previewbar a,body.light .namelink{color:#4338ca;border-bottom-color:
   <div class="eduline">For educational use only. Not affiliated with or endorsed by ICAI. No guarantee of exam outcomes.</div>
 </div></footer>
 
-<div class="demo-tag">✨ Live demo - click anything</div>
 
 <!-- MODAL -->
 <div id="reader"></div>
@@ -1129,7 +1145,7 @@ MODULES.forEach(m=>{
   el.className='mod'+(m.free?'':' locked');
   el.innerHTML=`<div class="num">${m.n}</div>
     <h3>${m.title}</h3>
-    <div class="meta">${m.chapters.length} chapters${m.free?' · Free':''}</div>
+    <div class="meta">${m.chapters.length} chapters${m.free?' · By CA Anshul Karwa':''}</div>
     <div class="chips">${m.chapters.slice(0,3).map(c=>`<span class="chip">${c}</span>`).join('')}${m.chapters.length>3?`<span class="chip">+${m.chapters.length-3}</span>`:''}</div>
     <div class="row">
       <button class="notes" onclick="openNotes(${m.n})">📝 Notes</button>
@@ -1344,7 +1360,7 @@ function chapSections(ch){
 
 /* entry points from the module cards */
 function gateLogin(){toast('Please log in to unlock this');openAuth('login');}
-function isGuestFree(n,ci){return n===2&&ci===0;} /* Module 2, Chapter 1 = free preview */
+function isGuestFree(n,ci){return n===1&&ci===0;} /* Module 1, Chapter 1 = free preview */
 function openNotes(n){
  if(n===7)return toast('Lab Manuals & Case Studies - coming soon');
  const m=modByN(n);if(!m)return openPay();
@@ -1376,7 +1392,7 @@ function openReader(ci){
     <div class="rbar-r"><span class="rlock">🔒 Read-only · no copy · no download</span></div>
   </div>
   <div class="rtabs">${chTabs}</div>
-  ${guest?`<div class="previewbar">✨ Free preview - Module 2, Chapter 1. <a onclick="closeReader();openAuth('register')">Create a free account</a> to unlock all modules, chapter tests and the exam.</div>`:''}
+  ${guest?`<div class="previewbar">✨ Free preview - Module 1, Chapter 1. <a onclick="closeReader();openAuth('register')">Create a free account</a> to unlock all modules, chapter tests and the exam.</div>`:''}
   <div class="rwrap">
     <aside class="rside"><div class="rside-h">On this page</div><div id="rside"></div></aside>
     <main class="rpaper" id="rpaper" oncontextmenu="return false">
@@ -1403,8 +1419,23 @@ function openReader(ci){
  document.getElementById('rside').innerHTML=idx||'<div style="color:var(--muted);font-size:13px;padding:8px">Read top to bottom</div>';
  r.classList.add('on');READER_ON=true;document.body.style.overflow='hidden';
  document.getElementById('rpaper').scrollTop=0;
+ clearTimeout(window._guestTimer);
+ if(guest){window._guestTimer=setTimeout(function(){guestPrompt();},60000);}
 }
-function closeReader(){const r=document.getElementById('reader');r.classList.remove('on');READER_ON=false;document.body.style.overflow='';}
+function guestPrompt(){
+ const r=document.getElementById('reader');
+ if(!r||!READER_ON||currentUser()||document.getElementById('gprompt'))return;
+ const d=document.createElement('div');d.id='gprompt';
+ d.style.cssText='position:absolute;inset:0;z-index:60;display:grid;place-items:center;background:rgba(10,15,30,.55);backdrop-filter:blur(4px);padding:20px';
+ d.innerHTML=`<div style="background:var(--card);color:var(--ink);border:1px solid var(--ring);border-radius:20px;max-width:430px;width:100%;padding:30px;text-align:center;box-shadow:var(--shadow)">
+   <div style="font-size:36px">🔓</div>
+   <h3 style="font-size:21px;font-weight:900;margin:8px 0">Enjoying the notes?</h3>
+   <p style="color:var(--muted);font-size:14px;line-height:1.65;margin-bottom:18px">This is a free preview. Sign in with Google to unlock all 6 modules, every chapter test and the full 200-mark exam - free for this attempt.</p>
+   <button class="btn grad" style="width:100%" onclick="closeReader();openAuth('login')">Sign in with Google</button>
+   <button class="btn ghost" style="width:100%;margin-top:8px" onclick="document.getElementById('gprompt').remove()">Keep reading the preview</button></div>`;
+ r.appendChild(d);
+}
+function closeReader(){clearTimeout(window._guestTimer);const r=document.getElementById('reader');r.classList.remove('on');READER_ON=false;document.body.style.overflow='';}
 
 /* content-protection: block copy, cut, right-click, save/print across the WHOLE site (allow typing in fields) */
 function inField(){const el=document.activeElement;return el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.isContentEditable);}
@@ -1606,11 +1637,13 @@ function openProfile(){
   <div class="pgrid">
     <div class="pcell"><div class="k">Membership No.</div><div class="v">${u.membership}</div></div>
     <div class="pcell"><div class="k">Phone</div><div class="v">${u.phone}</div></div>
+    <div class="pcell"><div class="k">Date of birth</div><div class="v">${u.dob||'-'}</div></div>
     <div class="pcell"><div class="k">Address</div><div class="v">${u.address}</div></div>
     <div class="pcell"><div class="k">Best exam score</div><div class="v">${best!==null?best+' / 200':'Not attempted'}</div></div>
+    <div class="pcell"><div class="k">Exam attempts</div><div class="v">${(u.exams||[]).length} of 2 used</div></div>
   </div>
   <div class="progwrap"><div class="eyebrow" style="margin-bottom:8px">Your progress · ${done} chapters mastered</div>${modProg}</div>
-  <div class="qnav" style="margin-top:20px"><button class="btn ghost" onclick="logout()">Log out</button><button class="btn grad" onclick="closeModal();startExam()">Take 200-mark exam →</button></div>`);
+  <div class="qnav" style="margin-top:20px"><button class="btn ghost" onclick="closeModal()">Close</button><button class="btn ghost" onclick="logout()">Log out</button></div>`);
 }
 function handlePhoto(input){const f=input.files[0];if(!f)return;const r=new FileReader();
  r.onload=e=>{const img=new Image();img.onload=()=>{const c=document.createElement('canvas');const mx=400;let w=img.width,h=img.height;const sc=Math.min(1,mx/Math.max(w,h));c.width=w*sc;c.height=h*sc;c.getContext('2d').drawImage(img,0,0,c.width,c.height);const u=currentUser();if(u){u.photo=c.toDataURL('image/jpeg',0.82);saveUser(u);updNav();openProfile();toast('Photo updated');}};img.src=e.target.result;};
@@ -1627,28 +1660,31 @@ const EXAM_MIN_ANSWERED=80, EXAM_MIN_MIN=70, EXAM_TOTAL_MIN=240;
 function startExam(){
  const u=currentUser();
  if(!u){toast('Please log in to take the exam');return openAuth('login');}
- if(u.exams&&u.exams.length)return examAlready(u);
+ if(u.exams&&u.exams.length>=2)return examAlready(u);
  if(typeof EXAMPOOL==='undefined'||!EXAMPOOL.length){return toast('Exam pool not loaded');}
  examNotice();
 }
 function examAlready(u){const best=Math.max(...u.exams.map(e=>e.score)),pass=best>=120;
- showModal(`<div class="modal-head"><div><h3>Exam already taken</h3><div class="sub">This exam can be attempted only once.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <div class="note-block">You have used your one attempt. Your score: <b>${best} / 200</b> - ${pass?'Passed 🎉':'Not cleared'}.</div>
+ showModal(`<div class="modal-head"><div><h3>Attempts finished</h3><div class="sub">This exam can be attempted only twice.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <div class="note-block">You have used both your attempts. Best score: <b>${best} / 200</b> - ${pass?'Passed 🎉':'Not cleared'}.</div>
   <p style="color:var(--muted);font-size:14px">Keep revising the notes and chapter tests to stay sharp.</p>
   <button class="btn grad" style="width:100%" onclick="closeModal()">Close</button>`);
 }
 function examNotice(){
+ const used=(currentUser().exams||[]).length;
  showModal(`<div class="modal-head"><div><h3>Before you begin ⚠️</h3><div class="sub">Please read carefully.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <div class="note-block" style="border-left-color:var(--bad)"><b>You can take this exam only ONE time.</b> Make sure you are ready and will not be disturbed.</div>
+  <div class="note-block" style="border-left-color:var(--bad)"><b>You can take this exam only TWICE.</b> This will be attempt ${used+1} of 2. Make sure you are ready and will not be disturbed.</div>
   <ul style="color:var(--ink);font-size:14.5px;line-height:1.85;margin:6px 0 14px 18px">
    <li>200 questions, 1 mark each. Duration: <b>4 hours (240 minutes)</b>.</li>
    <li>You <b>cannot submit before 70 minutes</b> have passed.</li>
    <li>You must answer <b>at least 80 questions</b> to get a result.</li>
+   <li>You may <b>exit</b> anytime before submitting - that will not count as an attempt.</li>
    <li>Pass mark is <b>120 / 200</b>. The timer auto-submits at zero.</li>
    <li>Copying, printing and downloading are disabled.</li>
   </ul>
   <div class="qnav"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn grad" onclick="beginExam()">I understand, start now</button></div>`);
 }
+function exitExam(){if(confirm('Exit the exam?\n\nYour answers in this attempt will be discarded and this will NOT count as an attempt.\nYou get 2 attempts in total.'))closeExam();}
 function beginExam(){
  closeModal();
  EX={q:EXAMPOOL.map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:EXAM_TOTAL_MIN*60,done:false};
@@ -1660,6 +1696,7 @@ function renderExam(){
  ex.innerHTML=`
   <div class="exbar"><div class="extitle">🥷 DISA Saarthi · Full Mock Exam (200 marks)</div>
     <div style="display:flex;gap:10px;align-items:center"><span class="extimer" id="extimer">${hhmmss(EX.t)}</span>
+    <button class="btn ghost" onclick="exitExam()">Exit</button>
     <button class="btn grad" onclick="confirmSubmit()">Submit exam</button></div></div>
   <div class="exbrand">🥷 Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a></div>
   <div class="exwrap">
@@ -1741,18 +1778,30 @@ function openContact(){
    <div class="pcell"><div class="k">Built by</div><div class="v"><a class="namelink" href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a>, CA, DISA, LLB</div></div>
    <div class="pcell"><div class="k">LinkedIn</div><div class="v"><a class="namelink" href="${M1LINK}" target="_blank" rel="noopener">linkedin.com/in/anshulkarwa</a></div></div>
   </div>
+  <label class="flbl">Your name</label><input class="fld" id="ctName" placeholder="Your name" value="${(currentUser()&&currentUser().name)||''}">
   <label class="flbl">Your email</label><input class="fld" id="ctFrom" type="email" placeholder="you@example.com" value="${(currentUser()&&currentUser().email)||''}">
   <label class="flbl">Your message</label><textarea class="fld" id="ctMsg" rows="4" placeholder="Type your message..."></textarea>
+  <div class="errmsg" id="ctErr"></div>
   <button class="btn grad" style="width:100%" onclick="sendContact()">Send message</button>`);
 }
 function sendContact(){
+ const name=(document.getElementById('ctName').value||'').trim();
  const from=(document.getElementById('ctFrom').value||'').trim();
  const msg=(document.getElementById('ctMsg').value||'').trim();
- if(!msg)return toast('Please type a message');
- const subject=encodeURIComponent('DISA Saarthi - message from '+(from||'a student'));
- const body=encodeURIComponent(msg+'\n\nFrom: '+(from||'(no email given)'));
+ const err=document.getElementById('ctErr');
+ if(!from||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(from)){if(err)err.textContent='Please enter a valid email.';return;}
+ if(!msg){if(err)err.textContent='Please type a message.';return;}
+ try{
+  if(ensureFB()){
+   SDB.collection('messages').add({name:name||'',email:from,message:msg,date:new Date().toISOString(),read:false}).then(function(){toast('Message sent - thank you!');}).catch(function(){toast('Message saved.');});
+   closeModal();return;
+  }
+ }catch(e){}
+ // fallback if cloud not available: open mail app
+ const subject=encodeURIComponent('DISA Saarthi - message from '+(name||from||'a student'));
+ const body=encodeURIComponent(msg+'\n\nFrom: '+(name||'')+' '+from);
  window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subject+'&body='+body;
- toast('Opening your email app to send...');closeModal();
+ toast('Opening your email app...');closeModal();
 }
 function openPrivacy(){
  showModal(`<div class="modal-head"><div><h3>Privacy Policy & Terms</h3><div class="sub">Last updated 2026</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
@@ -1770,7 +1819,10 @@ function openPrivacy(){
 /* ================= NAV / WIRING ================= */
 function updNav(){const a=document.getElementById('authArea');if(!a)return;const u=currentUser();
  a.innerHTML=u?`<div class="navuser" onclick="openProfile()" title="Your profile">${u.photo?`<img src="${u.photo}">`:`<span class="av">${(u.name[0]||'S').toUpperCase()}</span>`}<span>${u.name.split(' ')[0]}</span></div>`
-  :`<button class="btn" onclick="openAuth('login')">Log in</button>`;}
+  :`<button class="btn" onclick="openAuth('login')">Log in</button>`;
+ const pr=document.getElementById('pricing'),pl=document.getElementById('navPricing');
+ if(pr)pr.style.display=u?'none':'';
+ if(pl)pl.style.display=u?'none':'';}
 /* keep old entry points working */
 function openLogin(){openAuth('login');}
 /* record chapter score into profile after each chapter test */
@@ -1800,7 +1852,7 @@ function decodeJwt(t){try{const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g
 function onGoogle(resp){
  const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, use email instead');
  const email=d.email.toLowerCase(), all=users(), u=all[email];
- if(u){ if(d.picture&&!u.photo){u.photo=d.picture;saveUser(u);} setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); return; }
+ if(u){ if(d.picture&&!u.photo){u.photo=d.picture;} saveUser(u); setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); return; }
  window._gpending={name:d.name||'',email,photo:d.picture||null};
  completeProfile();
 }
@@ -1811,7 +1863,8 @@ function completeProfile(){
    <div class="pinfo"><b>${g.name||'Student'}</b><span>${g.email}</span></div></div>
   <div class="frow"><div style="flex:1"><label class="flbl">ICAI Membership No. (6 digits)</label><input class="fld" id="gpMem" maxlength="6" inputmode="numeric" placeholder="e.g. 123456"></div>
     <div style="flex:1"><label class="flbl">Phone (+91)</label><input class="fld" id="gpPhone" maxlength="10" inputmode="numeric" placeholder="10-digit number"></div></div>
-  <label class="flbl">Address</label><input class="fld" id="gpAddr" placeholder="City, State">
+  <div class="frow"><div style="flex:1"><label class="flbl">Date of birth</label><input class="fld" id="gpDob" type="date"></div>
+    <div style="flex:1"><label class="flbl">City / Address</label><input class="fld" id="gpAddr" placeholder="City, State"></div></div>
   <div class="errmsg" id="authErr"></div>
   <button class="btn grad" style="width:100%" onclick="finishGoogle()">Finish & enter</button>`);
 }
@@ -1820,18 +1873,21 @@ function finishGoogle(){
  const mem=(document.getElementById('gpMem').value||'').trim();
  const phone=(document.getElementById('gpPhone').value||'').trim();
  const addr=(document.getElementById('gpAddr').value||'').trim();
+ const dob=(document.getElementById('gpDob').value||'').trim();
  if(!/^\d{6}$/.test(mem))return authErr('Membership number must be exactly 6 digits.');
  if(!/^\d{10}$/.test(phone))return authErr('Phone must be a 10-digit number.');
- if(!addr)return authErr('Please enter your address.');
- const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
- saveUser(u);setSession(u.email);closeModal();toast('Welcome, '+u.name.split(' ')[0]+'!');openProfile();
+ if(!dob)return authErr('Please select your date of birth.');
+ if(!addr)return authErr('Please enter your city / address.');
+ const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,dob:dob,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
+ saveUser(u);setSession(u.email);closeModal();toast('Welcome, '+u.name.split(' ')[0]+'!');
 }
 /* make the auth modal render the Google button */
 if(typeof openAuth==='function'){const _oa=openAuth;openAuth=function(m){_oa(m);setTimeout(mountGoogle,60);};}
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
 /* ---------- FIREBASE (cloud sync of students, for the admin dashboard) ---------- */
 const FIREBASE_CONFIG={
   apiKey: "AIzaSyCWPyv3BZa10M7B-jz7hcC3fw0Iuxf2RII",
@@ -1841,7 +1897,7 @@ const FIREBASE_CONFIG={
   messagingSenderId: "76181770954",
   appId: "1:76181770954:web:08df00e6997e8b3dbf9a33",
   measurementId: "G-4QL1NPVWQQ"
-}; /* paste your Firebase config object here to enable cloud sync */
+};
 let SDB=null,SFB=false;
 function ensureFB(){if(SFB)return true;try{if(!FIREBASE_CONFIG||!window.firebase)return false;if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);SDB=firebase.firestore();SFB=true;return true;}catch(e){return false;}}
 function mirrorStudent(u){
@@ -1849,10 +1905,9 @@ function mirrorStudent(u){
  try{
   const done=Object.values(u.chapters||{}).filter(p=>p>=60).length;
   const best=(u.exams&&u.exams.length)?Math.max.apply(null,u.exams.map(e=>e.score)):null;
-  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
+  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',dob:u.dob||'',joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
  }catch(e){}
 }
-
 </script>
 </body>
 </html>
