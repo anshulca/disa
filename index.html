@@ -1907,7 +1907,6 @@ function finishGoogle(){
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 /* ---------- FIREBASE (cloud sync of students, for the admin dashboard) ---------- */
 const FIREBASE_CONFIG={
@@ -1929,32 +1928,11 @@ function mirrorStudent(u){
   SDB.collection('students').doc(u.uid).set({uid:u.uid,name:u.name||'',email:u.email||'',membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'google',dob:u.dob||'',photo:u.photo||'',chapters:u.chapters||{},joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
  }catch(e){}
 }
-/* ---------- WELCOME EMAIL (sent via EmailJS + your Zoho, on sign-up) ----------
-   Fill these 3 from emailjs.com (see setup). Leave blank to disable. */
-const EMAILJS_PUBLIC_KEY="LQs8GQPkuPLgD_qFx";
-const EMAILJS_SERVICE_ID="service_cu5vzih";
-const EMAILJS_WELCOME_TEMPLATE="template_xscpws7"; /* your welcome template */
-const SITE_URL="https://disa.studyfromnotes.com";
-try{ if(EMAILJS_PUBLIC_KEY && window.emailjs) emailjs.init({publicKey:EMAILJS_PUBLIC_KEY}); }catch(e){}
-function welcomeText(name){
- return "Dear "+(name||'Student')+",<br><br>"
- +"Welcome to <b>DISA Saarthi</b> - your companion to crack the ICAI DISA exam, built by CA Anshul Karwa.<br><br>"
- +"Here is what you can do:<br>"
- +"&bull; Read crisp, exam-focused notes for every module in a clean, distraction-free reader<br>"
- +"&bull; Practice chapter-wise MCQ tests with instant answers and explanations<br>"
- +"&bull; Attempt a full 200-mark mock exam with a real 4-hour timer and an instant result<br>"
- +"&bull; Track your progress and see exactly where you stand<br><br>"
- +"&#128073; Start studying now: <a href=\""+SITE_URL+"\">"+SITE_URL+"</a><br><br>"
- +"Only about 5% clear DISA. With steady practice here, you can be one of them.<br><br>"
- +"Thank You.<br>"
- +"DISA Saarthi,<br>"
- +"Founder,<br>"
- +"CA Anshul Karwa<br>"
- +"<a href=\"https://www.linkedin.com/in/anshulkarwa\">linkedin.com/in/anshulkarwa</a>";
-}
+/* ---------- WELCOME EMAIL via ZeptoMail (Cloudflare Worker, no EmailJS) ---------- */
+const WELCOME_WORKER_URL="https://disa-welcome.anshul-792.workers.dev/";
 function sendWelcomeEmail(name,email){
- if(!EMAILJS_PUBLIC_KEY||!EMAILJS_SERVICE_ID||!EMAILJS_WELCOME_TEMPLATE||!window.emailjs||!email)return;
- try{ emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_WELCOME_TEMPLATE,{to_email:email,to_name:name||'Student',subject:'Welcome to DISA Saarthi by CA Anshul Karwa',message:welcomeText(name),from_name:'CA Anshul Karwa - DISA Saarthi'}); }catch(e){}
+ if(!WELCOME_WORKER_URL||!email)return;
+ try{ fetch(WELCOME_WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to:email,name:name||"Student"})}); }catch(e){}
 }
 /* keep login state in sync with Firebase Auth (persists across reloads, enforces block/delete) */
 function fbAuthInit(){
