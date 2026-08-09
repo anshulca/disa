@@ -495,6 +495,21 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
   <div class="grid" id="modGrid"></div>
 </div></section>
 
+<section id="updates" style="display:none"><div class="wrap">
+  <div class="eyebrow">Stay in the loop</div>
+  <h2 class="title">News & Resources</h2>
+  <div class="feats" style="margin-top:22px;align-items:start">
+    <div class="feat" id="newsCard" style="display:none">
+      <span class="ic">📰</span><h4>Announcements</h4>
+      <div id="newsList" style="margin-top:8px"></div>
+    </div>
+    <div class="feat" id="resCard" style="display:none">
+      <span class="ic">📎</span><h4>Resources</h4>
+      <div id="resList" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div></section>
+
 <section id="features"><div class="wrap">
   <div class="eyebrow">Why it works</div>
   <h2 class="title">Built to make hard stuff stick.</h2>
@@ -1943,6 +1958,33 @@ function fbAuthInit(){
  });
 }
 fbAuthInit();
+
+/* ---- load News & Resources (public) ---- */
+function esc2(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+function loadUpdates(){
+ if(!ensureFB())return setTimeout(loadUpdates,800);
+ SDB.collection('news').get().then(function(snap){
+   const items=snap.docs.map(function(x){return x.data();}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+   if(items.length){
+     document.getElementById('newsList').innerHTML=items.slice(0,8).map(function(n){
+       return '<div style="border-left:3px solid var(--lime);padding:6px 0 6px 12px;margin-bottom:12px"><div style="font-weight:800;color:var(--ink);font-size:14.5px">'+esc2(n.title)+'</div>'+(n.text?'<div style="color:var(--muted);font-size:13px;margin-top:2px;line-height:1.5">'+esc2(n.text)+'</div>':'')+'<div style="color:var(--muted);font-size:11px;margin-top:3px">'+esc2((n.date||'').slice(0,10))+'</div></div>';
+     }).join('');
+     document.getElementById('newsCard').style.display='';
+     document.getElementById('updates').style.display='';
+   }
+ }).catch(function(){});
+ SDB.collection('resources').get().then(function(snap){
+   const items=snap.docs.map(function(x){return x.data();}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+   if(items.length){
+     document.getElementById('resList').innerHTML=items.map(function(r){
+       return '<a href="'+esc2(r.url)+'" target="_blank" rel="noopener" style="display:block;color:var(--lime);font-weight:700;font-size:14px;padding:6px 0;border-bottom:1px solid rgba(99,102,241,.14)">⬇ '+esc2(r.title)+'</a>';
+     }).join('');
+     document.getElementById('resCard').style.display='';
+     document.getElementById('updates').style.display='';
+   }
+ }).catch(function(){});
+}
+loadUpdates();
 </script>
 </body>
 </html>

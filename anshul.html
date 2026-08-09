@@ -21,8 +21,12 @@ const FIREBASE_CONFIG = {
   measurementId: "G-4QL1NPVWQQ"
 }; /* replace null with your { apiKey:"...", ... } object */
 
-/* 2) Admin passcode - choose any secret; you type this to open the dashboard */
+/* 2) Admin passcode - a second layer after Google admin sign-in */
 const ADMIN_PASSCODE = "Power@123";
+
+/* 2b) Admin emails - only these Google accounts can open the dashboard AND read data.
+       Add every admin's gmail here. This MUST match the admin list in your Firestore rules. */
+const ADMIN_EMAILS = ["studyfromnotes@gmail.com"];
 
 /* 3) Email: sending is done by the Zoho script "disa_emailer.py" (you run it on your PC).
       From this dashboard you Export the list (CSV) and Download your message, then run the script. */
@@ -108,10 +112,13 @@ textarea.fld{min-height:140px;resize:vertical}
   <div class="gatebox">
     <div class="mk">🔐</div>
     <h1>Admin access</h1>
-    <p>DISA Saarthi dashboard - enter your passcode.</p>
-    <input class="fld" id="pc" type="password" placeholder="Passcode" onkeydown="if(event.key==='Enter')tryGate()">
-    <div id="gateErr" style="color:var(--bad);font-size:13px;min-height:16px;margin-bottom:8px"></div>
-    <button class="btn" style="width:100%" onclick="tryGate()">Enter dashboard</button>
+    <p id="gateMsg">Sign in with your admin Google account.</p>
+    <div id="gStep"><button class="btn" style="width:100%" onclick="adminGoogle()">Sign in with Google</button></div>
+    <div id="pStep" style="display:none">
+      <input class="fld" id="pc" type="password" placeholder="Admin passcode" onkeydown="if(event.key==='Enter')tryGate()">
+      <button class="btn" style="width:100%" onclick="tryGate()">Enter dashboard</button>
+    </div>
+    <div id="gateErr" style="color:var(--bad);font-size:13px;min-height:16px;margin-top:10px"></div>
   </div>
 </div>
 
@@ -121,6 +128,8 @@ textarea.fld{min-height:140px;resize:vertical}
     <div class="logo"><span class="mk">🥷</span> DISA <b>Saarthi</b> <span class="tag">ADMIN</span></div>
     <div style="display:flex;gap:10px">
       <button class="btn ghost sm" onclick="loadStudents()">↻ Refresh</button>
+      <button class="btn ghost sm" onclick="openNews()">📰 News</button>
+      <button class="btn ghost sm" onclick="openResources()">📎 Resources</button>
       <button class="btn ghost sm" onclick="openMessages()">✉ Messages</button>
       <button class="btn acc sm" onclick="openBulk()">📣 Bulk email</button>
       <button class="btn ghost sm" onclick="exportCSV()">⭳ Export CSV</button>
@@ -136,7 +145,7 @@ textarea.fld{min-height:140px;resize:vertical}
     </div>
     <div class="tablewrap"><div class="scroller">
       <table><thead><tr>
-        <th>Name</th><th>Email</th><th>Membership</th><th>Phone</th><th>City</th>
+        <th>Name</th><th>Email</th><th>Membership</th><th>Phone</th><th>DOB</th><th>City</th>
         <th>Joined</th><th>Chapters</th><th>Best score</th><th>Status</th><th></th>
       </tr></thead><tbody id="rows"></tbody></table>
     </div></div>
@@ -155,12 +164,31 @@ textarea.fld{min-height:140px;resize:vertical}
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script>
-let STUDENTS=[], DB=null, FB_ON=false;
+let STUDENTS=[], DB=null, FB_ON=false, ADMIN_USER=null;
 
-/* ---- gate ---- */
+/* ---- gate: Google admin sign-in, then passcode ---- */
+function adminGoogle(){
+ try{ if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG); }catch(e){}
+ try{ DB=firebase.firestore(); }catch(e){}
+ firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function(res){
+   const email=(res.user.email||'').toLowerCase();
+   if(ADMIN_EMAILS.map(function(x){return x.toLowerCase();}).indexOf(email)>=0){
+     ADMIN_USER=res.user; FB_ON=true;
+     document.getElementById('gStep').style.display='none';
+     document.getElementById('pStep').style.display='block';
+     document.getElementById('gateMsg').textContent='Verified: '+email+'. Now enter your passcode.';
+     document.getElementById('gateErr').textContent='';
+   } else {
+     firebase.auth().signOut();
+     document.getElementById('gateErr').textContent='This Google account is not authorised as an admin.';
+   }
+ }).catch(function(e){document.getElementById('gateErr').textContent=e.message;});
+}
 function tryGate(){
+ if(!ADMIN_USER){document.getElementById('gateErr').textContent='Please sign in with Google first.';return;}
  const v=document.getElementById('pc').value;
  if(v===ADMIN_PASSCODE){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';initApp();}
  else document.getElementById('gateErr').textContent='Wrong passcode.';
@@ -169,12 +197,7 @@ function tryGate(){
 /* ---- init ---- */
 function initApp(){
  const b=document.getElementById('cfgBanner');
- if(!FIREBASE_CONFIG){
-   b.innerHTML='<div class="banner">⚙ <b>Firebase not connected yet.</b> Paste your Firebase config at the top of this file to see live student data. Showing a demo row for now.</div>';
-   STUDENTS=[{name:'Demo Student',email:'demo@example.com',membership:'123456',phone:'+919999999999',address:'Mumbai',joined:'2026-08-01',chaptersDone:6,bestScore:132,examCount:1}];
-   computeAndRender();return;
- }
- try{ firebase.initializeApp(FIREBASE_CONFIG); DB=firebase.firestore(); FB_ON=true; loadStudents(); }
+ try{ if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG); DB=firebase.firestore(); FB_ON=true; loadStudents(); }
  catch(e){ b.innerHTML='<div class="banner">Could not connect to Firebase: '+e.message+'</div>'; }
 }
 function loadStudents(){
@@ -209,7 +232,7 @@ function render(){
    const st=s.bestScore==null?'<span class="pill none">Not attempted</span>':(s.bestScore>=120?'<span class="pill pass">Passed</span>':'<span class="pill fail">Not cleared</span>');
    return `<tr>
      <td><b>${esc(s.name||'-')}</b></td><td>${esc(s.email||'-')}</td><td>${esc(s.membership||'-')}</td>
-     <td>${esc(s.phone||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
+     <td>${esc(s.phone||'-')}</td><td>${esc(s.dob||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
      <td>${s.chaptersDone!=null?s.chaptersDone:'-'}</td><td>${s.bestScore!=null?s.bestScore+' / 200':'-'}</td>
      <td>${s.blocked?'<span class="pill fail">Blocked</span> ':''}${st}</td><td style="white-space:nowrap"><button class="btn ghost sm" onclick="openEdit('${esc(s._id)}')">Edit</button> <button class="btn ghost sm" onclick="allowRetake('${esc(s._id)}')">+1 attempt</button> <button class="btn ghost sm" onclick="blockStudent('${esc(s._id)}',${s.blocked?'true':'false'})">${s.blocked?'Unblock':'Block'}</button> <button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
  document.getElementById('rows').innerHTML=rows||'<tr><td colspan="10" class="empty">No students yet.</td></tr>';
@@ -251,13 +274,14 @@ function openEdit(id){
   +'<label class="flbl">Name</label><input class="fld" id="edName" value="'+esc(s.name||'')+'">'
   +'<label class="flbl">Membership No.</label><input class="fld" id="edMem" value="'+esc(s.membership||'')+'">'
   +'<label class="flbl">Phone</label><input class="fld" id="edPhone" value="'+esc(s.phone||'')+'">'
+  +'<label class="flbl">Date of birth</label><input class="fld" id="edDob" type="date" value="'+esc(s.dob||'')+'">'
   +'<label class="flbl">City / Address</label><input class="fld" id="edAddr" value="'+esc(s.address||'')+'">'
   +'<div class="row"><button class="btn ghost" onclick="closeOv()">Cancel</button><button class="btn" onclick="saveEdit(\''+esc(id)+'\')">Save changes</button></div>';
  document.getElementById('ov').classList.add('on');
 }
 function saveEdit(id){
  if(!FB_ON)return alert('Connect Firebase first.');
- const data={name:document.getElementById('edName').value.trim(),membership:document.getElementById('edMem').value.trim(),phone:document.getElementById('edPhone').value.trim(),address:document.getElementById('edAddr').value.trim()};
+ const data={name:document.getElementById('edName').value.trim(),membership:document.getElementById('edMem').value.trim(),phone:document.getElementById('edPhone').value.trim(),dob:document.getElementById('edDob').value.trim(),address:document.getElementById('edAddr').value.trim()};
  DB.collection('students').doc(id).update(data).then(function(){closeOv();loadStudents();}).catch(function(e){alert('Save failed: '+e.message);});
 }
 function openBulk(preset){
@@ -309,6 +333,60 @@ function openMessages(){
  }).catch(function(e){document.getElementById('msgList').innerHTML='<div class="banner">Could not load messages: '+e.message+' - check your Firestore rules allow reading messages.</div>';});
 }
 function delMsg(id){ if(!confirm('Delete this message permanently?'))return; if(!FB_ON)return; DB.collection('messages').doc(id).delete().then(function(){openMessages();}).catch(function(e){alert('Delete failed: '+e.message);}); }
+
+/* ---- NEWS / announcements ---- */
+function openNews(){
+ const ov=document.getElementById('ov');
+ document.getElementById('modal').innerHTML='<h3>News &amp; Announcements</h3><div class="sub">Post exam dates or updates. These show on the student site.</div>'
+  +'<label class="flbl">Title</label><input class="fld" id="nwTitle" placeholder="e.g. Next DISA exam: 14 Dec 2026">'
+  +'<label class="flbl">Details</label><textarea class="fld" id="nwText" rows="3" placeholder="Write the announcement..."></textarea>'
+  +'<div class="row"><button class="btn" onclick="addNews()">Post announcement</button></div>'
+  +'<div id="nwList" style="max-height:44vh;overflow:auto;margin-top:10px">Loading...</div>'
+  +'<div class="row"><button class="btn ghost" onclick="closeOv()">Close</button></div>';
+ ov.classList.add('on'); loadNewsAdmin();
+}
+function addNews(){
+ const t=document.getElementById('nwTitle').value.trim(), x=document.getElementById('nwText').value.trim();
+ if(!t)return alert('Enter a title.'); if(!FB_ON)return alert('Connect Firebase first.');
+ DB.collection('news').add({title:t,text:x,date:new Date().toISOString()}).then(function(){openNews();}).catch(function(e){alert('Failed: '+e.message);});
+}
+function loadNewsAdmin(){
+ if(!FB_ON){document.getElementById('nwList').innerHTML='';return;}
+ DB.collection('news').get().then(function(snap){
+   const items=snap.docs.map(function(x){return Object.assign({_id:x.id},x.data());}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+   document.getElementById('nwList').innerHTML=items.length?items.map(function(n){
+     return '<div style="border:1px solid var(--ring);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff"><div style="display:flex;justify-content:space-between;gap:10px"><b>'+esc(n.title)+'</b><button class="btn sm" style="background:#e11d48;color:#fff" onclick="delNews(\''+esc(n._id)+'\')">Delete</button></div><div style="color:var(--muted);font-size:12px;margin:4px 0">'+esc((n.date||'').slice(0,10))+'</div><div style="font-size:14px">'+esc(n.text||'')+'</div></div>';
+   }).join(''):'<div class="empty">No announcements yet.</div>';
+ }).catch(function(e){document.getElementById('nwList').innerHTML='<div class="banner">'+e.message+'</div>';});
+}
+function delNews(id){ if(!confirm('Delete this announcement?'))return; DB.collection('news').doc(id).delete().then(function(){openNews();}).catch(function(e){alert(e.message);}); }
+
+/* ---- RESOURCES (links) ---- */
+function openResources(){
+ const ov=document.getElementById('ov');
+ document.getElementById('modal').innerHTML='<h3>Resources</h3><div class="sub">Add downloadable links (Google Drive, PDF links, etc.). These show on the student site.</div>'
+  +'<label class="flbl">Title</label><input class="fld" id="rsTitle" placeholder="e.g. Module 1 - Summary Notes (PDF)">'
+  +'<label class="flbl">Link (URL)</label><input class="fld" id="rsUrl" placeholder="https://drive.google.com/...">'
+  +'<div class="row"><button class="btn" onclick="addResource()">Add resource</button></div>'
+  +'<div id="rsList" style="max-height:44vh;overflow:auto;margin-top:10px">Loading...</div>'
+  +'<div class="row"><button class="btn ghost" onclick="closeOv()">Close</button></div>';
+ ov.classList.add('on'); loadResAdmin();
+}
+function addResource(){
+ const t=document.getElementById('rsTitle').value.trim(), u=document.getElementById('rsUrl').value.trim();
+ if(!t||!u)return alert('Enter a title and a link.'); if(!FB_ON)return alert('Connect Firebase first.');
+ DB.collection('resources').add({title:t,url:u,date:new Date().toISOString()}).then(function(){openResources();}).catch(function(e){alert('Failed: '+e.message);});
+}
+function loadResAdmin(){
+ if(!FB_ON){document.getElementById('rsList').innerHTML='';return;}
+ DB.collection('resources').get().then(function(snap){
+   const items=snap.docs.map(function(x){return Object.assign({_id:x.id},x.data());}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+   document.getElementById('rsList').innerHTML=items.length?items.map(function(r){
+     return '<div style="border:1px solid var(--ring);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff"><div style="display:flex;justify-content:space-between;gap:10px"><b>'+esc(r.title)+'</b><button class="btn sm" style="background:#e11d48;color:#fff" onclick="delResource(\''+esc(r._id)+'\')">Delete</button></div><a href="'+esc(r.url)+'" target="_blank" style="font-size:13px;word-break:break-all">'+esc(r.url)+'</a></div>';
+   }).join(''):'<div class="empty">No resources yet.</div>';
+ }).catch(function(e){document.getElementById('rsList').innerHTML='<div class="banner">'+e.message+'</div>';});
+}
+function delResource(id){ if(!confirm('Delete this resource?'))return; DB.collection('resources').doc(id).delete().then(function(){openResources();}).catch(function(e){alert(e.message);}); }
 </script>
 </body>
 </html>
