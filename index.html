@@ -1577,23 +1577,17 @@ function users(){try{return JSON.parse(localStorage.getItem('disa_users')||'{}')
 function saveUsers(u){try{localStorage.setItem('disa_users',JSON.stringify(u));}catch(e){toast('Storage full - try a smaller photo');}}
 function currentUser(){try{const e=localStorage.getItem('disa_session');if(!e)return null;return users()[e]||null;}catch(e){return null;}}
 function setSession(e){localStorage.setItem('disa_session',e);updNav();}
-function logout(){localStorage.removeItem('disa_session');updNav();closeModal();toast('Logged out');}
+function logout(){try{if(window.firebase&&firebase.auth&&firebase.apps.length)firebase.auth().signOut();}catch(e){}localStorage.removeItem('disa_session');updNav();closeModal();toast('Logged out');}
 function saveUser(u){const all=users();all[u.email]=u;saveUsers(all);try{mirrorStudent(u);}catch(e){}}
 
 const GSVG='<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.3 0 24 0 14.6 0 6.4 5.4 2.5 13.3l7.9 6.1C12.3 13.2 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.1 5.3-4.6 6.9l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.6c-.5-1.4-.8-2.9-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.1-5.5c-2 1.3-4.5 2.1-8.4 2.1-6.3 0-11.7-3.7-13.6-9.1l-7.9 6.1C6.4 42.6 14.6 48 24 48z"/></svg>';
 
 function openAuth(mode){
  showModal(`<div class="modal-head"><div><h3>Sign in to DISA Saarthi</h3><div class="sub">Your Google account is your login.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:14px">Accounts are created only through Google - one click and you are in. We fetch your name, email and photo, then ask a couple of details the first time.</p>
-  <div id="gbox" class="gbox"></div>
+  <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:16px">Sign in securely with Google - one click. The first time, we ask a couple of details to set up your profile.</p>
+  <button class="gbtn" onclick="fbGoogleLogin()">${GSVG} Continue with Google</button>
   <div class="errmsg" id="authErr"></div>
-  ${GOOGLE_CLIENT_ID?'':`<div class="orline">testing only</div><button class="btn ghost" style="width:100%" onclick="devLogin()">Preview without Google (dev)</button><p style="color:var(--muted);font-size:12px;margin-top:10px;text-align:center">This test button disappears automatically once your Google Client ID is added.</p>`}
-  <p style="color:var(--muted);font-size:12px;margin-top:14px;text-align:center">By continuing you agree to our <a class="namelink" onclick="closeModal();openPrivacy()">Privacy Policy</a>.</p>`);
-}
-function devLogin(){
- const email='test@disasaarthi.local';const all=users();let u=all[email];
- if(!u){u={name:'Test Student',email,membership:'000000',phone:'+910000000000',address:'Test City',pass:null,provider:'dev',photo:null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};saveUser(u);}
- setSession(email);closeModal();toast('Logged in as Test Student (dev)');
+  <p style="color:var(--muted);font-size:12px;margin-top:8px;text-align:center">By continuing you agree to our <a class="namelink" onclick="closeModal();openPrivacy()">Privacy Policy</a>.</p>`);
 }
 function authErr(m){const e=document.getElementById('authErr');if(e)e.textContent=m;}
 function doLogin(){
@@ -1671,7 +1665,7 @@ function startExam(){
  // Firestore is the source of truth so the admin can grant a retake
  if(ensureFB()){
    toast('Checking your exam access...');
-   SDB.collection('students').doc(u.email).get().then(function(doc){
+   SDB.collection('students').doc(u.uid).get().then(function(doc){
      const d=doc.exists?doc.data():{};
      const used=(d.exams&&d.exams.length)||d.examCount||((u.exams||[]).length)||0;
      const allowed=d.allowedAttempts||1;
@@ -1853,44 +1847,30 @@ function openLogin(){openAuth('login');}
 initTheme();updNav();
 
 
-/* ================= GOOGLE SIGN-IN (Google Identity Services) =================
-   TO GO LIVE: paste your OAuth Web Client ID below (from Google Cloud Console).
-   Leave it blank and the site falls back to email/password only.            */
-const GOOGLE_CLIENT_ID="76181770954-hojtm8562ugqvecn8piskmv0d8fpv2f9.apps.googleusercontent.com"; /* e.g. "1234567890-abcd.apps.googleusercontent.com" */
-
-function stubBtn(){return `<button class="gbtn" onclick="googleStub()">${GSVG} Continue with Google</button>`;}
-function googleStub(){toast(GOOGLE_CLIENT_ID?'Google is loading, try again in a moment':'Google sign-in turns on once your Client ID is added (see setup)');}
-function mountGoogle(){
- const box=document.getElementById('gbox'); if(!box)return;
- if(GOOGLE_CLIENT_ID && window.google && google.accounts && google.accounts.id){
-   try{
-     google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:onGoogle});
-     google.accounts.id.renderButton(box,{theme:document.body.classList.contains('light')?'outline':'filled_blue',size:'large',text:'continue_with',shape:'pill',width:320});
-   }catch(e){box.innerHTML=stubBtn();}
- }else{box.innerHTML=stubBtn();}
-}
-function decodeJwt(t){try{const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
- const json=decodeURIComponent(atob(p).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));
- return JSON.parse(json);}catch(e){return null;}}
+/* ================= GOOGLE SIGN-IN via FIREBASE AUTHENTICATION ================= */
 function clearLocalUser(email){try{const all=users();delete all[email];saveUsers(all);if(localStorage.getItem('disa_session')===email)localStorage.removeItem('disa_session');updNav();}catch(e){}}
 function ageFromDob(dob){const b=new Date(dob);if(isNaN(b.getTime()))return null;const t=new Date();let a=t.getFullYear()-b.getFullYear();const m=t.getMonth()-b.getMonth();if(m<0||(m===0&&t.getDate()<b.getDate()))a--;return a;}
-function loginLocalFallback(gname,email,gpic){const u=users()[email];if(u){if(gpic&&!u.photo)u.photo=gpic;saveUser(u);setSession(email);closeModal();toast('Welcome back!');}else{window._gpending={name:gname,email:email,photo:gpic};completeProfile();}}
-function onGoogle(resp){
- const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, please try again');
- const email=d.email.toLowerCase(), gname=d.name||'', gpic=d.picture||null;
- if(!ensureFB())return loginLocalFallback(gname,email,gpic);
- SDB.collection('students').doc(email).get().then(function(doc){
+function fbGoogleLogin(){
+ if(!ensureFB()||!firebase.auth){authErr('Sign-in is still loading, please try again in a moment.');return;}
+ const provider=new firebase.auth.GoogleAuthProvider();
+ firebase.auth().signInWithPopup(provider).then(function(res){handleFbUser(res.user);})
+  .catch(function(err){authErr(err&&err.message?err.message:'Sign-in failed, please try again.');});
+}
+function handleFbUser(user){
+ if(!user||!ensureFB())return;
+ const uid=user.uid, email=(user.email||'').toLowerCase();
+ SDB.collection('students').doc(uid).get().then(function(doc){
    if(doc.exists){
      const data=doc.data();
-     if(data.blocked){clearLocalUser(email);alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.');return;}
-     const u={name:data.name||gname,email:email,membership:data.membership||'',phone:data.phone||'',address:data.address||'',dob:data.dob||'',pass:null,provider:'google',photo:data.photo||gpic||null,chapters:data.chapters||{},exams:data.exams||[],joined:data.joined||new Date().toISOString().slice(0,10)};
-     saveUser(u);setSession(email);closeModal();toast('Welcome back, '+((u.name||'').split(' ')[0]||'')+'!');
+     if(data.blocked){try{firebase.auth().signOut();}catch(e){}clearLocalUser(email);alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.');return;}
+     const u={uid:uid,name:data.name||user.displayName||'',email:email,membership:data.membership||'',phone:data.phone||'',address:data.address||'',dob:data.dob||'',provider:'google',photo:data.photo||user.photoURL||null,chapters:data.chapters||{},exams:data.exams||[],joined:data.joined||new Date().toISOString().slice(0,10)};
+     saveUser(u);setSession(email);closeModal();updNav();
    }else{
      clearLocalUser(email); /* deleted or brand new -> fresh sign-up */
-     window._gpending={name:gname,email:email,photo:gpic};
+     window._gpending={uid:uid,name:user.displayName||'',email:email,photo:user.photoURL||null};
      completeProfile();
    }
- }).catch(function(){loginLocalFallback(gname,email,gpic);});
+ }).catch(function(){authErr('Could not reach the database. Please try again.');});
 }
 function completeProfile(){
  const g=window._gpending||{};
@@ -1919,15 +1899,15 @@ function finishGoogle(){
  var _age=ageFromDob(dob); if(_age===null||_age<18)return authErr('Sorry, we are unable to register this account with the details provided.');
  if(!addr)return authErr('Please enter your city / address.');
  if(!document.getElementById('gpAgree').checked)return authErr('Please accept the Privacy Policy & Terms to continue.');
- const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,dob:dob,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
+ const u={uid:g.uid,name:g.name||'Student',email:(g.email||'').toLowerCase(),membership:mem,phone:'+91'+phone,address:addr,dob:dob,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
  saveUser(u);setSession(u.email);closeModal();toast('Welcome, '+u.name.split(' ')[0]+'!');
+ try{sendWelcomeEmail(u.name,u.email);}catch(e){}
 }
-/* make the auth modal render the Google button */
-if(typeof openAuth==='function'){const _oa=openAuth;openAuth=function(m){_oa(m);setTimeout(mountGoogle,60);};}
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 /* ---------- FIREBASE (cloud sync of students, for the admin dashboard) ---------- */
 const FIREBASE_CONFIG={
@@ -1942,25 +1922,49 @@ const FIREBASE_CONFIG={
 let SDB=null,SFB=false;
 function ensureFB(){if(SFB)return true;try{if(!FIREBASE_CONFIG||!window.firebase)return false;if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);SDB=firebase.firestore();SFB=true;return true;}catch(e){return false;}}
 function mirrorStudent(u){
- if(!u||!u.email||!ensureFB())return;
+ if(!u||!u.uid||!ensureFB())return;
  try{
   const done=Object.values(u.chapters||{}).filter(p=>p>=60).length;
   const best=(u.exams&&u.exams.length)?Math.max.apply(null,u.exams.map(e=>e.score)):null;
-  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',dob:u.dob||'',photo:u.photo||'',chapters:u.chapters||{},joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
+  SDB.collection('students').doc(u.uid).set({uid:u.uid,name:u.name||'',email:u.email||'',membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'google',dob:u.dob||'',photo:u.photo||'',chapters:u.chapters||{},joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
  }catch(e){}
 }
-/* sign out accounts the admin has deleted or blocked */
-function enforceAccess(){
- try{
-  const u=currentUser(); if(!u)return;
-  if(!ensureFB())return setTimeout(enforceAccess,1500);
-  SDB.collection('students').doc(u.email).get().then(function(d){
-    if(!d.exists){ clearLocalUser(u.email); return; } /* account removed -> reset to fresh sign-up */
-    if(d.data().blocked){ clearLocalUser(u.email); alert('Your access has been removed. Please contact CA Anshul Karwa / Team DISA Saarthi.'); }
-  }).catch(function(){});
- }catch(e){}
+/* ---------- WELCOME EMAIL (sent via EmailJS + your Zoho, on sign-up) ----------
+   Fill these 3 from emailjs.com (see setup). Leave blank to disable. */
+const EMAILJS_PUBLIC_KEY="LQs8GQPkuPLgD_qFx";
+const EMAILJS_SERVICE_ID="service_2xtcyfb";
+const EMAILJS_WELCOME_TEMPLATE="template_xscpws7"; /* your welcome template */
+const SITE_URL="https://disa.studyfromnotes.com";
+try{ if(EMAILJS_PUBLIC_KEY && window.emailjs) emailjs.init({publicKey:EMAILJS_PUBLIC_KEY}); }catch(e){}
+function welcomeText(name){
+ return "Dear "+(name||'Student')+",<br><br>"
+ +"Welcome to <b>DISA Saarthi</b> - your companion to crack the ICAI DISA exam, built by CA Anshul Karwa.<br><br>"
+ +"Here is what you can do:<br>"
+ +"&bull; Read crisp, exam-focused notes for every module in a clean, distraction-free reader<br>"
+ +"&bull; Practice chapter-wise MCQ tests with instant answers and explanations<br>"
+ +"&bull; Attempt a full 200-mark mock exam with a real 4-hour timer and an instant result<br>"
+ +"&bull; Track your progress and see exactly where you stand<br><br>"
+ +"&#128073; Start studying now: <a href=\""+SITE_URL+"\">"+SITE_URL+"</a><br><br>"
+ +"Only about 5% clear DISA. With steady practice here, you can be one of them.<br><br>"
+ +"Thank You.<br>"
+ +"DISA Saarthi,<br>"
+ +"Founder,<br>"
+ +"CA Anshul Karwa<br>"
+ +"<a href=\"https://www.linkedin.com/in/anshulkarwa\">linkedin.com/in/anshulkarwa</a>";
 }
-setTimeout(enforceAccess,1800);
+function sendWelcomeEmail(name,email){
+ if(!EMAILJS_PUBLIC_KEY||!EMAILJS_SERVICE_ID||!EMAILJS_WELCOME_TEMPLATE||!window.emailjs||!email)return;
+ try{ emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_WELCOME_TEMPLATE,{to_email:email,to_name:name||'Student',subject:'Welcome to DISA Saarthi by CA Anshul Karwa',message:welcomeText(name),from_name:'CA Anshul Karwa - DISA Saarthi'}); }catch(e){}
+}
+/* keep login state in sync with Firebase Auth (persists across reloads, enforces block/delete) */
+function fbAuthInit(){
+ if(!ensureFB()||!firebase.auth){return setTimeout(fbAuthInit,600);}
+ firebase.auth().onAuthStateChanged(function(user){
+   if(user){ if(typeof handleFbUser==='function') handleFbUser(user); }
+   else { localStorage.removeItem('disa_session'); if(typeof updNav==='function') updNav(); }
+ });
+}
+fbAuthInit();
 </script>
 </body>
 </html>
