@@ -206,7 +206,7 @@ function render(){
      <td><b>${esc(s.name||'-')}</b></td><td>${esc(s.email||'-')}</td><td>${esc(s.membership||'-')}</td>
      <td>${esc(s.phone||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
      <td>${s.chaptersDone!=null?s.chaptersDone:'-'}</td><td>${s.bestScore!=null?s.bestScore+' / 200':'-'}</td>
-     <td>${st}</td><td style="white-space:nowrap"><button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
+     <td>${st}</td><td style="white-space:nowrap"><button class="btn ghost sm" onclick="openEdit('${esc(s._id)}')">Edit</button> <button class="btn ghost sm" onclick="allowRetake('${esc(s._id)}')">+1 attempt</button> <button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
  document.getElementById('rows').innerHTML=rows||'<tr><td colspan="10" class="empty">No students yet.</td></tr>';
 }
 function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -226,6 +226,28 @@ function delStudent(id){
  if(!confirm('Delete this student permanently? This cannot be undone.'))return;
  if(!FB_ON)return alert('Connect Firebase first.');
  DB.collection('students').doc(id).delete().then(function(){loadStudents();}).catch(function(e){alert('Delete failed: '+e.message);});
+}
+function allowRetake(id){
+ const s=STUDENTS.find(x=>x._id===id)||{};
+ const used=(s.examCount)||((s.exams&&s.exams.length)||0);
+ if(!confirm('Give this student ONE more exam attempt?'))return;
+ if(!FB_ON)return alert('Connect Firebase first.');
+ DB.collection('students').doc(id).update({allowedAttempts:(used+1)}).then(function(){alert('Done - this student can now appear once more.');loadStudents();}).catch(function(e){alert('Failed: '+e.message);});
+}
+function openEdit(id){
+ const s=STUDENTS.find(x=>x._id===id)||{};
+ document.getElementById('modal').innerHTML='<h3>Edit student</h3><div class="sub">'+esc(s.email||'')+'</div>'
+  +'<label class="flbl">Name</label><input class="fld" id="edName" value="'+esc(s.name||'')+'">'
+  +'<label class="flbl">Membership No.</label><input class="fld" id="edMem" value="'+esc(s.membership||'')+'">'
+  +'<label class="flbl">Phone</label><input class="fld" id="edPhone" value="'+esc(s.phone||'')+'">'
+  +'<label class="flbl">City / Address</label><input class="fld" id="edAddr" value="'+esc(s.address||'')+'">'
+  +'<div class="row"><button class="btn ghost" onclick="closeOv()">Cancel</button><button class="btn" onclick="saveEdit(\''+esc(id)+'\')">Save changes</button></div>';
+ document.getElementById('ov').classList.add('on');
+}
+function saveEdit(id){
+ if(!FB_ON)return alert('Connect Firebase first.');
+ const data={name:document.getElementById('edName').value.trim(),membership:document.getElementById('edMem').value.trim(),phone:document.getElementById('edPhone').value.trim(),address:document.getElementById('edAddr').value.trim()};
+ DB.collection('students').doc(id).update(data).then(function(){closeOv();loadStudents();}).catch(function(e){alert('Save failed: '+e.message);});
 }
 function openBulk(preset){
  const q=(document.getElementById('search')?document.getElementById('search').value:'').toLowerCase();

@@ -1483,6 +1483,7 @@ function answer(i){
 function nextQ(){qAnswered=false;if(qi<CUR.q.length-1){qi++;renderQ();}else{quizResult();}}
 function quizResult(){
  const set=CUR,total=set.q.length,pct=Math.round(qScore/total*100),pass=pct>=60;
+ try{if(currentUser())recordChapter(set.mod,set.chId,pct);}catch(e){}
  if(pass)confettiBurst();
  showBranded(`${M1BRAND}<div class="modal-head"><div><h3>Chapter Test done!</h3><div class="sub">${set.ch}</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
   ${ring(pct,pass)}
@@ -1625,9 +1626,14 @@ function doRegister(){
 /* ================= PROFILE ================= */
 function openProfile(){
  const u=currentUser();if(!u)return openAuth('login');
- const done=Object.values(u.chapters||{}).filter(p=>p>=60).length;
+ const ch=u.chapters||{};
+ const attempted=Object.keys(ch).length;
+ const mastered=Object.values(ch).filter(p=>p>=60).length;
  const best=(u.exams&&u.exams.length)?Math.max(...u.exams.map(e=>e.score)):null;
- const modProg=[1,2,3,4,5,6].map(n=>{const m=modByN(n);if(!m)return'';const tot=m.chapters.length;const c=m.chapters.filter(ch=>(u.chapters||{})[n+'.'+ch.id.split('.')[1]]>=60||((u.chapters||{})[ch.id]>=60)).length;const pct=Math.round(c/tot*100);return `<div class="progrow"><span class="pl">Mod ${n}: ${m.title.slice(0,20)}</span><span class="pbar"><i style="width:${pct}%"></i></span><span>${pct}%</span></div>`;}).join('');
+ const modProg=[1,2,3,4,5,6].map(n=>{const m=modByN(n);if(!m)return'';const tot=m.chapters.length;
+   const attemptedC=m.chapters.filter(c=>ch[c.id]!=null).length;
+   const pct=Math.round(attemptedC/tot*100);
+   return `<div class="progrow"><span class="pl">Mod ${n}: ${m.title.slice(0,20)}</span><span class="pbar"><i style="width:${pct}%"></i></span><span>${attemptedC}/${tot}</span></div>`;}).join('');
  showModal(`<div class="modal-head"><div><h3>Your profile</h3><div class="sub">Member since ${u.joined||'-'}</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
   <div class="pcard">
     <div class="pphoto">${u.photo?`<img src="${u.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:20px">`:(u.name[0]||'S').toUpperCase()}
@@ -1640,9 +1646,10 @@ function openProfile(){
     <div class="pcell"><div class="k">Date of birth</div><div class="v">${u.dob||'-'}</div></div>
     <div class="pcell"><div class="k">Address</div><div class="v">${u.address}</div></div>
     <div class="pcell"><div class="k">Best exam score</div><div class="v">${best!==null?best+' / 200':'Not attempted'}</div></div>
-    <div class="pcell"><div class="k">Exam attempts</div><div class="v">${(u.exams||[]).length} of 2 used</div></div>
+    <div class="pcell"><div class="k">Exam attempts</div><div class="v">${(u.exams||[]).length} of 1 used</div></div>
   </div>
-  <div class="progwrap"><div class="eyebrow" style="margin-bottom:8px">Your progress · ${done} chapters mastered</div>${modProg}</div>
+  <div style="font-size:12.5px;color:var(--muted);margin:2px 0 14px">To change your name or any details, please reach out via <a class="namelink" onclick="closeModal();openContact()">Contact us</a> at the bottom of the page.</div>
+  <div class="progwrap"><div class="eyebrow" style="margin-bottom:8px">Your progress · ${attempted} chapters attempted · ${mastered} mastered</div>${modProg}</div>
   <div class="qnav" style="margin-top:20px"><button class="btn ghost" onclick="closeModal()">Close</button><button class="btn ghost" onclick="logout()">Log out</button></div>`);
 }
 function handlePhoto(input){const f=input.files[0];if(!f)return;const r=new FileReader();
@@ -1660,31 +1667,40 @@ const EXAM_MIN_ANSWERED=80, EXAM_MIN_MIN=70, EXAM_TOTAL_MIN=240;
 function startExam(){
  const u=currentUser();
  if(!u){toast('Please log in to take the exam');return openAuth('login');}
- if(u.exams&&u.exams.length>=2)return examAlready(u);
  if(typeof EXAMPOOL==='undefined'||!EXAMPOOL.length){return toast('Exam pool not loaded');}
- examNotice();
+ // Firestore is the source of truth so the admin can grant a retake
+ if(ensureFB()){
+   toast('Checking your exam access...');
+   SDB.collection('students').doc(u.email).get().then(function(doc){
+     const d=doc.exists?doc.data():{};
+     const used=(d.exams&&d.exams.length)||d.examCount||((u.exams||[]).length)||0;
+     const allowed=d.allowedAttempts||1;
+     if(used>=allowed)return examAlready(u);
+     examNotice(used,allowed);
+   }).catch(function(){ localGate(u); });
+ } else localGate(u);
 }
-function examAlready(u){const best=Math.max(...u.exams.map(e=>e.score)),pass=best>=120;
- showModal(`<div class="modal-head"><div><h3>Attempts finished</h3><div class="sub">This exam can be attempted only twice.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <div class="note-block">You have used both your attempts. Best score: <b>${best} / 200</b> - ${pass?'Passed 🎉':'Not cleared'}.</div>
-  <p style="color:var(--muted);font-size:14px">Keep revising the notes and chapter tests to stay sharp.</p>
-  <button class="btn grad" style="width:100%" onclick="closeModal()">Close</button>`);
+function localGate(u){ if((u.exams||[]).length>=1)return examAlready(u); examNotice((u.exams||[]).length,1); }
+function examAlready(u){const best=(u.exams&&u.exams.length)?Math.max.apply(null,u.exams.map(e=>e.score)):null,pass=best>=120;
+ showModal(`<div class="modal-head"><div><h3>Attempt used</h3><div class="sub">This exam can be attempted only once.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <div class="note-block">You have used your attempt.${best!==null?` Best score: <b>${best} / 200</b> - ${pass?'Passed 🎉':'Not cleared'}.`:''}</div>
+  <p style="color:var(--ink);font-size:14px;line-height:1.6">If you want to appear again, please contact <b>CA Anshul Karwa</b> / <b>Team DISA Saarthi</b> and we can enable one more attempt for you.</p>
+  <div class="qnav"><button class="btn grad" onclick="closeModal();openContact()">Contact us to appear again</button><button class="btn ghost" onclick="closeModal()">Close</button></div>`);
 }
-function examNotice(){
- const used=(currentUser().exams||[]).length;
+function examNotice(used,allowed){
  showModal(`<div class="modal-head"><div><h3>Before you begin ⚠️</h3><div class="sub">Please read carefully.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <div class="note-block" style="border-left-color:var(--bad)"><b>You can take this exam only TWICE.</b> This will be attempt ${used+1} of 2. Make sure you are ready and will not be disturbed.</div>
+  <div class="note-block" style="border-left-color:var(--bad)"><b>You can take this exam only ONCE.</b> Make sure you are ready and will not be disturbed.</div>
   <ul style="color:var(--ink);font-size:14.5px;line-height:1.85;margin:6px 0 14px 18px">
    <li>200 questions, 1 mark each. Duration: <b>4 hours (240 minutes)</b>.</li>
    <li>You <b>cannot submit before 70 minutes</b> have passed.</li>
    <li>You must answer <b>at least 80 questions</b> to get a result.</li>
-   <li>You may <b>exit</b> anytime before submitting - that will not count as an attempt.</li>
+   <li>You may <b>exit</b> anytime before submitting - that will not count as your attempt.</li>
    <li>Pass mark is <b>120 / 200</b>. The timer auto-submits at zero.</li>
    <li>Copying, printing and downloading are disabled.</li>
   </ul>
   <div class="qnav"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn grad" onclick="beginExam()">I understand, start now</button></div>`);
 }
-function exitExam(){if(confirm('Exit the exam?\n\nYour answers in this attempt will be discarded and this will NOT count as an attempt.\nYou get 2 attempts in total.'))closeExam();}
+function exitExam(){if(confirm('Exit the exam?\n\nYour answers in this attempt will be discarded and this will NOT count as your attempt.'))closeExam();}
 function beginExam(){
  closeModal();
  EX={q:shuffle(EXAMPOOL).map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:EXAM_TOTAL_MIN*60,done:false};
@@ -1833,7 +1849,7 @@ function updNav(){const a=document.getElementById('authArea');if(!a)return;const
 /* keep old entry points working */
 function openLogin(){openAuth('login');}
 /* record chapter score into profile after each chapter test */
-if(typeof quizResult==='function'){const _qr=quizResult;quizResult=function(){try{if(currentUser()&&typeof CUR!=='undefined'&&CUR){recordChapter(CUR.mod,CUR.chId,Math.round(qScore/CUR.q.length*100));}}catch(e){}return _qr.apply(this,arguments);};}
+/* progress is now recorded directly inside quizResult() */
 initTheme();updNav();
 
 
