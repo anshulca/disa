@@ -175,7 +175,7 @@ function initApp(){
 function loadStudents(){
  if(!FB_ON){initApp();return;}
  DB.collection('students').get().then(snap=>{
-   STUDENTS=snap.docs.map(d=>d.data());
+   STUDENTS=snap.docs.map(d=>Object.assign({_id:d.id},d.data()));
    computeAndRender();
  }).catch(e=>{document.getElementById('cfgBanner').innerHTML='<div class="banner">Read failed: '+e.message+' - check your Firestore rules allow reads.</div>';});
 }
@@ -206,7 +206,7 @@ function render(){
      <td><b>${esc(s.name||'-')}</b></td><td>${esc(s.email||'-')}</td><td>${esc(s.membership||'-')}</td>
      <td>${esc(s.phone||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
      <td>${s.chaptersDone!=null?s.chaptersDone:'-'}</td><td>${s.bestScore!=null?s.bestScore+' / 200':'-'}</td>
-     <td>${st}</td><td><button class="btn acc sm" onclick="emailOne('${esc(s.email)}','${esc((s.name||'').replace(/'/g,''))}')">Email</button></td></tr>`;}).join('');
+     <td>${st}</td><td style="white-space:nowrap"><button class="btn acc sm" onclick="emailOne('${esc(s.email)}')">Email</button> <button class="btn sm" style="background:#e11d48;color:#fff" onclick="delStudent('${esc(s._id)}')">Delete</button></td></tr>`;}).join('');
  document.getElementById('rows').innerHTML=rows||'<tr><td colspan="10" class="empty">No students yet.</td></tr>';
 }
 function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
@@ -220,7 +220,13 @@ function exportCSV(){
 }
 
 /* ---- email ---- */
-function emailOne(email,name){window.location.href="mailto:"+email;}
+function emailOne(email){window.location.href="mailto:"+email;}
+function delStudent(id){
+ if(!id)return alert('This record has no id and must be deleted from the Firebase console.');
+ if(!confirm('Delete this student permanently? This cannot be undone.'))return;
+ if(!FB_ON)return alert('Connect Firebase first.');
+ DB.collection('students').doc(id).delete().then(function(){loadStudents();}).catch(function(e){alert('Delete failed: '+e.message);});
+}
 function openBulk(preset){
  const q=(document.getElementById('search')?document.getElementById('search').value:'').toLowerCase();
  const filtered=STUDENTS.filter(s=>!q||[s.name,s.email,s.membership,s.phone,s.address].join(' ').toLowerCase().includes(q));

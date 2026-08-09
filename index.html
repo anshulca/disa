@@ -514,10 +514,10 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
     <div class="plan"><h4>Starter</h4><div class="amt">FREE</div>
       <ul><li>Module 1 full access</li><li>Chapter tests</li><li>1 mock section</li></ul>
       <button class="btn ghost" style="width:100%" onclick="openLogin()">Start free</button></div>
-    <div class="plan pop"><h4>Full Access</h4><div class="amt"><s>Rs 999</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
+    <div class="plan pop"><h4>Full Access</h4><div class="amt"><s>Rs 1999</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
       <ul><li>All 7 modules + notes</li><li>1000+ chapter MCQs</li><li>Unlimited 200-mark mocks</li><li>Weak-area analytics</li></ul>
       <button class="btn grad" style="width:100%" onclick="openPay()">Unlock everything free</button></div>
-    <div class="plan"><h4>Mentor Plus</h4><div class="amt"><s>Rs 1199</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
+    <div class="plan"><h4>Mentor Plus</h4><div class="amt"><s>Rs 2199</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
       <ul><li>Everything in Full</li><li>Doubt-solving support</li><li>Passing certificate</li></ul>
       <button class="btn ghost" style="width:100%" onclick="openPay()">Go Plus free</button></div>
   </div>
@@ -1687,7 +1687,7 @@ function examNotice(){
 function exitExam(){if(confirm('Exit the exam?\n\nYour answers in this attempt will be discarded and this will NOT count as an attempt.\nYou get 2 attempts in total.'))closeExam();}
 function beginExam(){
  closeModal();
- EX={q:EXAMPOOL.map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:EXAM_TOTAL_MIN*60,done:false};
+ EX={q:shuffle(EXAMPOOL).map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:EXAM_TOTAL_MIN*60,done:false};
  renderExam();clearInterval(exTimer);exTimer=setInterval(exTick,1000);
 }
 function exTick(){if(!EX||EX.done)return;EX.t--;const el=document.getElementById('extimer');if(el){el.textContent=hhmmss(EX.t);if(EX.t<=300)el.classList.add('warn');}if(EX.t<=0){clearInterval(exTimer);submitExam(true);}}
@@ -1793,7 +1793,14 @@ function sendContact(){
  if(!msg){if(err)err.textContent='Please type a message.';return;}
  try{
   if(ensureFB()){
-   SDB.collection('messages').add({name:name||'',email:from,message:msg,date:new Date().toISOString(),read:false}).then(function(){toast('Message sent - thank you!');}).catch(function(){toast('Message saved.');});
+   SDB.collection('messages').add({name:name||'',email:from,message:msg,date:new Date().toISOString(),read:false})
+     .then(function(){toast("Thanks! Your message has reached CA Anshul Karwa - you'll get a reply soon.");})
+     .catch(function(){
+        var subject=encodeURIComponent('DISA Saarthi - message from '+(name||from));
+        var body=encodeURIComponent(msg+'\n\nFrom: '+(name||'')+' '+from);
+        window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+subject+'&body='+body;
+        toast('Opening your email app to send...');
+     });
    closeModal();return;
   }
  }catch(e){}
@@ -1865,6 +1872,9 @@ function completeProfile(){
     <div style="flex:1"><label class="flbl">Phone (+91)</label><input class="fld" id="gpPhone" maxlength="10" inputmode="numeric" placeholder="10-digit number"></div></div>
   <div class="frow"><div style="flex:1"><label class="flbl">Date of birth</label><input class="fld" id="gpDob" type="date"></div>
     <div style="flex:1"><label class="flbl">City / Address</label><input class="fld" id="gpAddr" placeholder="City, State"></div></div>
+  <label style="display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin:6px 0 12px;cursor:pointer">
+    <input type="checkbox" id="gpAgree" style="margin-top:3px;width:16px;height:16px;flex-shrink:0">
+    <span>I accept the <a class="namelink" onclick="openPrivacy()">Privacy Policy &amp; Terms</a> and understand that DISA Saarthi (by CA Anshul Karwa) is a study aid only and is <b>not liable</b> for exam outcomes, accuracy, or any decisions I take based on it.</span></label>
   <div class="errmsg" id="authErr"></div>
   <button class="btn grad" style="width:100%" onclick="finishGoogle()">Finish & enter</button>`);
 }
@@ -1878,6 +1888,7 @@ function finishGoogle(){
  if(!/^\d{10}$/.test(phone))return authErr('Phone must be a 10-digit number.');
  if(!dob)return authErr('Please select your date of birth.');
  if(!addr)return authErr('Please enter your city / address.');
+ if(!document.getElementById('gpAgree').checked)return authErr('Please accept the Privacy Policy & Terms to continue.');
  const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,dob:dob,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
  saveUser(u);setSession(u.email);closeModal();toast('Welcome, '+u.name.split(' ')[0]+'!');
 }
