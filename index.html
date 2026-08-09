@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DISA Saarthi - by CA Anshul Karwa</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23c026d3'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='900' text-anchor='middle' fill='%23c6ff3d' font-family='Segoe UI,sans-serif'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f46e5'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='58' font-weight='900' text-anchor='middle' fill='%2310b981' font-family='Segoe UI,sans-serif'%3ED%3C/text%3E%3C/svg%3E">
 <style>
 :root{
   --bg:#0d0b18;
@@ -12,21 +12,21 @@
   --card2:#1e1940;
   --ink:#f4f1ff;
   --muted:#a99fd6;
-  --grad:linear-gradient(135deg,#7c3aed 0%,#a855f7 45%,#c026d3 100%);
-  --grad2:linear-gradient(135deg,#6366f1,#8b5cf6);
-  --lime:#c6ff3d;
+  --grad:linear-gradient(135deg,#4f46e5 0%,#6366f1 45%,#7c3aed 100%);
+  --grad2:linear-gradient(135deg,#6366f1,#818cf8);
+  --lime:#10b981;
   --lime-ink:#132200;
   --good:#34d399;
   --bad:#fb7185;
-  --ring:rgba(168,85,247,.45);
-  --shadow:0 20px 50px -20px rgba(124,58,237,.6);
+  --ring:rgba(99,102,241,.45);
+  --shadow:0 20px 50px -20px rgba(79,70,229,.6);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background:radial-gradient(1200px 700px at 80% -10%,#2a1560 0%,transparent 55%),
-             radial-gradient(900px 600px at -10% 20%,#3b0d55 0%,transparent 50%),
+  background:radial-gradient(1200px 700px at 80% -10%,#1e1b4b 0%,transparent 55%),
+             radial-gradient(900px 600px at -10% 20%,#0f1830 0%,transparent 50%),
              var(--bg);
   color:var(--ink);min-height:100vh;overflow-x:hidden;
 }
@@ -36,13 +36,13 @@ button{font-family:inherit;cursor:pointer;border:none}
 
 /* floating blobs */
 .blob{position:fixed;border-radius:50%;filter:blur(60px);opacity:.4;z-index:0;animation:float 9s ease-in-out infinite}
-.blob.b1{width:340px;height:340px;background:#7c3aed;top:-80px;right:-60px}
-.blob.b2{width:280px;height:280px;background:#c026d3;bottom:-60px;left:-40px;animation-delay:2s}
+.blob.b1{width:340px;height:340px;background:#4f46e5;top:-80px;right:-60px}
+.blob.b2{width:280px;height:280px;background:#7c3aed;bottom:-60px;left:-40px;animation-delay:2s}
 @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-30px) scale(1.08)}}
 
 /* nav */
 nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
-  background:rgba(13,11,24,.6);border-bottom:1px solid rgba(168,85,247,.18)}
+  background:rgba(13,11,24,.6);border-bottom:1px solid rgba(99,102,241,.18)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
 .logo .byline{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.3px;line-height:1;margin-top:3px}
@@ -54,18 +54,18 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .nav-links{display:flex;gap:6px;align-items:center}
 .nav-links a{padding:8px 14px;border-radius:10px;font-size:14px;color:var(--muted);transition:.2s}
-.nav-links a:hover{color:var(--ink);background:rgba(168,85,247,.14)}
+.nav-links a:hover{color:var(--ink);background:rgba(99,102,241,.14)}
 .btn{background:var(--lime);color:var(--lime-ink);font-weight:800;padding:10px 18px;
   border-radius:12px;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 24px -8px var(--lime)}
 .btn:hover{transform:translateY(-2px) scale(1.04)}
 .btn:active{transform:translateY(1px) scale(.97)}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(168,85,247,.4);box-shadow:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid rgba(99,102,241,.4);box-shadow:none}
 .btn.grad{background:var(--grad);color:#fff;box-shadow:var(--shadow)}
 
 /* hero */
 header.hero{position:relative;z-index:1;padding:70px 0 40px;text-align:center}
 .badge{display:inline-flex;gap:8px;align-items:center;padding:7px 15px;border-radius:999px;
-  background:rgba(198,255,61,.12);border:1px solid rgba(198,255,61,.35);color:var(--lime);
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35);color:var(--lime);
   font-size:13px;font-weight:700;margin-bottom:22px;animation:bob 3s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .hero h1{font-size:clamp(38px,7vw,68px);line-height:1.02;font-weight:900;letter-spacing:-1.5px}
@@ -85,19 +85,19 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 
 /* module grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.mod{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(168,85,247,.16);
+.mod{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(99,102,241,.16);
   border-radius:20px;padding:22px;transition:transform .18s,box-shadow .25s,border-color .2s;
   transform-style:preserve-3d}
 .mod:hover{transform:translateY(-6px) rotate(-.5deg);box-shadow:var(--shadow);border-color:var(--ring)}
 .mod .num{width:46px;height:46px;border-radius:13px;background:var(--grad2);display:grid;place-items:center;
-  font-weight:900;font-size:20px;margin-bottom:14px;box-shadow:0 10px 24px -10px #8b5cf6}
+  font-weight:900;font-size:20px;margin-bottom:14px;box-shadow:0 10px 24px -10px #818cf8}
 .mod h3{font-size:18px;font-weight:800;line-height:1.25;margin-bottom:6px}
 .mod .meta{color:var(--muted);font-size:13px;margin-bottom:14px}
 .mod .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.chip{font-size:11px;padding:4px 9px;border-radius:8px;background:rgba(168,85,247,.14);color:#d9cbff}
+.chip{font-size:11px;padding:4px 9px;border-radius:8px;background:rgba(99,102,241,.14);color:#d9cbff}
 .mod .row{display:flex;gap:8px}
 .mod .row button{flex:1;padding:10px;border-radius:11px;font-weight:700;font-size:13px;transition:.15s}
-.mod .row .notes{background:rgba(198,255,61,.14);color:var(--lime)}
+.mod .row .notes{background:rgba(16,185,129,.14);color:var(--lime)}
 .mod .row .test{background:var(--grad);color:#fff}
 .mod .row button:hover{transform:translateY(-2px)}
 .mod .row button:active{transform:scale(.96)}
@@ -107,7 +107,7 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 
 /* feature row */
 .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.feat{background:var(--card);border:1px solid rgba(168,85,247,.14);border-radius:18px;padding:22px;transition:.2s}
+.feat{background:var(--card);border:1px solid rgba(99,102,241,.14);border-radius:18px;padding:22px;transition:.2s}
 .feat:hover{transform:translateY(-4px);border-color:var(--ring)}
 .feat .ic{font-size:30px;margin-bottom:12px;display:inline-block;animation:bob 3.4s ease-in-out infinite}
 .feat h4{font-size:17px;font-weight:800;margin-bottom:6px}
@@ -115,7 +115,7 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 
 /* pricing */
 .price{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.plan{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(168,85,247,.18);
+.plan{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(99,102,241,.18);
   border-radius:22px;padding:28px;position:relative;transition:.2s}
 .plan:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
 .plan.pop{border-color:var(--lime)}
@@ -145,7 +145,7 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 .closeb:hover{background:rgba(255,255,255,.16)}
 
 /* notes */
-.note-block{background:rgba(124,58,237,.08);border-left:3px solid var(--lime);border-radius:0 12px 12px 0;
+.note-block{background:rgba(79,70,229,.08);border-left:3px solid var(--lime);border-radius:0 12px 12px 0;
   padding:14px 16px;margin:12px 0;font-size:14.5px;line-height:1.65;color:#e7e0ff}
 .note-block b{color:var(--lime)}
 .timeline .ti{display:flex;gap:12px;margin:10px 0}
@@ -161,14 +161,14 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 .timer.warn{color:var(--bad);animation:blink 1s infinite}
 @keyframes blink{50%{opacity:.4}}
 .qtext{font-size:18px;font-weight:700;line-height:1.4;margin-bottom:18px}
-.opt{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid rgba(168,85,247,.2);
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1.5px solid rgba(99,102,241,.2);
   border-radius:14px;padding:14px 16px;margin-bottom:10px;color:var(--ink);font-size:15px;
   transition:transform .12s,border-color .15s,background .15s}
 .opt:hover{transform:translateX(4px);border-color:var(--ring)}
-.opt.sel{border-color:var(--lime);background:rgba(198,255,61,.1)}
+.opt.sel{border-color:var(--lime);background:rgba(16,185,129,.1)}
 .opt.correct{border-color:var(--good);background:rgba(52,211,153,.14)}
 .opt.wrong{border-color:var(--bad);background:rgba(251,113,133,.14)}
-.opt .k{display:inline-block;width:26px;height:26px;border-radius:8px;background:rgba(168,85,247,.2);
+.opt .k{display:inline-block;width:26px;height:26px;border-radius:8px;background:rgba(99,102,241,.2);
   text-align:center;line-height:26px;font-weight:800;margin-right:10px;font-size:13px}
 .explain{background:rgba(52,211,153,.08);border-radius:12px;padding:12px 14px;font-size:14px;
   color:#c7f9e5;margin:6px 0 14px;display:none;line-height:1.55}
@@ -183,63 +183,63 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 .score-ring .pct{position:absolute;inset:0;display:grid;place-items:center;font-size:34px;font-weight:900}
 .verdict{font-size:24px;font-weight:900;margin-bottom:6px}
 .breakdown{text-align:left;margin-top:20px}
-.brow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(168,85,247,.12);font-size:14px}
+.brow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(99,102,241,.12);font-size:14px}
 .brow b{color:var(--muted);font-weight:600}
 .bar{height:7px;background:rgba(255,255,255,.08);border-radius:99px;flex:1;margin:0 14px;align-self:center;overflow:hidden}
 .bar i{display:block;height:100%;border-radius:99px}
 
 footer{position:relative;z-index:1;padding:40px 0;text-align:center;color:var(--muted);
-  border-top:1px solid rgba(168,85,247,.14);margin-top:30px;font-size:14px}
-.demo-tag{position:fixed;bottom:16px;left:16px;z-index:60;background:rgba(198,255,61,.14);
-  border:1px solid rgba(198,255,61,.4);color:var(--lime);font-size:12px;font-weight:700;
+  border-top:1px solid rgba(99,102,241,.14);margin-top:30px;font-size:14px}
+.demo-tag{position:fixed;bottom:16px;left:16px;z-index:60;background:rgba(16,185,129,.14);
+  border:1px solid rgba(16,185,129,.4);color:var(--lime);font-size:12px;font-weight:700;
   padding:8px 13px;border-radius:10px;backdrop-filter:blur(8px)}
 .confetti{position:fixed;width:10px;height:14px;z-index:200;top:-20px;pointer-events:none}
 @media(max-width:640px){.nav-links a:not(.btn){display:none}}
-.namelink{color:var(--lime);font-weight:800;text-decoration:none;border-bottom:2px solid rgba(198,255,61,.5);transition:.15s}
+.namelink{color:var(--lime);font-weight:800;text-decoration:none;border-bottom:2px solid rgba(16,185,129,.5);transition:.15s}
 .namelink:hover{border-bottom-color:var(--lime);filter:brightness(1.15)}
 
 /* ---- Module content / branding ---- */
 .modal{position:relative}
 .modal.wm-on::before{content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;z-index:0;opacity:.06;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='150'%3E%3Ctext x='10' y='95' font-family='Segoe UI,sans-serif' font-size='21' font-weight='800' fill='%23c6ff3d' transform='rotate(-18 180 75)'%3ECreated by CA Anshul Karwa%3C/text%3E%3C/svg%3E")}
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='150'%3E%3Ctext x='10' y='95' font-family='Segoe UI,sans-serif' font-size='21' font-weight='800' fill='%2310b981' transform='rotate(-18 180 75)'%3ECreated by CA Anshul Karwa%3C/text%3E%3C/svg%3E")}
 .modal.wm-on>*{position:relative;z-index:1}
 .brand-strip{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:800;color:var(--lime);
-  background:rgba(198,255,61,.08);border:1px solid rgba(198,255,61,.28);padding:5px 11px;border-radius:9px;margin-bottom:14px;width:fit-content}
+  background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.28);padding:5px 11px;border-radius:9px;margin-bottom:14px;width:fit-content}
 .brand-strip .namelink{border-bottom:none}
 .chlist{display:flex;flex-direction:column;gap:9px;margin-top:4px}
-.chsel{text-align:left;background:var(--card);border:1.5px solid rgba(168,85,247,.2);border-radius:13px;
+.chsel{text-align:left;background:var(--card);border:1.5px solid rgba(99,102,241,.2);border-radius:13px;
   padding:13px 15px;color:var(--ink);transition:transform .14s,border-color .15s;display:flex;flex-direction:column;gap:3px}
 .chsel:hover{transform:translateX(5px);border-color:var(--ring)}
 .chsel b{color:var(--lime);font-size:12px;letter-spacing:.5px}
 .chsel .cn{font-size:15px;font-weight:800}
 .chsel span.sub2{color:var(--muted);font-size:12px;font-weight:600}
-.concept{background:rgba(168,85,247,.22);color:#e3d8ff;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:800}
+.concept{background:rgba(99,102,241,.22);color:#e3d8ff;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:800}
 .notebody p{margin-bottom:12px;line-height:1.7;color:#e7e0ff;font-size:14.5px}
 
 /* ================= PROTECTED STUDY READER ================= */
 #reader{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;
-  background:radial-gradient(900px 500px at 80% -5%,#241154 0%,transparent 55%),var(--bg);
+  background:radial-gradient(900px 500px at 80% -5%,#1e1b4b 0%,transparent 55%),var(--bg);
   -webkit-user-select:none;-moz-user-select:none;user-select:none}
 #reader.on{display:flex}
 .rbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;
-  border-bottom:1px solid rgba(168,85,247,.2);background:rgba(13,11,24,.7);backdrop-filter:blur(12px)}
+  border-bottom:1px solid rgba(99,102,241,.2);background:rgba(13,11,24,.7);backdrop-filter:blur(12px)}
 .rbar-l{display:flex;align-items:center;gap:12px;min-width:0}
 .rclose{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.08);color:#fff;font-size:20px;flex-shrink:0}
 .rclose:hover{background:rgba(255,255,255,.16)}
 .rbrand{font-size:12px;font-weight:800;color:var(--lime)}
 .rtitle{font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rlock{font-size:12px;font-weight:700;color:var(--muted);background:rgba(198,255,61,.1);
-  border:1px solid rgba(198,255,61,.3);padding:6px 11px;border-radius:9px;white-space:nowrap}
-.rtabs{display:flex;gap:7px;padding:10px 18px;overflow-x:auto;border-bottom:1px solid rgba(168,85,247,.14)}
-.rtab{flex-shrink:0;width:44px;height:34px;border-radius:9px;background:rgba(168,85,247,.14);color:#d9cbff;font-weight:800;font-size:13px;transition:.15s}
-.rtab:hover{background:rgba(168,85,247,.28)}
+.rlock{font-size:12px;font-weight:700;color:var(--muted);background:rgba(16,185,129,.1);
+  border:1px solid rgba(16,185,129,.3);padding:6px 11px;border-radius:9px;white-space:nowrap}
+.rtabs{display:flex;gap:7px;padding:10px 18px;overflow-x:auto;border-bottom:1px solid rgba(99,102,241,.14)}
+.rtab{flex-shrink:0;width:44px;height:34px;border-radius:9px;background:rgba(99,102,241,.14);color:#d9cbff;font-weight:800;font-size:13px;transition:.15s}
+.rtab:hover{background:rgba(99,102,241,.28)}
 .rtab.act{background:var(--grad);color:#fff}
 .rwrap{flex:1;display:flex;gap:0;overflow:hidden}
-.rside{width:250px;flex-shrink:0;padding:24px 14px;overflow-y:auto;border-right:1px solid rgba(168,85,247,.12)}
+.rside{width:250px;flex-shrink:0;padding:24px 14px;overflow-y:auto;border-right:1px solid rgba(99,102,241,.12)}
 .rside-h{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding-left:8px}
 .ridx{display:block;width:100%;text-align:left;background:transparent;color:#c9bff0;font-size:13.5px;
   padding:9px 10px;border-radius:9px;margin-bottom:3px;transition:.15s;line-height:1.35}
-.ridx:hover{background:rgba(168,85,247,.16);color:#fff}
+.ridx:hover{background:rgba(99,102,241,.16);color:#fff}
 .rpaper{flex:1;overflow-y:auto;padding:38px 20px 60px;position:relative;scroll-behavior:smooth}
 .rpaper::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.05;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='330' height='150'%3E%3Ctext x='8' y='95' font-family='Segoe UI,sans-serif' font-size='19' font-weight='800' fill='%23222' transform='rotate(-18 165 75)'%3ECreated by CA Anshul Karwa%3C/text%3E%3C/svg%3E")}
@@ -247,7 +247,7 @@ footer{position:relative;z-index:1;padding:40px 0;text-align:center;color:var(--
 /* the actual reading sheet */
 .rhead,.rsec,.rfoot-note{max-width:800px;margin:0 auto}
 .rhead{background:#fbfaff;color:#1c1830;border-radius:18px 18px 0 0;padding:34px 44px 22px;border-bottom:2px solid #eee}
-.reyebrow{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#7c3aed}
+.reyebrow{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#4f46e5}
 .rhead h1{font-size:32px;font-weight:900;letter-spacing:-.5px;margin:8px 0 6px;line-height:1.1}
 .rby{font-size:13px;color:#6b6486;font-weight:600}
 .rsec{background:#fbfaff;color:#221d38;padding:6px 44px 2px}
@@ -256,7 +256,7 @@ footer{position:relative;z-index:1;padding:40px 0;text-align:center;color:var(--
 .rfoot-note{background:#fbfaff;color:#6b6486;border-radius:0 0 18px 18px;padding:20px 44px 34px;
   font-size:15px;font-style:italic;text-align:center;border-top:2px solid #eee}
 .rnav{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
-  padding:14px 18px;border-top:1px solid rgba(168,85,247,.2);background:rgba(13,11,24,.7);backdrop-filter:blur(12px)}
+  padding:14px 18px;border-top:1px solid rgba(99,102,241,.2);background:rgba(13,11,24,.7);backdrop-filter:blur(12px)}
 .rcount{font-size:13px;color:var(--muted);font-weight:700}
 @media(max-width:820px){
   .rside{display:none}
@@ -289,26 +289,26 @@ footer{position:relative;z-index:1;padding:40px 0;text-align:center;color:var(--
 /* ================= LIGHT THEME ================= */
 body.light{
   --bg:#f3f1fb;--card:#ffffff;--card2:#f7f5ff;--ink:#1b1730;--muted:#6a6390;
-  --ring:rgba(124,58,237,.3);--shadow:0 20px 50px -24px rgba(124,58,237,.3);
+  --ring:rgba(79,70,229,.3);--shadow:0 20px 50px -24px rgba(79,70,229,.3);
 }
 body.light{background:radial-gradient(1000px 600px at 82% -8%,#e6dcff 0%,transparent 55%),radial-gradient(800px 500px at -8% 15%,#efe4ff 0%,transparent 50%),var(--bg)}
-body.light nav{background:rgba(255,255,255,.72);border-bottom:1px solid rgba(124,58,237,.14)}
+body.light nav{background:rgba(255,255,255,.72);border-bottom:1px solid rgba(79,70,229,.14)}
 body.light .blob{opacity:.18}
 body.light .chip{color:#5a2fae}
 body.light .opt{color:var(--ink)}
 body.light .feat p,body.light .mod .meta{color:var(--muted)}
 
 /* ================= NAV EXTRAS ================= */
-.icobtn{width:40px;height:40px;border-radius:11px;background:rgba(168,85,247,.14);color:var(--ink);
+.icobtn{width:40px;height:40px;border-radius:11px;background:rgba(99,102,241,.14);color:var(--ink);
   font-size:17px;display:grid;place-items:center;transition:.15s}
-.icobtn:hover{background:rgba(168,85,247,.26);transform:translateY(-1px)}
-.navuser{display:flex;align-items:center;gap:8px;background:rgba(168,85,247,.14);border-radius:999px;padding:4px 12px 4px 4px;cursor:pointer;transition:.15s}
-.navuser:hover{background:rgba(168,85,247,.24)}
+.icobtn:hover{background:rgba(99,102,241,.26);transform:translateY(-1px)}
+.navuser{display:flex;align-items:center;gap:8px;background:rgba(99,102,241,.14);border-radius:999px;padding:4px 12px 4px 4px;cursor:pointer;transition:.15s}
+.navuser:hover{background:rgba(99,102,241,.24)}
 .navuser img,.navuser .av{width:30px;height:30px;border-radius:50%;object-fit:cover;background:var(--grad);display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff}
 .navuser span{font-size:13px;font-weight:700;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* ================= FORMS ================= */
-.fld{width:100%;padding:12px 14px;border-radius:12px;background:var(--card);border:1.5px solid rgba(168,85,247,.25);
+.fld{width:100%;padding:12px 14px;border-radius:12px;background:var(--card);border:1.5px solid rgba(99,102,241,.25);
   color:var(--ink);margin-bottom:10px;font-size:15px;font-family:inherit}
 .fld:focus{outline:none;border-color:var(--lime)}
 .fld.err{border-color:var(--bad)}
@@ -321,7 +321,7 @@ body.light .feat p,body.light .mod .meta{color:var(--muted)}
 .authswitch{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
 .authswitch a{color:var(--lime);font-weight:700;cursor:pointer}
 .orline{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin:4px 0 12px}
-.orline::before,.orline::after{content:"";flex:1;height:1px;background:rgba(168,85,247,.2)}
+.orline::before,.orline::after{content:"";flex:1;height:1px;background:rgba(99,102,241,.2)}
 
 /* profile */
 .pcard{display:flex;gap:16px;align-items:center;margin-bottom:18px}
@@ -330,26 +330,26 @@ body.light .feat p,body.light .mod .meta{color:var(--muted)}
 .pinfo b{font-size:19px;font-weight:900;display:block}
 .pinfo span{color:var(--muted);font-size:13px}
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.pcell{background:var(--card);border:1px solid rgba(168,85,247,.16);border-radius:12px;padding:11px 13px}
+.pcell{background:var(--card);border:1px solid rgba(99,102,241,.16);border-radius:12px;padding:11px 13px}
 .pcell .k{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
 .pcell .v{font-size:14.5px;font-weight:700;margin-top:2px;word-break:break-word}
 .progwrap{margin-top:14px}
 .progrow{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px}
 .progrow .pl{width:150px;color:var(--muted)}
-.progrow .pbar{flex:1;height:9px;background:rgba(168,85,247,.14);border-radius:99px;overflow:hidden}
+.progrow .pbar{flex:1;height:9px;background:rgba(99,102,241,.14);border-radius:99px;overflow:hidden}
 .progrow .pbar i{display:block;height:100%;background:var(--grad);border-radius:99px}
 
 /* ================= EXAM (full screen) ================= */
 #exam{position:fixed;inset:0;z-index:210;display:none;flex-direction:column;background:var(--bg)}
 #exam.on{display:flex}
-.exbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid rgba(168,85,247,.2);background:var(--card2)}
+.exbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid rgba(99,102,241,.2);background:var(--card2)}
 .extitle{font-weight:900;font-size:16px}
-.extimer{font-weight:900;font-size:20px;color:var(--ink);background:rgba(168,85,247,.12);padding:6px 14px;border-radius:11px;font-variant-numeric:tabular-nums}
+.extimer{font-weight:900;font-size:20px;color:var(--ink);background:rgba(99,102,241,.12);padding:6px 14px;border-radius:11px;font-variant-numeric:tabular-nums}
 .extimer.warn{color:#fff;background:var(--bad);animation:blink 1s infinite}
 .exwrap{flex:1;display:flex;overflow:hidden}
-.expalette{width:230px;flex-shrink:0;border-right:1px solid rgba(168,85,247,.14);padding:16px;overflow-y:auto}
+.expalette{width:230px;flex-shrink:0;border-right:1px solid rgba(99,102,241,.14);padding:16px;overflow-y:auto}
 .pgrid200{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
-.pg{aspect-ratio:1;border-radius:8px;background:rgba(168,85,247,.12);color:var(--ink);font-size:12px;font-weight:800;transition:.12s}
+.pg{aspect-ratio:1;border-radius:8px;background:rgba(99,102,241,.12);color:var(--ink);font-size:12px;font-weight:800;transition:.12s}
 .pg.ans{background:var(--grad);color:#fff}
 .pg.flag{outline:2px solid #fbbf24;outline-offset:-2px}
 .pg.cur{outline:2px solid var(--lime);outline-offset:-2px}
@@ -358,10 +358,10 @@ body.light .feat p,body.light .mod .meta{color:var(--muted)}
 .exmain{flex:1;overflow-y:auto;padding:34px 26px;max-width:900px;margin:0 auto;width:100%}
 .exq{font-size:20px;font-weight:700;line-height:1.5;margin-bottom:20px}
 .exq .qn{color:var(--lime);font-weight:900;margin-right:8px}
-.exnav{display:flex;justify-content:space-between;gap:10px;padding:14px 18px;border-top:1px solid rgba(168,85,247,.2);background:var(--card2);flex-wrap:wrap}
+.exnav{display:flex;justify-content:space-between;gap:10px;padding:14px 18px;border-top:1px solid rgba(99,102,241,.2);background:var(--card2);flex-wrap:wrap}
 .palegend{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.8}
 .palegend b{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:4px}
-.exrev{background:var(--card);border:1px solid rgba(168,85,247,.16);border-radius:14px;padding:16px;margin-bottom:12px}
+.exrev{background:var(--card);border:1px solid rgba(99,102,241,.16);border-radius:14px;padding:16px;margin-bottom:12px}
 .exrev .rvq{font-weight:700;margin-bottom:10px}
 .exrev .rvo{padding:8px 12px;border-radius:9px;margin-bottom:6px;font-size:14px;border:1.5px solid transparent}
 .exrev .rvo.right{background:rgba(52,211,153,.14);border-color:var(--good)}
@@ -372,13 +372,13 @@ body.light .feat p,body.light .mod .meta{color:var(--muted)}
 .cert{max-width:620px;margin:0 auto;background:linear-gradient(160deg,#fffdf5,#fff);color:#1c1830;
   border-radius:20px;padding:40px 38px;text-align:center;border:3px solid var(--lime);position:relative;box-shadow:var(--shadow)}
 .cert .seal{font-size:46px}
-.cert h2{font-size:26px;font-weight:900;margin:6px 0;color:#2a1560}
+.cert h2{font-size:26px;font-weight:900;margin:6px 0;color:#1e1b4b}
 .cert .big{font-size:52px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin:8px 0}
 .cert .verdict2{font-size:20px;font-weight:900;margin-bottom:12px}
 .cert p{color:#3a3357;font-size:14.5px;line-height:1.7;margin:10px 0}
-.cert .nm{font-weight:800;color:#2a1560}
+.cert .nm{font-weight:800;color:#1e1b4b}
 .cert .cwm{position:absolute;inset:0;pointer-events:none;opacity:.05;border-radius:20px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Ctext x='6' y='90' font-family='Segoe UI' font-size='20' font-weight='800' fill='%237c3aed' transform='rotate(-16 150 70)'%3EDISA Saarthi%3C/text%3E%3C/svg%3E")}
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='140'%3E%3Ctext x='6' y='90' font-family='Segoe UI' font-size='20' font-weight='800' fill='%234f46e5' transform='rotate(-16 150 70)'%3EDISA Saarthi%3C/text%3E%3C/svg%3E")}
 
 /* toast */
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);z-index:400;
@@ -386,14 +386,58 @@ body.light .feat p,body.light .mod .meta{color:var(--muted)}
   opacity:0;transition:.25s;pointer-events:none;box-shadow:var(--shadow)}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .madelove{text-align:center;color:#8b6fd6;font-weight:800;font-size:14px;margin:28px auto 6px;max-width:820px}
-.madelove a{color:#7c3aed}
+.madelove a{color:#4f46e5}
 .eduline{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;opacity:.8}
 
 .plan .amt s{color:var(--muted);text-decoration-thickness:3px}
 .blessing{color:var(--lime);font-weight:800;font-size:14.5px;line-height:1.35;margin:2px 0 6px}
-.previewbar{background:rgba(198,255,61,.12);border-bottom:1px solid rgba(198,255,61,.3);color:var(--ink);
+.previewbar{background:rgba(16,185,129,.12);border-bottom:1px solid rgba(16,185,129,.3);color:var(--ink);
   font-size:13px;font-weight:600;text-align:center;padding:9px 16px}
 .previewbar a{color:var(--lime);font-weight:800;cursor:pointer;text-decoration:underline}
+.gbox{display:flex;justify-content:center;margin-bottom:12px;min-height:44px}
+
+/* exam branding lines */
+.exbrand{text-align:center;font-weight:800;font-size:13px;color:#8b6fd6;padding:8px}
+.exbrand a{color:#4f46e5;text-decoration:none}
+/* site-wide copy protection (typing still allowed in fields) */
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none}
+input,textarea,[contenteditable]{-webkit-user-select:text;-moz-user-select:text;user-select:text}
+img{-webkit-user-drag:none;user-drag:none}
+/* certificate links must be visible on the light certificate */
+.cert a{color:#4f46e5 !important;font-weight:800;text-decoration:underline;border-bottom:none !important}
+/* LIGHT THEME: fix low-contrast neon green */
+body.light{--lime:#3f7d00;--lime-ink:#ffffff}
+body.light .rlock,body.light .brand-strip{color:#3f7d00}
+body.light .previewbar a,body.light .namelink{color:#2f6a00}
+
+/* ===================== DISA SAARTHI - STUDY THEME (professional) ===================== */
+:root{
+ --bg:#0b1020;--card:#141b2e;--card2:#1b2440;--ink:#eef2ff;--muted:#9aa6c2;
+ --grad:linear-gradient(135deg,#6366f1 0%,#818cf8 55%,#a78bfa 100%);
+ --grad2:linear-gradient(135deg,#4f46e5,#6366f1);
+ --lime:#34d399;--lime-ink:#052e22;--good:#34d399;--bad:#fb7185;
+ --ring:rgba(99,102,241,.45);--shadow:0 22px 50px -24px rgba(2,6,23,.8);
+}
+body{background:radial-gradient(1100px 650px at 82% -10%,#1e1b4b 0%,transparent 55%),radial-gradient(800px 520px at -8% 12%,#0f1830 0%,transparent 50%),var(--bg)}
+.blob{opacity:.20}
+/* default = clean LIGHT study theme */
+body.light{
+ --bg:#f5f7fc;--card:#ffffff;--card2:#eef1f9;--ink:#0f172a;--muted:#5b6478;
+ --grad:linear-gradient(135deg,#4f46e5 0%,#6366f1 55%,#7c3aed 100%);
+ --grad2:linear-gradient(135deg,#6366f1,#818cf8);
+ --lime:#059669;--lime-ink:#ffffff;--good:#16a34a;--bad:#e11d48;
+ --ring:rgba(79,70,229,.26);--shadow:0 18px 44px -22px rgba(79,70,229,.28);
+}
+body.light{background:radial-gradient(1000px 600px at 84% -8%,#e9ecff 0%,transparent 55%),radial-gradient(760px 480px at -8% 12%,#eef4ff 0%,transparent 50%),var(--bg)}
+body.light .blob{opacity:.10}
+.btn{color:var(--lime-ink)}
+.btn.grad{color:#fff}
+.badge{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.4)}
+body.light .rlock,body.light .brand-strip,body.light .brand-strip .namelink{color:#059669}
+body.light .previewbar a,body.light .namelink{color:#4338ca;border-bottom-color:rgba(67,56,202,.4)}
+.cert a{color:#4f46e5 !important}
+/* softer, more studious cards */
+.mod:hover{transform:translateY(-5px)}
 </style>
 </head>
 <body>
@@ -1106,8 +1150,8 @@ window.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 /* ---------- LOGIN / PAY (demo) ---------- */
 function openLogin(){
  showModal(`<div class="modal-head"><div><h3>Welcome back 👋</h3><div class="sub">Log in to save your progress & streaks.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <input placeholder="Email" style="width:100%;padding:13px 15px;border-radius:12px;background:var(--card);border:1.5px solid rgba(168,85,247,.25);color:#fff;margin-bottom:10px;font-size:15px">
-  <input placeholder="Password" type="password" style="width:100%;padding:13px 15px;border-radius:12px;background:var(--card);border:1.5px solid rgba(168,85,247,.25);color:#fff;margin-bottom:16px;font-size:15px">
+  <input placeholder="Email" style="width:100%;padding:13px 15px;border-radius:12px;background:var(--card);border:1.5px solid rgba(99,102,241,.25);color:#fff;margin-bottom:10px;font-size:15px">
+  <input placeholder="Password" type="password" style="width:100%;padding:13px 15px;border-radius:12px;background:var(--card);border:1.5px solid rgba(99,102,241,.25);color:#fff;margin-bottom:16px;font-size:15px">
   <button class="btn grad" style="width:100%" onclick="closeModal()">Log in</button>
   <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:14px">Demo only - no real account is created.</p>`);
 }
@@ -1126,19 +1170,167 @@ function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor
 function prep(item){const tagged=item.o.map((o,i)=>({o,ok:i===item.a}));const sh=shuffle(tagged);
   return {q:item.q,c:item.c||'',e:item.e,o:sh.map(x=>x.o),a:sh.findIndex(x=>x.ok)};}
 
+/* Module 1 rendered notes (from Module1_Notes.md) */
+if(typeof NOTES!=='undefined'){NOTES[1]={"n": 1, "title": "Information Systems Audit Process", "chapters": [{"id": "1.1", "name": "Concepts of IS Audit", "html": "<h3>Key Definitions (verbatim-style definitions get tested - know precisely)</h3>\n<table>\n<thead>\n<tr>\n<th>Term</th>\n<th>Definition</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Audit</strong></td>\n<td>Independent inspection/examination of accounts/records/systems for a stated purpose</td>\n</tr>\n<tr>\n<td><strong>IS Audit (ISACA definition)</strong></td>\n<td>\"Any audit that encompasses <strong>wholly or partly</strong>, review and evaluation of automated information processing systems, related <strong>non-automated processes</strong>, and the <strong>interfaces</strong> between them\"</td>\n</tr>\n<tr>\n<td><strong>Computer System</strong></td>\n<td>Complete/functional computer incl. required hardware and software</td>\n</tr>\n<tr>\n<td><strong>Information (IT Act 2000)</strong></td>\n<td>Includes data, messages, images, sound, voice, codes, computer programs, software, databases, microfilm, computer-generated microfiche</td>\n</tr>\n<tr>\n<td><strong>Secure System</strong></td>\n<td>Reasonably secure from unauthorized access/misuse; assures correct processing; suited to intended functions; adheres to accepted security procedures</td>\n</tr>\n<tr>\n<td><strong>Risk</strong></td>\n<td>Potential that a given <strong>threat</strong> will exploit <strong>vulnerabilities</strong> of an asset to cause loss/damage</td>\n</tr>\n<tr>\n<td><strong>Internal Control</strong></td>\n<td>Policies, standards, practices, procedures, org structures providing reasonable assurance objectives are achieved and undesired events prevented/detected/corrected</td>\n</tr>\n<tr>\n<td><strong>Business Process</strong></td>\n<td>Collection of related, structured activities producing a specific service/product for a customer</td>\n</tr>\n<tr>\n<td>&gt; Trap: The ISACA definition of IS Audit explicitly includes <strong>non-automated processes and interfaces</strong> - it is NOT limited to purely automated/computerized systems. A very frequently tested nuance: IS Audit is broader than \"auditing computers.\"</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>IS Audit vs \"Audit in a Computerized Environment\" (classic distinction)</h3>\n<ul>\n<li><strong>IS Audit</strong> = a <strong>focused audit</strong> specifically about the information systems area itself.</li>\n<li><strong>Audit in a Computerized Environment</strong> = a <strong>regular/general audit engagement</strong> (e.g. financial audit) that happens to be performed in a process area using computers.<blockquote>\n<p>Trap: These two terms sound similar but are explicitly distinguished - IS Audit is the specialised discipline; \"audit in a computerized environment\" is any regular audit touching computerised processes.</p>\n</blockquote>\n</li>\n<li>Key underlying principle: <strong>the overall scope and objectives of audit do NOT change</strong> in a computerised environment - only the <strong>methodology</strong> of processing/storage (and hence audit procedures/evidence, which move from physical to digital) changes.</li>\n</ul>\n<h3>Applicable Standards (know exact numbers - high yield)</h3>\n<table>\n<thead>\n<tr>\n<th>Standard</th>\n<th>Covers</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>SA 200</strong></td>\n<td>Basic principles of audit (applicable to IS Audit too)</td>\n</tr>\n<tr>\n<td><strong>SA 315</strong></td>\n<td>Risk identification and assessment</td>\n</tr>\n<tr>\n<td><strong>SA 330</strong></td>\n<td>Auditor's responses to assessed risks (review management's risk remediation)</td>\n</tr>\n<tr>\n<td><strong>SA 320</strong></td>\n<td>Audit Materiality</td>\n</tr>\n<tr>\n<td><strong>ITAF (3rd Edition, ISACA)</strong></td>\n<td>IS audit and assurance standards framework - includes specific numbered standards: <strong>1002/1003 (Independence)</strong>, <strong>1004 (Reasonable Expectation)</strong>, <strong>1005 (Due Professional Care)</strong>, <strong>1006 (Proficiency)</strong>, <strong>1007 (Assertions)</strong>, <strong>1008 (Criteria)</strong>, <strong>1204 (Materiality)</strong></td>\n</tr>\n<tr>\n<td>&gt; Trap: Don't confuse <strong>SA 315</strong> (risk identification/assessment) with <strong>SA 330</strong> (auditor's response/remediation review) - these are sequential but distinct standards, frequently swapped as MCQ distractors.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>IT Risk in the Risk Hierarchy</h3>\n<ul>\n<li>IT risk is a <strong>component of the overall enterprise risk universe</strong> alongside strategic, environmental, market, credit, operational, and compliance risk.</li>\n<li>Many enterprises treat IT risk as a subset of <strong>Operational Risk</strong> (e.g. under <strong>Basel II</strong> in banking) - <strong>but</strong> the material explicitly cautions this is not ideal, since IT risk can also have <strong>Strategic risk</strong> and <strong>Credit risk</strong> dimensions (e.g. poor IT security controls can lower an organization's credit rating).<blockquote>\n<p>Trap: \"IT risk is ALWAYS purely operational risk\" is a wrong/oversimplified statement - the material specifically argues IT risk should <strong>not</strong> be depicted with a rigid hierarchic dependency on just one risk category.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Risk-Based Audit Approach</h3>\n<ul>\n<li>Focuses audit resources on <strong>high-risk areas</strong> for maximum value addition; also drives decisions on sample size for compliance vs substantive testing.</li>\n<li>Relies on: inherent risk + control risk + detection risk assessment <strong>combined with</strong> knowledge of internal/operational controls and business knowledge (risk-based auditing is NOT purely a risk-only exercise).</li>\n</ul>\n<h3>Audit Universe</h3>\n<ul>\n<li>= <strong>all risk areas</strong> that could be subject to audit (organised by business unit/product/process/system/risk category).</li>\n<li><strong>Benefits:</strong> clarity on extent of risk coverage each year, rigour around unaudited areas, supports resourcing discussions, helps form the \"overall audit opinion.\"</li>\n<li>Entities are typically <strong>ranked into tiers</strong> (e.g. Tier 1/2/3) by risk impact - <strong>lower-tier areas audited less frequently</strong>, and some low-risk areas <strong>may never be audited</strong> (relying on other assurance providers instead).</li>\n<li>Overriding considerations beyond simple tiering: <strong>Board/senior management-requested reviews</strong> and <strong>Regulator-requested reviews</strong>.</li>\n</ul>\n<h3>Audit Risk = Inherent Risk × Control Risk × Detection Risk (THE most important formula-style concept in this chapter)</h3>\n<table>\n<thead>\n<tr>\n<th>Component</th>\n<th>Meaning</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Inherent Risk (IR)</strong></td>\n<td>Risk that exists <strong>assuming NO internal controls</strong> at all - natural/susceptibility risk of the business/resource itself</td>\n</tr>\n<tr>\n<td><strong>Control Risk (CR)</strong></td>\n<td>Risk that a material error <strong>will not be prevented/detected/corrected on time by the internal control system</strong> (even collaborated fraud despite good SoD is an example)</td>\n</tr>\n<tr>\n<td><strong>Detection Risk (DR)</strong></td>\n<td>Risk that the <strong>IS Auditor's own procedures</strong> fail to detect a material error/weakness that exists (e.g. missing audit logs for the audit period → high detection risk)</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>Trap #1: <strong>Audit Risk = IR × CR × DR</strong> (a multiplicative relationship across all three components) - a frequently tested formula-recognition question.\nTrap #2: Detection risk is specifically about the <strong>auditor's own failure</strong> to catch something - don't confuse it with control risk (which is about the client's control system failing).\nTrap #3: Inherent risk is assessed <strong>ignoring internal controls</strong> - if asked \"which risk assumes no controls exist,\" the answer is Inherent Risk.</p>\n</blockquote>\n<h3>Materiality</h3>\n<ul>\n<li>In <strong>financial audit</strong> - based on value/volume of transactions and the error/discrepancy detected.</li>\n<li>In <strong>regulatory audit</strong> - based on impact of non-compliance.</li>\n<li>In <strong>IS Audit</strong> - based on the <strong>effect/consequence of the risk in terms of potential loss</strong> (not purely monetary value like financial audit).</li>\n<li>Key relationship: <strong>Higher the materiality level set, LOWER the audit risk the IS Auditor is willing to accept.</strong></li>\n<li>A seemingly minor incident (e.g. a virus quickly detected/cleaned with no visible business impact) can still be <strong>material</strong> if root-cause analysis reveals an underlying <strong>control weakness</strong> that could recur - materiality attaches to the <strong>root cause</strong>, not just the immediate visible impact.</li>\n<li>Governing standard: <strong>SA 320</strong>; ISACA's <strong>ITAF 1204</strong> standards on materiality (1204.1-1204.4) require auditors to consider control weaknesses/absences, materiality's relationship to audit risk, cumulative effect of minor deficiencies, and specific disclosure requirements in the report.<blockquote>\n<p>Trap: The \"virus cleaned with no impact\" example is a classic scenario question - the correct answer is that the incident <strong>can still be material</strong> once root cause (a control gap) is considered, even though the immediate loss was nil.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Types of Internal Controls - 2 classification schemes (don't mix them up)</h3>\n<p><strong>(a) By Structure:</strong>\nInternal Controls = <strong>General Controls + IS Controls</strong>; IS Controls = <strong>IT Application Controls + IT General Controls (ITGC)</strong>.\n- <strong>General Controls</strong> - all administrative areas broadly (incl. IT implementation).\n- <strong>Application Controls</strong> - specific to individual application software.\n- <strong>ITGC</strong> - apply to the <strong>IT environment in general</strong> (not one specific application).</p>\n<p><strong>(b) By Function (Preventive / Detective / Corrective - the classic triad, same as later modules):</strong>\n| Type | Role | Example |\n|---|---|---|\n| Preventive | Stops problems <strong>before</strong> they arise | Firewalls |\n| Detective | <strong>Detects and reports</strong> occurrence of error/malicious act | Audit Trails |\n| Corrective | <strong>Minimizes impact</strong>, remedies problems found by detective controls | Backups |</p>\n<blockquote>\n<p>Trap: Don't confuse the <strong>General/Application/ITGC structural classification</strong> with the <strong>Preventive/Detective/Corrective functional classification</strong> - both exist independently and a question may ask you to place a given control (e.g. \"firewall\") into either scheme correctly.</p>\n</blockquote>\n<h3>Organization of the IS Audit Function</h3>\n<ul>\n<li>The <strong>Audit Committee</strong> should ideally decide the IS audit function's composition/constitution and is the <strong>prime reporting authority</strong>.</li>\n<li>The <strong>Audit Charter</strong> defines authority, scope, and responsibility - it is the mandate document for the audit function.</li>\n<li><strong>Internal vs External IS Audit</strong> - scope/approach differs even though overall objective is the same:</li>\n<li><strong>Internal IS Auditor</strong> - reviews the internal control environment <strong>in detail</strong>.</li>\n<li><strong>External IS Auditor</strong> - takes an <strong>overall view</strong>, focuses more on <strong>substantive testing</strong> as per the specific engagement scope (defined via the <strong>audit engagement letter</strong>).<blockquote>\n<p>Trap: \"Internal auditor = detailed control review; External auditor = overall view + substantive testing\" - a frequently tested distinction on <strong>scope depth</strong>, not just reporting lines.</p>\n</blockquote>\n</li>\n<li><strong>ITAF 1002/1003</strong> - Organisational Independence and Professional Independence standards; audit function must be independent of the area being reviewed, in both attitude and appearance.</li>\n</ul>"}, {"id": "1.2", "name": "IS Audit in Phases", "html": "<h3>Audit Charter - 4 Pillars (must know all 4 headings + what sits under each)</h3>\n<table>\n<thead>\n<tr>\n<th>Pillar</th>\n<th>Contains</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Purpose</strong></td>\n<td>Role, Aims/goals, Mission statement, Scope, Objectives</td>\n</tr>\n<tr>\n<td><strong>Responsibility</strong></td>\n<td>Operating principles, Independence, Relationship with external audit, Auditee requirements, CSFs, KPIs, Risk assessment</td>\n</tr>\n<tr>\n<td><strong>Authority</strong></td>\n<td>Right of access to info/personnel/locations/systems, Scope/limitations, Functions to be audited, Reporting lines, Grading of IS audit staff</td>\n</tr>\n<tr>\n<td><strong>Accountability</strong></td>\n<td>Reporting lines to senior management, Performance appraisals, Staffing/career development, Auditee rights, Independent quality reviews, Budget vs actual comparison</td>\n</tr>\n<tr>\n<td>- Governing ITAF standards: <strong>1001.1</strong> (document the audit function in a charter - purpose/responsibility/authority/accountability) and <strong>1001.2</strong> (charter must be agreed/approved at an appropriate level).</td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: \"Independence\" and \"risk assessment\" sit under <strong>Responsibility</strong>, not Authority - the 4-pillar classification (Purpose/Responsibility/Authority/Accountability) is tested by asking which item belongs under which pillar.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Audit Engagement Letter (3 pillars, NOT 4 - \"Purpose\" drops out)</h3>\n<p>Engagement letter covers only <strong>Responsibility, Authority, Accountability</strong> (no separate \"Purpose\" section, unlike the Audit Charter which has 4).</p>\n<blockquote>\n<p>Trap: The Audit Charter has <strong>4 sections</strong>; the Engagement Letter has only <strong>3</strong> (drops \"Purpose\") - a frequently tested numeric distinction.\n- Governing standard: <strong>SA 210</strong> - \"Agreeing the Terms of Audit Engagements\" - requires agreement + documentation, and <strong>renewal before each year's audit if necessary</strong>.\n- Key distinction: <strong>External IS audits</strong> have specific/fixed scope, objectives, timelines, deliverables (via engagement letter); <strong>Internal IS audits</strong> can be more <strong>flexible</strong>, varying per enterprise needs.</p>\n</blockquote>\n<h3>Quality Assurance</h3>\n<ul>\n<li><strong>SA 220</strong> (Quality Control) - premised on <strong>SQC 1</strong>: the firm must ensure (a) compliance with professional/regulatory/legal standards, and (b) reports issued are appropriate.</li>\n<li>Engagement teams may <strong>rely on the firm's system of quality control</strong> unless informed otherwise.</li>\n</ul>\n<h3>Audit Scope - key questions asked while scoping (checklist style, good for \"which of these is NOT a scoping consideration\" MCQs)</h3>\n<p>Impact on org results? Will it improve performance/accountability/value? High visibility/current concern? Significant recent change (new tech, staff turnover, reorg, new regulation)? Right timing? Past non-compliance history? Management's risk appetite? Past fraud/material errors?</p>\n<h3>Audit Planning</h3>\n<ul>\n<li>Governed by <strong>SA 300</strong> (\"Planning\") - extent of planning varies with entity size, audit complexity, and auditor's experience/knowledge of the business.</li>\n<li><strong>Planning is a CONTINUOUS activity</strong>, not a one-time start-of-audit task - changes in circumstances require the plan to be revised via a change-management-style process (with recorded reasons).</li>\n<li>ITAF standards: <strong>1201</strong> (plan objectives/scope/timeline/compliance/risk-based approach/documentation), <strong>1202</strong> (risk assessment in planning - both at overall IS audit plan level AND individual engagement level).<blockquote>\n<p>Trap: \"Audit planning happens only at the start of the audit\" is a WRONG statement - explicitly flagged as a common misconception; planning continues throughout the audit cycle.</p>\n</blockquote>\n</li>\n</ul>\n<h3>7 Steps for Audit Planning (sequence)</h3>\n<p>Understand business mission/objectives/processes → Understand changes in business environment → Review prior work papers → Identify policies/standards/guidelines/org structure → Perform risk analysis → Set scope &amp; objectives → Develop audit approach/strategy → Assign personnel → Address engagement logistics.</p>\n<h3>Objectives of IS Controls - 3 Categories = COBIT 2019's 7 Information Criteria (re-encountered from Module 3, now from the audit lens)</h3>\n<table>\n<thead>\n<tr>\n<th>Category</th>\n<th>Criteria</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Fiduciary</strong></td>\n<td>Reliability, Compliance</td>\n</tr>\n<tr>\n<td><strong>Quality</strong></td>\n<td>Efficiency, Effectiveness</td>\n</tr>\n<tr>\n<td><strong>Security (CIA)</strong></td>\n<td>Confidentiality, Integrity, Availability</td>\n</tr>\n<tr>\n<td>&gt; Trap: This 3-category grouping (<strong>Fiduciary / Quality / Security</strong>) is the audit-planning lens on the same 7 COBIT information criteria seen in Module 3 Ch.4 - don't treat them as unrelated lists; Fiduciary = Reliability+Compliance, Quality = Efficiency+Effectiveness, Security = CIA.</td>\n<td></td>\n</tr>\n<tr>\n<td>- <strong>Confidentiality</strong> underlying principle = <strong>\"need-to-know\"/\"least privilege.\"</strong></td>\n<td></td>\n</tr>\n<tr>\n<td>- <strong>Integrity</strong> explicitly includes <strong>Authenticity</strong> (content unchanged) and <strong>Non-repudiation &amp; Accountability</strong> (action traceable to a user) - as sub-components.</td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: Non-repudiation is bundled <strong>under Integrity</strong> here too (consistent with Module 5's framing) - reinforcing that it's not a standalone 4th CIA pillar.</td>\n<td></td>\n</tr>\n<tr>\n<td>- Relevant law reference: <strong>SOX 404 / LODR of SEBI</strong> (India's SOX-equivalent) - focuses on integrity of financial information/internal controls.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Understanding the IT Environment of the Auditee - 4 key areas (per SA 315)</h3>\n<ol>\n<li><strong>Business of the Entity</strong> - ownership, management, regulatory environment, industry factors, market/competitive forces.</li>\n<li><strong>Organization Structure</strong> - task allocation, coordination, supervision, roles/responsibilities.</li>\n<li><strong>IT Infrastructure</strong> - capacities, hardware/software age, licensing, vendor agreements.</li>\n<li><strong>Regulations, Standards, Policies, Procedures, Guidelines</strong> - applicable laws + compliance requirements (per <strong>SA 250</strong>).</li>\n</ol>\n<h3>Key Legal/Regulatory References (audit-specific angle - cross-check vs Module 2's legal notes)</h3>\n<table>\n<thead>\n<tr>\n<th>Law/Standard</th>\n<th>Key point</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Section 7A, IT Act</strong></td>\n<td>Provisions for audit of physical records apply equally to <strong>electronic</strong> records/documents</td>\n</tr>\n<tr>\n<td><strong>Section 43A, IT Act</strong></td>\n<td>Body corporate negligent with sensitive personal data → liable for damages; <strong>no upper compensation limit</strong></td>\n</tr>\n<tr>\n<td><strong>Sections 66-66F, 67, IT Act</strong></td>\n<td>Cyber crimes: offensive messages, dishonest use, unauthorised access, identity theft, privacy violation, cyber terrorism, obscene material</td>\n</tr>\n<tr>\n<td><strong>Section 72A, IT Act</strong></td>\n<td>Disclosure without consent, breach of lawful contract → imprisonment up to <strong>3 years</strong> or fine up to <strong>₹5,00,000</strong>, or both</td>\n</tr>\n<tr>\n<td><strong>SOX Section 404 (USA)</strong></td>\n<td>Independent Auditor must opine on <strong>effectiveness of internal controls over financial reporting</strong>, in addition to fair presentation opinion</td>\n</tr>\n<tr>\n<td><strong>PCAOB Auditing Standard 5</strong></td>\n<td>Governs integrated audit of internal control over financial reporting + financial statements</td>\n</tr>\n<tr>\n<td><strong>SEBI LODR</strong></td>\n<td>Sharpens Audit Committee role - recommending auditor appointment, monitoring independence, related-party transaction approval</td>\n</tr>\n<tr>\n<td><strong>Companies Act Section 143</strong></td>\n<td>Requirement for IFC (Internal Financial Controls) reporting</td>\n</tr>\n<tr>\n<td><strong>ISO/IEC 27000 family</strong></td>\n<td>27000 = overview/vocabulary; <strong>27001:2013</strong> = formal, <strong>certifiable</strong> ISMS specification; <strong>27002:2013</strong> = code of practice/advisory only, <strong>NOT certifiable</strong></td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>ISO 27001 is certifiable; ISO 27002 is only a advisory code of practice, NOT a formal certifiable specification</strong> - a very frequently tested distinction (echoes the certifiable-vs-not theme from Module 2 Ch.2).</td>\n<td></td>\n</tr>\n<tr>\n<td>- RBI/SEBI guideline references worth remembering: <strong>Gopalakrishna Committee Report (29.04.2011)</strong> on Cyber Security/IS Audit/IT Security/BCP.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>ITAF (3rd Edition) - 3 Categories of Standards (MUST memorise the numbering ranges)</h3>\n<table>\n<thead>\n<tr>\n<th>Series</th>\n<th>Category</th>\n<th>Covers</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>1000 series</strong></td>\n<td><strong>General Standards</strong></td>\n<td>Guiding principles - ethics, independence, objectivity, due care, knowledge/competency/skill</td>\n</tr>\n<tr>\n<td><strong>1200 series</strong></td>\n<td><strong>Performance Standards</strong></td>\n<td>Conduct of engagement - planning, supervision, scoping, risk/materiality, evidence, professional judgment</td>\n</tr>\n<tr>\n<td><strong>1400 series</strong></td>\n<td><strong>Reporting Standards</strong></td>\n<td>Types of reports, communication means, information communicated</td>\n</tr>\n<tr>\n<td>&gt; Trap: Memorise the <strong>number ranges</strong> - \"1000s = General, 1200s = Performance, 1400s = Reporting\" is a direct, frequently tested fact (note: 1300 series is not mentioned, so don't assume a continuous 1000-1400 block).</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>COBIT 2019 recap - Governance System 6 Principles (already in Module 2/3 - here it's framed for audit use)</h3>\n<p>Provide Stakeholder Value, Holistic Approach, Dynamic Governance System, Governance Distinct from Management, Tailored to Enterprise Needs, End-to-End Governance System.\n- <strong>7 Components (=Enablers):</strong> Processes, Organizational Structures, Information flows/items, People/Skills/Competence, Policies &amp; Procedures, Culture/Ethics/Behaviour, Services/Infrastructure/Applications.\n- <strong>40 Core Objectives across 5 Domains</strong> - EDM (Governance, 5 objectives: Governance Framework Setting, Benefit Delivery, Risk Optimisation, Resource Optimisation, Stakeholder Engagement) + APO/BAI/DSS/MEA (Management, 4 domains).\n- <strong>MEA02 \"Managed System of Internal Control\"</strong> - key COBIT process for assessing internal controls; practices: Monitor internal controls → Review business process control effectiveness → Perform control self-assessment → Identify/report control deficiencies.</p>\n<blockquote>\n<p>Trap: EDM has exactly <strong>5 named governance objectives</strong> (not a round \"4\" or \"6\") - Governance Framework Setting &amp; Maintenance, Benefit Delivery, Risk Optimisation, Resource Optimisation, Stakeholder Engagement - worth memorising the count and names.</p>\n</blockquote>\n<h3>Risk Assessment - ISACA Guidance (know the frequency/cadence facts)</h3>\n<ul>\n<li>Risk assessment for the overall <strong>IS Audit Plan</strong> must be conducted <strong>at least annually</strong>, and approved by those charged with governance.</li>\n<li>For <strong>each individual engagement</strong>, a <strong>preliminary risk assessment</strong> must be separately performed (distinct from the annual overall plan-level assessment).<blockquote>\n<p>Trap: There are <strong>TWO levels</strong> of risk assessment - (1) annual, overall IS audit plan level, and (2) preliminary, per-individual-engagement level - don't conflate the two; a question may ask which one happens \"at least annually\" (the overall plan-level one).</p>\n</blockquote>\n</li>\n<li>Key inverse relationship: <strong>the LOWER the materiality threshold set, the MORE PRECISE the audit expectations and the GREATER the audit risk.</strong></li>\n<li>To reduce risk at higher materiality: <strong>extend tests of controls</strong> (reduces Control Risk) and/or <strong>extend substantive testing</strong> (reduces Detection Risk).</li>\n</ul>\n<h3>Risk Management Process - 2 broad activities</h3>\n<ol>\n<li><strong>Collect Data</strong> - identify/record IT risk-related data, historical loss data, event data, contributing factors.</li>\n<li><strong>Analyze Risk</strong> - build risk scenarios, estimate frequency/magnitude, compare to risk tolerance, analyse cost-benefit of response options (<strong>Avoid/Reduce-Mitigate/Transfer-Share/Accept/Exploit-Seize</strong> - note \"Exploit/Seize\" as a positive-risk response option not seen in earlier modules), validate results before use in decisions.<blockquote>\n<p>Trap: This risk response list adds a <strong>5th option - \"Exploit/Seize\"</strong> (for positive risk/upside opportunities) - beyond the standard 4 (Accept/Avoid/Transfer/Mitigate) seen in Module 2 Ch.2. Worth remembering this is the audit-context expanded list.</p>\n</blockquote>\n</li>\n</ol>\n<h3>General Controls Review - IT General Controls (ITGC) area</h3>\n<ul>\n<li>A <strong>General Controls review</strong> covers: organizational/administrative structure of the IS function, policies/procedures, staff skills, overall control environment, <strong>infrastructure and environmental controls</strong> (data centre air conditioning, UPS/generators, fire suppression, cabling), and <strong>physical access control</strong> (locked doors, swipe cards, biometrics, security guards, visitor logging).</li>\n<li><strong>ITGC = controls around applications</strong> (not specific to one application) - supports healthy maintenance/general security of applications/IT processes. Covers: Change Management, Logical &amp; Physical Access Management, Backup &amp; Recovery, Incident Management, Job/Batch Scheduling, OS/DB security review.<blockquote>\n<p>Trap: <strong>If ITGC are ineffective, the auditor CANNOT rely on Application Controls</strong> - a foundational audit-logic point (ITGC is the base layer; without reliable ITGC, application-level controls testing loses its assurance value).</p>\n</blockquote>\n</li>\n</ul>\n<h3>Organisational Controls (4 documentation areas - checklist)</h3>\n<ol>\n<li><strong>Responsibilities &amp; objectives</strong> of each IS function (systems software, app programming, DB admin, operations).</li>\n<li><strong>Policies, standards, procedures &amp; practices</strong> - Policies = rules/boundaries of delegated authority; Procedures = step-by-step instructions to complete tasks (Policy vs Procedure distinction - same theme as Module 5 Ch.2's hierarchy).</li>\n<li><strong>Job Descriptions</strong> - communicate management's expectations; establish accountability.</li>\n<li><strong>Segregation of Duties (SoD)</strong> - critical factors: nature of business, managerial policy, org structure, IT resources deployed. Classic SoD separations: <strong>Systems software programming vs Application programming</strong>; <strong>DBA group vs other data processing</strong>; <strong>Computer hardware operations vs other groups</strong>; <strong>Systems Analyst function vs Programming function</strong>; <strong>Application programming vs Operations/data preparation</strong>.<blockquote>\n<p>Trap: These 5 specific SoD separations (systems-vs-app programming, DBA-vs-processing, hardware ops-vs-others, analyst-vs-programmer, programming-vs-operations) are exact, commonly tested pairings - a scenario question may ask \"which SoD violation occurred\" and expect you to match against this list.</p>\n</blockquote>\n</li>\n</ol>\n<h3>Operating System Controls</h3>\n<ul>\n<li>OS control weaknesses can have <strong>catastrophic</strong> effect (auditors often under-attend to OS controls per the material's own caution).</li>\n<li>Key OS controls: limit admin account access, safeguard domain controller, strong password policy, deactivate default accounts, regular patch management, updated antivirus, OS hardening.</li>\n</ul>\n<h3>Risk Control Matrix (RCM) - the practical working tool</h3>\n<ul>\n<li>A spreadsheet-based tool per process/application/area, containing: <strong>Risk No., Risk (in depth), Control Objective, Control Number, Control Implemented</strong> (+ optionally control owner, process owner, testing plan/results, observations, evidence, risk ranking, recommendations - i.e. it can double as the full <strong>Audit Notebook</strong>).<blockquote>\n<p>Trap: RCM's core minimum columns are <strong>Risk, Control Objective, Control Number, Control Implemented</strong> - don't confuse \"Control Objective\" (the ideal/textbook control) with \"Control Implemented\" (what the enterprise actually has in place) - these are two distinct columns.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Audit Sampling</h3>\n<ul>\n<li>Governed by <strong>SA 530</strong> (Audit Sampling) and ISACA sampling guidance.</li>\n<li>2 broad categories:</li>\n<li><strong>Statistical Sampling</strong> - Random sampling, Systematic sampling.</li>\n<li><strong>Non-Statistical Sampling</strong> - Haphazard sampling, Judgmental sampling.</li>\n<li>Sampling is used in <strong>both compliance testing</strong> (e.g. user access rights, program change control, documentation, log reviews, license audits) <strong>and substantive testing</strong> (e.g. re-performing a complex interest calculation on a sample of accounts).<blockquote>\n<p>Trap: Statistical = Random + Systematic; Non-Statistical = Haphazard + Judgmental - a straightforward but frequently tested 2x2 classification.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Compliance Testing vs Substantive Testing (THE classic distinction of this chapter - very high yield)</h3>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Compliance Testing</th>\n<th>Substantive Testing</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Tests</td>\n<td>Whether <strong>controls are being applied</strong> as per organizational policy (existence/effectiveness/continuity of controls)</td>\n<td><strong>Integrity of actual transactions/data/balances</strong> (completeness, accuracy, validity)</td>\n</tr>\n<tr>\n<td>Level</td>\n<td><strong>Process level</strong> (not transactional)</td>\n<td><strong>Transactional level</strong> (more granular)</td>\n</tr>\n<tr>\n<td>Also called</td>\n<td>Test of Controls</td>\n<td>\"Default procedures\" - performed in <strong>every</strong> audit</td>\n</tr>\n<tr>\n<td>Example</td>\n<td>Sample of programs to check source vs object version match</td>\n<td>Re-performing a complex interest calculation on a sample of accounts</td>\n</tr>\n<tr>\n<td>Relationship</td>\n<td>If compliance test concludes control is <strong>ineffective</strong>, auditor <strong>has no option but to</strong> move to substantive testing</td>\n<td>Performed regardless, but scope/extent increases if compliance testing fails</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>Trap: Compliance testing is at the <strong>process level</strong>; substantive testing is at the <strong>transactional level</strong> (more granular) - a precise, frequently tested distinction. Also: <strong>\"if a compliance test is ineffective, the auditor MUST perform substantive testing\"</strong> - this causal link (not the reverse) is commonly tested.</p>\n</blockquote>\n<h3>Design Effectiveness vs Operational Effectiveness (very important pair - easily confused)</h3>\n<table>\n<thead>\n<tr>\n<th></th>\n<th>Design Effectiveness</th>\n<th>Operational Effectiveness</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Tests</td>\n<td>The <strong>documented/blueprint design</strong> of the control - is it capable of mitigating the risk if it works as designed?</td>\n<td>The <strong>actual real-world performance</strong> of the control in practice</td>\n</tr>\n<tr>\n<td>Method</td>\n<td>Walkthrough (end-to-end, step-by-step process evaluation), review of policies/procedures</td>\n<td>Sample-based self-testing - select sample, gather evidence control was actually performed</td>\n</tr>\n<tr>\n<td>Key fact</td>\n<td>Only a <strong>properly designed</strong> control CAN operate effectively - a control deficiency = design or operation fails to prevent/detect on time</td>\n<td>Manual controls need EXTRA scrutiny (subject to human error) - e.g. a signature alone doesn't prove careful review occurred; system controls, once configured, either work consistently or don't</td>\n</tr>\n<tr>\n<td>&gt; Trap: A <strong>signature on a user access request is NOT sufficient evidence</strong> that the reviewer actually exercised due diligence - the auditor must test WHETHER the review was carried out properly, not just whether a signature exists. This \"signature ≠ proof of quality control\" point is a favourite scenario-based MCQ.</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>System/automated controls, once properly configured, operate consistently</strong> (they either work or they don't) - <strong>manual controls are inherently more variable</strong> and need sample-based quality testing, not just presence-checking.</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Audit Evidence - Reliability determinants (4 factors - rank/apply in scenario questions)</h3>\n<ol>\n<li><strong>Independence of the provider</strong> - external/independent source evidence &gt; internal source evidence.</li>\n<li><strong>Qualifications of the provider</strong> - including the IS Auditor's OWN technical competence in the area.</li>\n<li><strong>Objectivity of evidence</strong> - direct/objective evidence (e.g. physical media inventory count) &gt; evidence requiring judgment/interpretation (e.g. efficiency assessment from discussions).</li>\n<li><strong>Timing of the evidence</strong> - relevant to nature/timing/extent of testing.\n- Evidence must be <strong>Sufficient</strong> (quantity, based on auditor judgment) and <strong>Competent</strong> (valid + relevant = quality).</li>\n</ol>\n<h3>8 Types of Audit Evidence (match type → description - matching MCQ favourite)</h3>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Physical examination</strong></td>\n<td>Inspection/count of a tangible asset (inventory, cash, securities)</td>\n</tr>\n<tr>\n<td><strong>Confirmation</strong></td>\n<td><strong>Direct written response from a third party</strong>, requested via the client but sent directly to the auditor</td>\n</tr>\n<tr>\n<td><strong>Documentation</strong></td>\n<td>Inspection of client documents/records - <strong>Internal</strong> (prepared/retained within org) vs <strong>External</strong> (handled outside org, currently held or accessible by client)</td>\n</tr>\n<tr>\n<td><strong>Analytical procedures</strong></td>\n<td>Comparisons/relationships (e.g. gross margin year-over-year)</td>\n</tr>\n<tr>\n<td><strong>Inquiries of the Client</strong></td>\n<td>Written/oral info from client - <strong>usually NOT conclusive</strong> (not independent), needs corroboration</td>\n</tr>\n<tr>\n<td><strong>Recalculation</strong></td>\n<td>Rechecking client's arithmetic (sales invoice extensions, depreciation calc)</td>\n</tr>\n<tr>\n<td><strong>Performance</strong></td>\n<td>Auditor's <strong>independent re-test</strong> of client's own accounting/control procedures</td>\n</tr>\n<tr>\n<td><strong>Observation</strong></td>\n<td>Using senses to watch client activities - <strong>rarely sufficient alone</strong> (auditee may change behaviour when watched - \"Hawthorne effect\"-like caveat)</td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>Confirmation</strong> requires the third party to respond <strong>directly to the auditor</strong> (not back through the client) - if the response route goes through the client, it weakens the independence/reliability of that evidence. <strong>Inquiries of the client</strong> and <strong>Observation</strong> are both explicitly flagged as <strong>insufficient alone</strong> - a common \"which evidence type needs corroboration\" MCQ.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Evidence Preservation (Digital Forensics angle)</h3>\n<ul>\n<li>Evidence of computer fraud exists as log files, timestamps, memory contents - <strong>rebooting or accessing files can destroy/corrupt/overwrite it</strong>.</li>\n<li>First step: <strong>image the attacked system</strong> + <strong>dump memory content to a file BEFORE rebooting</strong>.</li>\n<li>Further analysis must be on the <strong>image/copy</strong>, never the original.</li>\n<li><strong>Chain of Custody</strong> - documenting in detail how evidence is handled/maintained (ownership, transfer, modification) - needed for legal admissibility.</li>\n</ul>\n<h3>Standards on Evidence (ICAI + ISACA - know exact numbers)</h3>\n<table>\n<thead>\n<tr>\n<th>Standard</th>\n<th>Covers</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>SA 230</strong></td>\n<td>Audit Documentation</td>\n</tr>\n<tr>\n<td><strong>SA 500</strong></td>\n<td>Audit Evidence (sufficient appropriate evidence)</td>\n</tr>\n<tr>\n<td><strong>SA 580</strong></td>\n<td>Written Representations from management</td>\n</tr>\n<tr>\n<td><strong>ITAF 1205</strong></td>\n<td>Evidence - sufficiency and appropriateness for engagement conclusions</td>\n</tr>\n<tr>\n<td>- Reliability is GREATER when evidence is: written (not oral), from independent sources, obtained by the professional directly (not by the entity), certified/kept by an independent party, from inspection or observation results.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Using Work of Another Auditor/Expert</h3>\n<ul>\n<li>Even when work is <strong>outsourced/delegated</strong>, the <strong>professional liability is NOT necessarily delegated</strong> - the engaging IS Auditor/entity remains responsible.</li>\n<li>Key ISACA standard: <strong>1206</strong> (Using the Work of Other Experts) - assess qualifications/competence/independence BEFORE engagement, evaluate their work, determine if additional test procedures are needed if their evidence is insufficient.</li>\n<li>Related SAs: <strong>SA 600, 610, 620</strong> (using work of other auditors/internal audit/experts).<blockquote>\n<p>Trap: \"Once outsourced, liability shifts fully to the external expert\" is WRONG - liability generally stays with the engaging IS Auditor/firm, a frequently tested accountability point (echoes the outsourcing-accountability trap from Module 2 Ch.3).</p>\n</blockquote>\n</li>\n</ul>\n<h3>Evaluation of Strengths &amp; Weaknesses - Compensating &amp; Overlapping Controls</h3>\n<ul>\n<li><strong>Compensating Control</strong> - one strong control offsets a weakness in another (e.g. detailed manual balancing process compensates for a weak transaction error report).</li>\n<li><strong>Overlapping Controls</strong> - occurs when a compensating situation exists (one stronger control supporting a weaker one) - auditor should ALWAYS check for compensating controls <strong>before</strong> reporting a control weakness.<blockquote>\n<p>Trap: Never report a \"control weakness\" without first checking whether a <strong>compensating control</strong> exists elsewhere that mitigates the risk - a very frequently tested audit-judgment principle.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Materiality of Findings (judgment-based - scenario MCQs common)</h3>\n<ul>\n<li>What's material to <strong>local/site management</strong> may NOT be material to <strong>senior/headquarters management</strong>, and vice versa - materiality is audience-dependent.</li>\n<li>The IS Auditor must <strong>always exercise judgment</strong> on which findings to escalate to which level of management.</li>\n</ul>\n<h3>Risk Ranking - 3 scale types (know the distinguishing math property)</h3>\n<table>\n<thead>\n<tr>\n<th>Scale</th>\n<th>Property</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Ordinal</strong></td>\n<td>Rank order only (Low/Medium/High) - no numeric distance meaning</td>\n</tr>\n<tr>\n<td><strong>Interval</strong></td>\n<td>Numerically equal distance, but <strong>no true zero</strong> (e.g. 1=lowest, 3=highest, but 3 is NOT \"3 times\" 1)</td>\n</tr>\n<tr>\n<td><strong>Ratio</strong></td>\n<td>Has a <strong>true zero</strong> - allows real proportional comparison (a ranking of 10 IS truly 5x a ranking of 2)</td>\n</tr>\n<tr>\n<td>&gt; Trap: Only <strong>Ratio scales</strong> allow true multiplicative comparison (\"X times greater\") - Interval scales look numeric but do NOT support that kind of comparison because they lack a true zero. A classic \"which scale allows saying risk A is twice as bad as risk B\" MCQ → Ratio scale only.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Example Risk Rating Model - Green/Orange/Red (know review frequency for each)</h3>\n<table>\n<thead>\n<tr>\n<th>Colour</th>\n<th>Risk level</th>\n<th>Review frequency</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Green</strong></td>\n<td>Low</td>\n<td>Not critical to review annually/on rotation (management's discretion)</td>\n</tr>\n<tr>\n<td><strong>Orange</strong></td>\n<td>Medium</td>\n<td>At least <strong>once every 2-3 years</strong>, rotational basis</td>\n</tr>\n<tr>\n<td><strong>Red</strong></td>\n<td>High</td>\n<td><strong>Annually</strong></td>\n</tr>\n<tr>\n<td>&gt; Trap: Orange = \"once every 2-3 years\" (NOT annual) - Red is the only colour requiring strictly annual review; a common trap is assuming Orange also needs annual review.</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Audit Report - Required Contents (per ISACA standard)</h3>\n<p>Enterprise identification/recipients/restrictions, Scope/objectives/period/nature-timing-extent of work, Findings/conclusions/recommendations, Any qualifications/scope limitations, Signature/date/distribution per charter or engagement letter.\n- <strong>Exit Interview</strong> (end of audit) - confirm facts are correct, ensure recommendations are realistic/cost-effective, agree implementation dates.\n- Presentation techniques: <strong>Executive Summary</strong> (concise, business-perspective) + <strong>Visual presentation</strong> (slides/graphics); technical detail goes in attachments for operations management.</p>\n<blockquote>\n<p>Trap: IS Auditors are <strong>ultimately responsible to Senior Management and the Audit Committee</strong> - any attempt by lower-level management to restrict/deny access to this reporting line is itself flagged as a <strong>threat to audit independence</strong>.\n- If the IS Auditor assists the auditee in implementing recommended controls, this creates an <strong>independence concern</strong> (auditor shifting into a \"consultant\" role) - same theme as SDLC advisory-role independence trap (Module 3 Ch.1) and AI governance trap (Module 6).</p>\n</blockquote>\n<h3>Follow-Up Review (final phase)</h3>\n<ul>\n<li>IIA definition: \"a process by which internal Auditors determine the <strong>adequacy, effectiveness and timeliness</strong> of actions taken by management on reported audit findings.\"</li>\n<li>It is a <strong>limited-scope review</strong> - does NOT go beyond examining the specifically agreed corrective actions.</li>\n<li>Output: typically a separate <strong>Compliance Audit Report</strong>, issued after follow-up completion.<blockquote>\n<p>Trap: Follow-up review's scope is explicitly <strong>limited</strong> to the previously agreed action items - it is NOT a fresh, full-scope re-audit of the area.</p>\n</blockquote>\n</li>\n</ul>"}, {"id": "1.3", "name": "Computer Assisted Audit Tools and Techniques", "html": "<h3>Why CAATs are needed</h3>\n<ul>\n<li>Digital evidence exists on <strong>magnetic media</strong> across varied hardware/software/data structures - impossible to analyse manually without a software tool.</li>\n<li>Per <strong>ICAI Guidance Note on CAAT</strong>, used for: tests of transaction/balance details, analytical procedures, tests of general controls, sampling programs, tests of application controls, re-performance of calculations.</li>\n</ul>\n<h3>5 Functional Capabilities of CAATs (know the list)</h3>\n<p><strong>File access</strong> (read various formats), <strong>File reorganization</strong> (index/sort/merge/link), <strong>Data selection</strong> (filtering/selection criteria), <strong>Statistical functions</strong> (sampling/stratification/frequency analysis), <strong>Arithmetical functions</strong> (re-computation/re-performance).</p>\n<h3>6-step Approach for Using CAATs</h3>\n<p>Set objective → Determine content/accessibility of files → Define transaction types to test → Define procedures to perform → Define output requirements → Identify audit/IT personnel involved.</p>\n<h3>3 Types of CAATs (must distinguish clearly - very testable)</h3>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Description</th>\n<th>Key trait</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Generalised Audit Software (GAS)</strong></td>\n<td>Off-the-shelf, standard packages for reading/selecting/analysing/reporting on data across various hardware/OS/DB</td>\n<td><strong>Most widely known/used</strong> CAAT; economical; low technical skill needed</td>\n</tr>\n<tr>\n<td><strong>Specialised Audit Software (SAS)</strong></td>\n<td>Written for <strong>specific/specialised</strong> audit purposes or IT environments (e.g. testing NPAs, UNIX controls, Forex overnight deals)</td>\n<td>May be developed by auditee, embedded in mission-critical app, or built by the auditor independently - auditor must verify <strong>integrity/security</strong> of client-developed SAS before use</td>\n</tr>\n<tr>\n<td><strong>Utility Software</strong></td>\n<td>Not built specifically for audit, but useful (search, sort, file comparison, circularisation letters) - part of OS/DBMS/office automation</td>\n<td>Extensively used in design/dev/testing/auditing, security testing, debugging</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>Trap: <strong>GAS is the \"most widely known\" CAAT</strong> and requires the LEAST technical/programming expertise (vs. building one's own audit software, which requires programming competence) - a frequently tested \"which is easiest to use\" fact.\nTrap: For SAS developed by the <strong>client/auditee</strong>, the auditor must specifically obtain <strong>assurance on integrity and security</strong> before relying on it - a key independence/reliability checkpoint.</p>\n</blockquote>\n<h3>5 Typical GAS Operations (know the terms)</h3>\n<p><strong>Sampling</strong> (value-based/random selection), <strong>Extraction</strong> (report items meeting criteria), <strong>Totalling</strong> (sum value/number of items meeting criteria), <strong>Ageing</strong> (age data by reference to a base date), <strong>Calculation</strong> (manipulate input data before applying selection criteria).</p>\n<h3>GAS 10-Step Process (sequence)</h3>\n<p>Define audit objectives → Identify tests package can perform → Prepare input forms → Compile/clear errors → Test any custom coded routines → Obtain copies of application files → Execute against copy files → Maintain security of copy files/output → Check results/draw conclusions → Interface results with subsequent manual audit work.</p>\n<blockquote>\n<p>Trap: GAS is always run against <strong>COPIES of application files</strong>, not live production data directly - and copy-file/output security must be maintained until results are fully checked.</p>\n</blockquote>\n<h3>Continuous Auditing - 7 Techniques (EXTREMELY high-yield - match technique → mechanism precisely)</h3>\n<table>\n<thead>\n<tr>\n<th>Technique</th>\n<th>Mechanism</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Snapshot</strong></td>\n<td>Series of sequential data captures at a control point (e.g. ATM instruction execution) - produces an <strong>audit trail</strong> to trace steps/logic of an application</td>\n</tr>\n<tr>\n<td><strong>Integrated Test Facility (ITF)</strong></td>\n<td>Test transactions pushed through the <strong>live production system</strong> against <strong>dummy entities/accounts</strong> - identifies real-environment errors not traceable in a test environment; <strong>dummy transactions must be deleted afterward</strong> since they append to the live DB</td>\n</tr>\n<tr>\n<td><strong>System Activity File Interrogation</strong></td>\n<td>Reviewing OS-generated <strong>logs</strong> of every user/system event to build an audit trail; flags unauthorised access, failed logins, master record changes</td>\n</tr>\n<tr>\n<td><strong>Embedded Audit Facilities</strong></td>\n<td><strong>Program audit procedures inserted into client's application code</strong>, execute simultaneously with the app, select items per audit criteria, write to an output file</td>\n</tr>\n<tr>\n<td><strong>Continuous &amp; Intermittent Simulation (CIS)</strong></td>\n<td>For distributed/client-server systems - audit software runs an \"intermittent test\" whenever a transaction meets a <strong>pre-defined criterion</strong>, then waits for the next qualifying transaction - <strong>low overhead</strong>, doesn't compromise system independence</td>\n</tr>\n<tr>\n<td><strong>SCARF (Systems Control Audit Review File)</strong></td>\n<td>Specially written audit software <strong>embedded in host application</strong>, continuously monitors, <strong>collects/stores data</strong> on errors, policy/procedure variances, exceptions for later examination</td>\n</tr>\n<tr>\n<td><strong>Audit Hook</strong></td>\n<td>Embedded modules act as <strong>\"red flags\"</strong> - <strong>real-time notification</strong> of suspicious transactions so auditors/security can act <strong>before</strong> an error/irregularity escalates</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>Trap #1: <strong>ITF vs Embedded Audit Facilities</strong> - ITF uses <strong>dummy/test data</strong> injected into the live system (and needs cleanup afterward); Embedded Audit Facilities monitor <strong>real, actual transactions</strong> as they process (no dummy data, no cleanup needed) - this distinction (dummy data vs real data) is the #1 trap in this section.\nTrap #2: <strong>SCARF vs Audit Hook</strong> - SCARF <strong>collects and stores</strong> data for later/deferred examination; Audit Hook provides <strong>real-time/immediate alerting</strong> (\"red flag\") before the issue escalates - SCARF is more passive/retrospective, Audit Hook is more active/immediate.\nTrap #3: <strong>Snapshot</strong> is specifically about capturing a <strong>sequence of steps/states</strong> to reconstruct the processing logic/flow (like a stop-motion trail), NOT about real-time alerting - don't confuse it with Audit Hook.</p>\n</blockquote>"}, {"id": "1.4", "name": "Application Controls Review", "html": "<h3>Business Application Selection Parameters (5 - checklist)</h3>\n<p>Business goal, Nature of business (e.g. cash-heavy vs credit-heavy), <strong>Geographical spread</strong> (drives need for 24/7 robustness + multi-currency capability), Volume of transactions (scalability), Regulatory structure at place of operation (compliance-ready software, e.g. SOX-compliant products sell better).</p>\n<h3>Types of Business Applications (know common Indian examples - matching MCQs)</h3>\n<table>\n<thead>\n<tr>\n<th>Type</th>\n<th>Examples</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Accounting</strong></td>\n<td>TALLY, TATA EX, UDYOG</td>\n</tr>\n<tr>\n<td><strong>Banking (CBS - Core Banking Solution)</strong></td>\n<td><strong>FINACLE (Infosys)</strong>, <strong>FLEXCUBE (Oracle Financial Services, formerly i-flex)</strong>, <strong>TCS BaNCS (TCS)</strong></td>\n</tr>\n<tr>\n<td><strong>ERP</strong></td>\n<td>Optimises resource use for <strong>E³ - Economy, Efficiency, Effectiveness</strong></td>\n</tr>\n<tr>\n<td><strong>Payroll</strong></td>\n<td>Standalone or built into accounting software (e.g. Tally has payroll built-in)</td>\n</tr>\n<tr>\n<td>Others</td>\n<td>Office Management, Compliance, CRM, Management Support, Logistics Management, Legal Matter Management, Industry-specific</td>\n</tr>\n<tr>\n<td>&gt; Trap: Know the <strong>vendor-product mapping</strong> for CBS systems - FINACLE↔Infosys, FLEXCUBE↔Oracle(i-flex), BaNCS↔TCS - a classic matching-type question in Indian banking IT context.</td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>ERP's goal is memorised as \"E³\"</strong> - Economy, Efficiency, Effectiveness - a specific mnemonic worth remembering verbatim.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Application Controls - COBIT Definition</h3>\n<p>\"A <strong>subset of internal controls</strong> that relate to an application system and the information managed by that application\" - manual + automated activities ensuring info conforms to COBIT's information criteria (Effectiveness, Efficiency, Confidentiality, Integrity, Availability, Compliance, Reliability - the same 7 criteria from Module 3 Ch.4).</p>\n<h3>6 COBIT Control Objectives for Application Controls (MUST memorise all 6 in order - the backbone of this chapter)</h3>\n<table>\n<thead>\n<tr>\n<th>#</th>\n<th>Objective</th>\n<th>Core idea</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>1</td>\n<td><strong>Source Data Preparation &amp; Authorisation</strong></td>\n<td>Source documents prepared by <strong>authorised/qualified personnel</strong>, proper SoD between origination and approval</td>\n</tr>\n<tr>\n<td>2</td>\n<td><strong>Source Data Collection and Entry</strong></td>\n<td>Timely input by authorised staff; <strong>correction/resubmission without compromising original authorisation levels</strong>; retain original source docs</td>\n</tr>\n<tr>\n<td>3</td>\n<td><strong>Accuracy, Completeness and Authenticity Checks</strong></td>\n<td>Validate input; <strong>edit/send back for correction as close to point of origination as possible</strong></td>\n</tr>\n<tr>\n<td>4</td>\n<td><strong>Processing Integrity and Validity</strong></td>\n<td>Maintain integrity through the processing cycle; <strong>erroneous transaction detection must NOT disrupt processing of valid transactions</strong></td>\n</tr>\n<tr>\n<td>5</td>\n<td><strong>Output Review, Reconciliation and Error Handling</strong></td>\n<td>Output handled/delivered/protected in an authorised manner; verify/detect/correct output accuracy</td>\n</tr>\n<tr>\n<td>6</td>\n<td><strong>Transaction Authentication and Integrity</strong></td>\n<td>Before passing data between internal apps/business functions (within or outside enterprise) - check proper addressing, authenticity of origin, integrity of content; maintain during transmission</td>\n</tr>\n</tbody>\n</table>\n<blockquote>\n<p>Trap: This exact 6-objective sequence (<strong>Source Data Prep → Source Data Collection/Entry → Accuracy/Completeness/Authenticity → Processing Integrity → Output Review → Transaction Authentication</strong>) mirrors the natural data lifecycle (input → process → output → transmit) - a scenario describing \"checking origin authenticity before sending data to an external partner application\" maps to <strong>Objective 6 (Transaction Authentication and Integrity)</strong>, NOT Objective 3 (which is about internal input accuracy, not inter-application transmission).\nTrap: Objective 4 explicitly states <strong>detecting an erroneous transaction should NOT stop processing of the OTHER valid transactions</strong> - a frequently tested nuance (errors get quarantined to a suspense file/log, not allowed to halt the whole batch).</p>\n</blockquote>\n<h3>Illustrative Control Practices - key testable specifics (per objective)</h3>\n<ul>\n<li><strong>Objective 1 (Source Data Prep):</strong> unique <strong>sequential identifier</strong> auto-assigned to every transaction; unauthorised/incomplete documents <strong>returned to originator + logged</strong> (not silently discarded).</li>\n<li><strong>Objective 2 (Collection &amp; Entry):</strong> use <strong>pre-numbered source documents</strong> for critical transactions; errors that can't be fixed immediately go into an <strong>automated suspense log</strong> while valid transactions continue processing; source documents retained per legal/regulatory/business requirement.</li>\n<li><strong>Objective 3 (Accuracy/Completeness/Authenticity):</strong> validation should NOT stop at the <strong>first error found</strong> - continue checking for all errors and report them together; control types include sequence, limit, range, validity, reasonableness, table look-ups, key verification, <strong>check digit</strong>, completeness (hash totals), duplicate checks, logical relationship checks.</li>\n<li><strong>Objective 4 (Processing Integrity):</strong> maintain <strong>audit trail</strong> (date/time of input + user ID for every transaction); for sensitive data, <strong>before-and-after images</strong> should be checked by the <strong>business owner</strong> for accuracy/authorisation; <strong>reconcile file totals</strong> via a parallel control file (transaction counts/monetary value compared to master file post-processing); high-value transactions/overrides reviewed by a <strong>supervisor who does NOT perform data entry</strong> (SoD).</li>\n<li><strong>Objective 5 (Output Review):</strong> <strong>physical inventory</strong> of sensitive output (e.g. negotiable instruments) taken periodically and compared to inventory records; match <strong>header/trailer control totals</strong> of output against data-entry control totals; business owners review final output for reasonableness/accuracy/completeness.</li>\n<li><strong>Objective 6 (Transaction Authentication):</strong> agreed-upon standard for electronic transaction exchange; maintain authenticity/integrity during transmission/transport.<blockquote>\n<p>Trap: \"High-value transactions and overrides must be reviewed by a supervisor who does NOT perform data entry\" - this is a direct <strong>Segregation of Duties</strong> requirement baked into Objective 4's control practices, a favourite scenario MCQ (\"who should review an override?\").\nTrap: <strong>Check digit</strong> is specifically listed as an accuracy-check technique under Objective 3 - remember this term precisely if asked to identify types of validation controls.</p>\n</blockquote>\n</li>\n</ul>\n<p><em>(End of Module 1 notes - Chapters 1-4 complete. Chapters 5-6 follow.)</em></p>"}, {"id": "1.5", "name": "Application Controls Review - Specialised Systems", "html": "<h3>AI - 3 Application Categories (know each + examples - Module 1's angle differs from Module 6's)</h3>\n<table>\n<thead>\n<tr>\n<th>Category</th>\n<th>Focus</th>\n<th>Applications</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Cognitive Science</strong></td>\n<td>How the human brain works/thinks/learns (biology, neurology, psychology, maths)</td>\n<td>Expert Systems, Learning Systems, Neural Networks, Intelligent Agents, Fuzzy Logic</td>\n</tr>\n<tr>\n<td><strong>Robotics</strong></td>\n<td>Robot machines with AI + human-like physical capability</td>\n<td>Visual perception, touch/feel, dexterity, locomotion</td>\n</tr>\n<tr>\n<td><strong>Natural Languages</strong></td>\n<td>Conversing with computers in human language</td>\n<td>Interactive voice response, natural programming languages, <strong>Virtual Reality</strong> (classified here as a natural-interface application)</td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>Virtual Reality is classified under \"Natural Languages/Interfaces\"</strong> in this framework, NOT under Robotics - a specific classification worth remembering exactly as stated.</td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: IS Auditor's role note - <strong>errors from AI-based systems are considered MORE CRITICAL</strong> than errors from traditional systems (since AI drives autonomous decisions) - a testable \"why does AI need special audit attention\" point.</td>\n<td></td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Data Warehouse - definition components (know all 4 adjectives - textbook definition style)</h3>\n<p>\"A <strong>Subject-oriented, Integrated, Non-volatile</strong>, collection of data to support management's decision-making\" - Central Repository of clean/consistent/integrated/summarized info from multiple operational systems for online query processing.\n- <strong>Data Mart</strong> = subset of the core Data Warehouse for a specific business unit/line; <strong>simplified structure</strong> vs the fully normalised core DW; may be relational DB or OLAP structure.\n- <strong>TPS (Transaction Processing System)</strong> = day-to-day operational transactions (deposits, withdrawals, loan applications); <strong>Data Warehouse</strong> = decision-support, integrates data FROM TPS + CRM + external sources (e.g. market trend data).</p>\n<blockquote>\n<p>Trap: TPS = operational/day-to-day; Data Warehouse = decision-support/analytical, sourced FROM TPS (among others) - don't confuse the two roles; TPS feeds the DW, not vice versa.</p>\n</blockquote>\n<h3>IS Auditor's checklist for Data Warehouse review (6 points - very testable list)</h3>\n<p>Credibility of source data, Accuracy of source data, Complexity of source data structure, Accuracy of extraction/transformation process, Access control rules, Network capacity for speedy access.</p>\n<h3>DSS (Decision Support System)</h3>\n<ul>\n<li>Interactive support to <strong>middle management</strong> via analytical models; <strong>ad hoc</strong>, specific-decision-oriented (unlike TPS which handles routine/repetitive transactions).</li>\n<li>Examples: comparative sales analysis, revenue/cost projections, evaluating alternatives.</li>\n<li>IS Auditor's checklist (5 points, note it ADDS \"accuracy/correctness of output\" vs the Data Warehouse's 6-point list, but drops \"complexity of source structure\" and \"network capacity\"): Credibility of source data, Accuracy of source data, Accuracy of extraction/transformation, <strong>Accuracy and correctness of output generated</strong>, Access control rules.<blockquote>\n<p>Trap: DSS audit checklist and Data Warehouse audit checklist look almost identical but <strong>DSS specifically adds \"accuracy and correctness of OUTPUT\"</strong> as a distinct checklist item (since DSS directly drives a management decision) - a subtle but testable difference between the two lists.</p>\n</blockquote>\n</li>\n</ul>\n<h3>EFT (Electronic Funds Transfer)</h3>\n<ul>\n<li><strong>RBI's NEFT guidelines</strong> require banks to create procedures for: (i) verifying payment instructions are authorised by the claimed sender, (ii) detecting transmission/content errors in NEFT messages.</li>\n<li>IS Auditor's checklist: Authorisation of payments, Validation of receiver details (correctness/completeness), Verifying payments made, Obtaining acknowledgement from receiver/bank, Checking whether the underlying obligation was fulfilled (and procedures exist if not).</li>\n</ul>\n<h3>E-commerce</h3>\n<ul>\n<li>Risks: identity/nature of relationship with trading partners, transaction integrity, electronic processing, systems reliability, <strong>privacy</strong>, returns/warranties, taxation/regulatory issues.</li>\n<li>IS Auditor's checklist (4 - AACP, easy mnemonic): <strong>A</strong>uthorisation, <strong>A</strong>uthentication, <strong>C</strong>onfirmation, <strong>P</strong>ayment gateway security.</li>\n</ul>\n<h3>PoS (Point of Sale)</h3>\n<ul>\n<li>Captures data at time/place of transaction; often paired with barcode scanners/magnetic card readers; <strong>eliminates manual transcription errors</strong>; may use <strong>batch or online processing</strong>.</li>\n<li>IS Auditor's checklist: evaluate batch controls (if batch processing), check controls are operational, review exceptional transaction logs, verify internal controls ensure batch accuracy/completeness before update, evaluate online transaction controls, validate against <strong>RBI guidelines on \"Cash withdrawal at PoS - Prepaid Payment Instruments.\"</strong></li>\n</ul>\n<h3>ATM (Automated Teller Machine) - \"a specialised form of the PoS terminal\" (HIGH-YIELD checklist)</h3>\n<ul>\n<li>IS Auditor's checklist (know the specific, detailed items - very commonly tested as scenario/matching MCQs):</li>\n<li>Only authorised individuals granted system access; exception reports (limit-exceeding attempts) reviewed by management.</li>\n<li>Bank has <strong>ATM liability coverage</strong> for onsite AND offsite machines.</li>\n<li>Controls on: storage of unused ATM cards, issuance only against valid application forms, custody of unissued cards, return of old/unclaimed cards, <strong>PIN activation control</strong>.</li>\n<li>Controls on unused PINs, PIN issue procedure, return of PINs for returned cards.</li>\n<li><strong>PINs must NEVER appear in printed form together with the customer's account number.</strong></li>\n<li>Access control over retrieval/display of PINs via terminals.</li>\n<li><strong>Cards and PINs must be mailed SEPARATELY</strong>, with <strong>at least ~3 days gap</strong> between the two mailings; envelopes must NOT carry an identifiable bank return address.</li>\n<li>Procedures for handling retracted/rejected transactions.<blockquote>\n<p>Trap: The <strong>\"mail cards and PINs separately, ~3 days apart, with unidentifiable envelopes\"</strong> rule is a very specific, frequently tested ATM control fact - don't confuse the 3-day gap detail with any other numeric fact in the module.\nTrap: PINs and account numbers must <strong>NEVER co-appear in any printed output</strong> - a strict, absolute control (not just \"minimise exposure\").</p>\n</blockquote>\n</li>\n<li>Context facts: India has <strong>over 2,50,000 ATM installations</strong>; most banks use third-party <strong>ATM Switch Application Service Providers (ASPs)</strong> - RBI mandates baseline cyber security controls in these vendor contracts (secure app deployment/change process, continuous surveillance, data storage/processing/transmission controls, forensic examination capability, robust incident response).</li>\n</ul>"}, {"id": "1.6", "name": "IT Enabled Services", "html": "<h3>Classification of Audits (know each type's defining scope - matching-type MCQs common)</h3>\n<table>\n<thead>\n<tr>\n<th>Audit Type</th>\n<th>Focus</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Systems and Applications</strong></td>\n<td>Systems/apps appropriate, efficient, adequately controlled for valid/reliable/timely/secure processing</td>\n</tr>\n<tr>\n<td><strong>Information Processing Facilities</strong></td>\n<td>Facility controlled for timely/accurate/efficient processing, under <strong>normal AND disruptive conditions</strong></td>\n</tr>\n<tr>\n<td><strong>Systems Development</strong></td>\n<td>Systems-under-development meet org objectives + generally accepted SDLC standards</td>\n</tr>\n<tr>\n<td><strong>Management of IT and Enterprise Architecture</strong></td>\n<td>Org structure/procedures for controlled, efficient info-processing environment</td>\n</tr>\n<tr>\n<td><strong>Client/Server, Telecom, Intranet/Extranet</strong></td>\n<td>Telecom controls on client, server, AND the connecting network</td>\n</tr>\n<tr>\n<td><strong>Compliance Audits</strong></td>\n<td>Specific tests demonstrating adherence to regulatory/industry standards (e.g. <strong>PCI-DSS</strong>, <strong>HIPAA</strong> - US law for medical data privacy/security)</td>\n</tr>\n<tr>\n<td><strong>Operational Audit</strong></td>\n<td>Internal control structure of a given process/area (e.g. logical security systems)</td>\n</tr>\n<tr>\n<td><strong>Financial Audit</strong></td>\n<td>Accuracy of financial reporting; substantive testing, but increasingly risk/control-based</td>\n</tr>\n<tr>\n<td><strong>Integrated Audit</strong></td>\n<td><strong>Combines financial + operational</strong> audit steps</td>\n</tr>\n<tr>\n<td><strong>Administrative Audit</strong></td>\n<td>Efficiency of <strong>operational productivity</strong></td>\n</tr>\n<tr>\n<td><strong>IS Audit</strong></td>\n<td>Broadest - safeguards assets, data/system integrity &amp; availability, reliable info, effective goal achievement, efficient resource use, adequate internal controls</td>\n</tr>\n<tr>\n<td><strong>Specialized Audit</strong></td>\n<td>Sub-type of IS Audit - e.g. <strong>third-party service provider</strong> reviews</td>\n</tr>\n<tr>\n<td><strong>Forensic Audit</strong></td>\n<td>Discovering/disclosing/following up frauds &amp; crimes; develops evidence for <strong>law enforcement/judicial</strong> authorities</td>\n</tr>\n<tr>\n<td><strong>Control Self-Assessment (CSA)</strong></td>\n<td><strong>Business process owners</strong> set evaluation criteria and execute the assessment themselves; auditors <strong>facilitate/guide</strong> only</td>\n</tr>\n<tr>\n<td><strong>Internal Audit/Compliance Review</strong></td>\n<td>Performed by internal audit/compliance dept - <strong>more independent than CSA</strong> since the reviewer is NOT involved in operating the enabler being reviewed</td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>CSA vs Internal Audit/Compliance Review</strong> - in CSA, the <strong>business owners themselves</strong> set criteria and self-assess (auditor only facilitates); in an Internal Audit/Compliance Review, an <strong>independent internal party</strong> (not involved in running the process) sets criteria and performs the review - Internal Audit/Compliance is explicitly called <strong>MORE independent/credible</strong> than CSA. This exact comparison is a frequent MCQ.</td>\n<td></td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>Integrated Audit = Financial + Operational</strong> (a specific 2-way combination) - don't confuse with \"IS Audit\" which is a broader, separate category on its own.</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>IT Enabled Services - IS Auditor's consulting opportunities (problem→solution→opportunity mapping)</h3>\n<p>Sample framework: Draft/enforce policies → Develop procedures → Assist in application selection/implementation (incl. <strong>PMO role</strong>, <strong>Scope Manager in SDLC</strong>) → Design/enforce business workflows (incl. <strong>BPR - Business Process Re-engineering</strong>) → Perform risk assessment/ranking → Advise on <strong>SoD</strong> (roles/responsibilities design, identify SoD conflicts) → Provide training.</p>\n<blockquote>\n<p>Trap: IS Auditors can act in <strong>consulting roles</strong> (PMO, Scope Manager, policy drafting) as part of IT-enabled services - but recall from Chapter 2/across modules that taking such an active implementation role can create an <strong>independence conflict</strong> if the auditor later needs to audit that same system.</p>\n</blockquote>\n<h3>Fraud - Definitions and Key Regulatory Requirements</h3>\n<ul>\n<li><strong>SIA 11 (Standard on Internal Audit)</strong> defines Fraud: \"an intentional act... involving the use of deception to obtain unjust or illegal advantage.\"</li>\n<li><strong>Cyber Fraud</strong> = fraud involving use of computers and computer networks.</li>\n<li>Key Indian legal/regulatory references:\n  | Law | Requirement |\n  |---|---|\n  | <strong>IT (Amendment) Act 2008</strong> | Body corporates must protect sensitive personal info via reasonable security practices; recognises/punishes company + individual IT-misuse offences |\n  | <strong>SEBI LODR</strong> | Makes top management accountable for internal control weaknesses; <strong>CEO/CFO must certify</strong> effectiveness of Internal Controls |\n  | <strong>CARO 2003</strong> | Requires verifying adequacy of internal control procedures + reporting whether any frauds on/by the company were noticed/reported during the year |\n  | <strong>National Cyber Security Policy</strong> | Protects info/info-infrastructure in cyberspace; builds prevention/response capability |</li>\n<li><strong>SA 240</strong> - requires auditor to evaluate whether risk assessment findings indicate fraud risk factors.</li>\n<li><strong>SA 315</strong> - requires identifying risks of <strong>material misstatement arising due to fraud</strong>.</li>\n<li><strong>SA 505</strong> (\"External Confirmations\") - reinforces that evidence from <strong>independent external sources</strong> is more reliable than internal, and evidence obtained <strong>directly by the auditor</strong> is more reliable than indirect evidence.</li>\n<li><strong>SIA 2</strong> - internal auditors must use knowledge/skills to reasonably identify fraud indicators.<blockquote>\n<p>Trap: Written representations (<strong>SA 580</strong>) obtained from management do <strong>NOT absolve the IS Auditor</strong> from performing proper audit procedures - management's confirmation is not a substitute for the auditor's own due diligence, a frequently tested principle.</p>\n</blockquote>\n</li>\n</ul>\n<h3>Cyber Fraud Investigation - 3-step process (same as general fraud investigation, adapted)</h3>\n<ol>\n<li>Collecting and analysing documentation.</li>\n<li>Conducting interviews.</li>\n<li><strong>Data mining &amp; digital forensics.</strong></li>\n</ol>\n<h3>Sample Cyber Fraud Risk Categories (know each risk → typical controls mapping)</h3>\n<table>\n<thead>\n<tr>\n<th>Fraud Type</th>\n<th>Example Controls</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Theft</strong> (unauthorised HW access)</td>\n<td>Key cards, security guards, visitor logs, CCTV, backup/recovery, biometric physical access</td>\n</tr>\n<tr>\n<td><strong>Identity Theft</strong> (unauthorised access to personal info)</td>\n<td>Unique user IDs, strict password policy, IDS/Firewalls, incident response policy, <strong>delete ex-employee access</strong></td>\n</tr>\n<tr>\n<td><strong>Information Theft</strong> (unauthorised access to confidential company info)</td>\n<td>SoD, access logs, transaction logs, security violation logs, encryption</td>\n</tr>\n<tr>\n<td><strong>Copyright Infringement</strong> (unauthorised software/DB access)</td>\n<td>Block P2P sharing, internet surveillance, software licensing, information-sharing policy, protect software code</td>\n</tr>\n</tbody>\n</table>\n<h3>COBIT 2019's 7 Components applied to Cyber Fraud Governance (audit assessment questions per component - matching-style)</h3>\n<p>Policies &amp; Procedures (documented Cyber Fraud Governance Program?), Processes (regular cyber fraud risk assessment?), Organisational Structures (defined roles/responsibilities?), Culture/Ethics/Behaviour (periodic awareness training?), Information Flows &amp; Items (fraud reporting mechanism to board/audit committee?), Services/Infrastructure/Applications (appropriate tech use for prevention/detection?), People/Skills/Competencies (expert teams for fraud investigation?).</p>\n<h3>Digital/Computer Forensics - 4-stage process (MUST memorise all 4 in order - extremely high-yield)</h3>\n<table>\n<thead>\n<tr>\n<th>Stage</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><strong>Identify</strong></td>\n<td>Identify information available that might constitute evidence of an incident</td>\n</tr>\n<tr>\n<td><strong>Preserve</strong></td>\n<td>Retrieve identified information and preserve it - typically <strong>imaging original media in presence of an independent third party</strong>; document chain of custody</td>\n</tr>\n<tr>\n<td><strong>Analyze</strong></td>\n<td>Extract, process, interpret evidence - performed on an <strong>IMAGE of the media, never the original</strong>; requires domain knowledge to interpret how evidence pieces fit together</td>\n</tr>\n<tr>\n<td><strong>Present</strong></td>\n<td>Present findings to management/attorneys/court - acceptance depends on presentation manner, presenter's qualifications, credibility of the preservation/analysis process</td>\n</tr>\n<tr>\n<td>&gt; Trap: <strong>Analysis must always be performed on a COPY/IMAGE of the media, never the original</strong> - identical principle to the \"image before rebooting\" rule in Chapter 2's evidence preservation section; this consistent theme (never touch the original) appears across multiple chapters/modules and is a top exam trap.</td>\n<td></td>\n</tr>\n<tr>\n<td>- Definition: Computer forensics = \"process of identifying, preserving, analysing and presenting digital evidence in a manner that is <strong>legally acceptable</strong> in a court of law.\"</td>\n<td></td>\n</tr>\n<tr>\n<td>- Chain of custody must document: <strong>who had access (chronologically)</strong>, <strong>procedures followed</strong> (disk duplication, memory dump, etc.), and <strong>assurance that analysis used identical copies</strong> of original evidence (via checksums/timestamps/documentation).</td>\n<td></td>\n</tr>\n</tbody>\n</table>\n<h3>Fraud Investigation Tools - CAAT Functions (10 - overlaps with Module 6 Data Analytics functions, here framed for fraud specifically)</h3>\n<p><strong>Stratification</strong> (abnormal strata), <strong>Classification</strong> (abnormal patterns), <strong>Summarisation</strong> (control totals/variance), <strong>Outliers</strong> (out-of-range transactions), <strong>Benford's Law</strong> (possible fraud areas), <strong>Trend Analysis</strong> (pattern deviation), <strong>Gap Test</strong> (sequence gaps), <strong>Duplicate Test</strong> (duplicate records), <strong>Relation</strong> (cross-table relating), <strong>Compare</strong> (record comparison/differences).</p>\n<blockquote>\n<p>Trap: CAATs allow analysing the <strong>ENTIRE population</strong> instead of relying on a sampling approach - a key advantage specifically highlighted for fraud detection use cases (contrast with traditional audit sampling from Chapter 2, which tests a subset).</p>\n</blockquote>\n<p><em>(End of Module 1 notes - all 6 chapters: Concepts of IS Audit, IS Audit in Phases, CAATs, Application Controls Review, Application Controls Review - Specialised Systems, IT Enabled Services)</em></p>"}]};}
+
+/* Extra ICAI-style MCQs to bring every chapter to 7+, grounded in the notes. Appended at runtime. */
+const MCQADD={
+"1":{
+ "1.2":[
+  {c:"Audit Process",q:"In the IS audit process, follow-up of agreed corrective actions takes place:",o:["Before fieldwork begins","After the report has been issued","During initial risk assessment","Before any evidence is gathered"],a:1,e:"Follow-up confirms that agreed actions were implemented, so it occurs after the report is issued. The other stages come earlier in the cycle."}
+ ],
+ "1.3":[
+  {c:"CAATs",q:"Generalised Audit Software (GAS) is used chiefly to:",o:["Embed monitoring code inside the application","Read and analyse client data files","Create a dummy entity in production","Encrypt the collected audit evidence"],a:1,e:"GAS reads and analyses data files for exceptions and re-computation. Embedding code is EAM, a dummy entity is ITF, and encryption is unrelated."}
+ ],
+ "1.5":[
+  {c:"Expert Systems",q:"In an expert system, the specialist rules and facts are stored in the:",o:["Inference engine","Knowledge base","User interface","Data dictionary"],a:1,e:"The knowledge base holds the rules and facts; the inference engine applies them. The interface and dictionary serve other purposes."},
+  {c:"Specialised Systems",q:"A perfectly validated input feeding a flawed model in a specialised system will:",o:["Always be caught by input controls","Produce a confidently wrong output","Automatically correct itself","Have no impact on the audit"],a:1,e:"Good input controls cannot fix a wrong model, so the system produces confidently wrong results, which is the distinctive audit concern here."},
+  {c:"Expert Systems",q:"An expert system is designed primarily to:",o:["Replace all human staff permanently","Capture and apply the reasoning of specialists","Store day-to-day transaction logs","Encrypt data held at rest"],a:1,e:"An expert system encodes and applies specialist reasoning through rules. It neither replaces all staff nor performs logging or encryption."}
+ ],
+ "1.6":[
+  {c:"ITeS",q:"IT Enabled Services typically include:",o:["Factory manufacturing lines","BPO, KPO and call-centre services","Retail counter sales","Physical courier logistics only"],a:1,e:"ITeS covers IT-delivered services such as BPO, KPO and call centres. The other options are not IT-enabled service processes."},
+  {c:"Outsourcing Risk",q:"A key exit-related exposure when outsourcing a process is:",o:["Having too many SLAs","No defined transition or exit plan","Auditing the provider too often","The vendor earning a low margin"],a:1,e:"Without a transition/exit plan the entity is stuck if the arrangement ends, a serious exposure. The other items are not primary risks."},
+  {c:"Provider Monitoring",q:"Ongoing performance of a service provider is best governed through:",o:["Verbal assurances from the vendor","SLAs and performance scorecards","The provider's own report alone","No formal mechanism"],a:1,e:"SLAs and scorecards give measurable, enforceable oversight. Verbal assurance or the vendor's own reporting alone are inadequate."}
+ ]
+},
+"2":{
+ "2.1":[
+  {c:"EGIT Benefit",q:"The MOST important benefit of EGIT is:",o:["Lower day-to-day IT running cost","Strategic alignment of IT with the business","Faster hardware procurement","Fewer audit findings each year"],a:1,e:"EGIT's chief benefit is aligning IT with business strategy. Cost, procurement speed and audit findings are secondary effects."},
+  {c:"ERM",q:"IT security and controls are best described as:",o:["A superset of enterprise risk management","A subset of enterprise risk management","Entirely independent of ERM","A replacement for ERM"],a:1,e:"IT security and controls sit within the broader ERM strategy, not the other way round, a common trap."},
+  {c:"COBIT Numbers",q:"COBIT 2019 defines how many governance and management objectives?",o:["5","40","200","14"],a:1,e:"COBIT 2019 has 5 domains, 40 objectives and 200+ practices. 40 is the objectives figure."}
+ ],
+ "2.2":[
+  {c:"Risk Response",q:"The '4 Ts' of risk response are Accept, Avoid, Transfer and:",o:["Test","Mitigate","Tolerate","Track"],a:1,e:"The fourth response is Mitigate (reduce likelihood/impact via controls). The others are not part of the four."},
+  {c:"Risk Identification",q:"Which technique resolves disagreement among experts during risk identification?",o:["Brainstorming free-for-all","The Delphi technique","Heat mapping","Benchmarking"],a:1,e:"The Delphi technique gathers anonymous expert input iteratively to reach consensus. Heat maps and benchmarking serve other purposes."}
+ ],
+ "2.3":[
+  {c:"COBIT Components",q:"Which governance-system component is described as the most valuable for most enterprises?",o:["Processes","Information","Organisational structures","Culture and behaviour"],a:1,e:"The material singles out Information as the most valuable component, though all seven are essential."},
+  {c:"Committees",q:"Which committee implements IT strategy and oversees major IT projects at executive level?",o:["IT Strategy Committee","IT Steering Committee","Audit Committee","Board of Directors"],a:1,e:"The IT Steering Committee (executive level) implements strategy; the Strategy Committee (board level) oversees it."},
+  {c:"COBIT Domains",q:"The only governance domain, EDM, stands for:",o:["Establish, Deliver, Manage","Evaluate, Direct, Monitor","Execute, Design, Maintain","Enable, Deploy, Measure"],a:1,e:"EDM = Evaluate, Direct, Monitor, the sole governance domain. The others are invented expansions."}
+ ],
+ "2.4":[
+  {c:"Indicators",q:"A Key Risk Indicator (KRI) measures:",o:["Whether a goal was finally achieved","Risk exposure at the risk level","Process performance as a lead measure","Overall customer satisfaction"],a:1,e:"A KRI tracks risk exposure. A KGI measures goal achievement and a KPI measures process performance."},
+  {c:"Balanced Scorecard",q:"Which Balanced Scorecard perspective is regarded as mainly leading/enabling?",o:["Financial","Learning and Growth","Customer","Internal Process"],a:1,e:"Learning and Growth (people, IT capability) enables the other three and is the leading perspective; Financial and Customer are lagging."},
+  {c:"Scorecards",q:"The board-level Strategic Scorecard was developed by:",o:["Kaplan and Norton","CIMA","ISACA","PMI"],a:1,e:"CIMA developed the Strategic Scorecard. Kaplan and Norton created the Balanced Scorecard."}
+ ],
+ "2.5":[
+  {c:"Recovery Sites",q:"Which alternate site provides space and infrastructure but no hardware or data?",o:["Hot site","Cold site","Warm site","Mirror site"],a:1,e:"A cold site is bare space/infrastructure, cheapest and slowest. Warm, hot and mirror sites carry progressively more readiness."},
+  {c:"Offsite Protection",q:"Which offsite technique offers the highest fault tolerance?",o:["Electronic vaulting","Database shadowing","Remote journaling","Nightly tape backup"],a:1,e:"Database shadowing duplicates the database to multiple servers, giving the greatest redundancy, above remote journaling and e-vaulting."},
+  {c:"Availability",q:"'Five nines' availability corresponds to:",o:["99.9% uptime","99.999% uptime","99.99% uptime","95% uptime"],a:1,e:"Five nines means 99.999% availability, a very small allowable downtime."}
+ ]
+},
+"3":{
+ "3.1":[
+  {c:"PERT",q:"The PERT expected time for an activity is calculated as:",o:["(Optimistic + Pessimistic + Most likely) / 3","(Optimistic + Pessimistic + 4 x Most likely) / 6","(Optimistic + 4 x Pessimistic + Most likely) / 6","(Optimistic + Most likely) / 2"],a:1,e:"PERT weights the most-likely estimate by four: (O + P + 4M)/6. The other formulas are distractors."},
+  {c:"Estimation",q:"Function Point Analysis sizes software based on:",o:["Source lines of code written","Inputs, outputs, files, interfaces and queries","The number of developers assigned","Total compilation time"],a:1,e:"FPA measures functionality (inputs, outputs, files, interfaces, queries), unlike SLOC which counts code lines."},
+  {c:"Critical Path",q:"Activities lying on the critical path have:",o:["The maximum available slack","Zero slack or float","Negative duration","Fully optional sequencing"],a:1,e:"Critical-path activities have zero float, so any delay delays the whole project. Slack exists only off the critical path."}
+ ],
+ "3.2":[
+  {c:"Waterfall",q:"The Waterfall model requires that requirements be:",o:["Left open to change at any time","Defined early and completely","Discovered during coding","Deferred until testing"],a:1,e:"Waterfall needs early, complete requirements because change later is costly. Flexibility to change late is not its strength."},
+  {c:"Escrow",q:"Software escrow primarily protects:",o:["The vendor's ownership of source code","The customer's business continuity","The auditor's independence","The regulator's records"],a:1,e:"Escrow releases source code to the licensee if the vendor fails, protecting the customer's continuity."},
+  {c:"DevOps",q:"In a DevOps setup, the control an IS auditor must specifically verify is:",o:["That documentation is colourful","That segregation of duties is preserved","That the office is open-plan","That releases happen monthly"],a:1,e:"DevOps merges dev and ops teams, so the auditor must confirm segregation of duties is still maintained."}
+ ],
+ "3.3":[
+  {c:"Testing Types",q:"Which testing deliberately forces failures to confirm the system restarts correctly?",o:["Regression testing","Recovery testing","Load testing","Usability testing"],a:1,e:"Recovery testing induces failure to check proper recovery. The others test change impact, capacity and ease of use."},
+  {c:"Integration",q:"Top-down integration testing substitutes lower modules with:",o:["Drivers","Stubs","Test harnesses","Live data feeds"],a:1,e:"Top-down uses stubs (placeholders) for lower modules; bottom-up uses drivers for higher ones."},
+  {c:"Static Testing",q:"Which static technique is a formal committee review using checklists?",o:["Desk check","Code inspection","Structured walkthrough","Smoke test"],a:1,e:"Code inspection is the formal, checklist-driven committee review; desk check is solo and walkthrough is peer-level."}
+ ],
+ "3.4":[
+  {c:"Information Criteria",q:"Which of the following is one of the seven COBIT information criteria?",o:["Validity","Reliability","Authorization","Completeness"],a:1,e:"Reliability is one of the seven information criteria. Validity, Authorization and Completeness are application-control objectives."},
+  {c:"Control Objectives",q:"Which is an application control OBJECTIVE rather than an information criterion?",o:["Confidentiality","Completeness","Reliability","Availability"],a:1,e:"Completeness is one of the five control objectives. Confidentiality, Reliability and Availability are information criteria."},
+  {c:"Automated Controls",q:"Automated application controls remain reliable only when supported by strong:",o:["Marketing budgets","IT General Controls (ITGC)","Physical door locks","Manual registers"],a:1,e:"Automated controls depend on sound ITGC (change, access, operations) to be trustworthy."}
+ ]
+},
+"4":{
+ "4.1":[
+  {c:"ITIL",q:"Which ITIL stage focuses on day-to-day delivery of agreed service levels?",o:["Service Design","Service Operation","Service Transition","Service Strategy"],a:1,e:"Service Operation delivers agreed services daily (incident, request, access, problem, event management)."},
+  {c:"IS Classification",q:"Executive Support Systems serve which level of decision making?",o:["Operational","Strategic","Tactical","Transactional"],a:1,e:"ESS supports strategic decisions; MIS is tactical and TPS is operational."},
+  {c:"Roles",q:"The CISO's remit, per the notes, explicitly also includes:",o:["Payroll processing","Data privacy","Network cabling","Vendor invoicing"],a:1,e:"The CISO is responsible for information/cyber security and data privacy, not just security."}
+ ],
+ "4.2":[
+  {c:"Change Management",q:"In the change process, testing a change happens:",o:["Before CAB approval","After approval and scheduling, before go-live","After implementation only","Only for emergency changes"],a:1,e:"Testing follows CAB approval and scheduling but must precede live implementation."},
+  {c:"Configuration",q:"Locking the configuration is done in order to:",o:["Speed up processing","Prevent unauthorised changes once finalised","Delete all older versions","Bypass quality assurance"],a:1,e:"Locking prevents unauthorised changes after the configuration is finalised."},
+  {c:"Version Control",q:"In version control, an 'atomic transaction' refers to:",o:["Encrypting the whole repository","The smallest indivisible unit of change","A nightly full backup","A parallel development branch"],a:1,e:"An atomic transaction is the smallest indivisible change, applied fully or not at all."}
+ ],
+ "4.3":[
+  {c:"ACID",q:"Durability in ACID guarantees that once a transaction commits, its data is:",o:["Isolated from other transactions","Permanently written to storage","Rolled back on any error","Kept only in memory"],a:1,e:"Durability means committed data persists in permanent storage even after failure."},
+  {c:"RDBMS Keys",q:"A foreign key is best described as:",o:["An index that speeds up queries","The primary key of another table enforcing referential integrity","A column that must always be numeric","A backup copy of the primary key"],a:1,e:"A foreign key references another table's primary key to enforce referential integrity."},
+  {c:"Patch Management",q:"The first step of the patch-management process is to:",o:["Install the patch on production","Acquire the patch from the vendor or approved source","Report the patch to management","Audit the deployment"],a:1,e:"Patch management runs Acquire, Test, Install, Report, Audit, so acquisition is first."}
+ ],
+ "4.4":[
+  {c:"Incident Response",q:"Speed of containment is cited as the key performance measure of the:",o:["SOC procurement team","Incident response team","Internal audit team","Change advisory board"],a:1,e:"How fast the team contains an incident is a key measure of IR effectiveness."},
+  {c:"SOC",q:"A SOC's premises are, per the notes, deliberately:",o:["Located inside the data centre","Physically separate and unmarked","Open to all staff","Co-located with HR"],a:1,e:"The SOC is kept physically separate from the IT department/data centre and unmarked."},
+  {c:"SIEM",q:"SIM (Security Information Management) is chiefly used by:",o:["Level 1 monitoring staff","Level 2 investigators","End users","External auditors"],a:1,e:"SIM (correlation, analysis, reporting) supports Level 2 investigators; SEM supports Level 1."}
+ ]
+},
+"5":{
+ "5.1":[
+  {c:"STRIDE",q:"In the STRIDE model, Tampering violates which property?",o:["Authenticity","Integrity","Availability","Authorization"],a:1,e:"Tampering violates Integrity. Spoofing hits authenticity, DoS availability and elevation of privilege authorization."},
+  {c:"Attacks",q:"Data diddling occurs:",o:["After output is printed","Before or during data entry","Only while data is in transit","During the backup window"],a:1,e:"Data diddling alters data before or during entry, at the input stage."},
+  {c:"Controls",q:"Which control type is described as passive, building evidence after the fact?",o:["Preventive","Detective","Directive","Deterrent"],a:1,e:"Detective controls are passive, recording evidence after events rather than stopping them."}
+ ],
+ "5.2":[
+  {c:"Policy Hierarchy",q:"Within the policy hierarchy, a Procedure is:",o:["Advisory only","Mandatory and operational","Higher in authority than a policy","Optional guidance"],a:1,e:"Procedures are mandatory operational steps. Only guidelines are advisory."},
+  {c:"Four Eyes",q:"A known weakness of the Four Eyes principle is:",o:["It is far too slow","Possible collusion between maker and checker","It needs six separate people","It removes the approval step"],a:1,e:"Maker and checker can collude, so Four Eyes is not foolproof."},
+  {c:"Classification",q:"Company Confidential Data in the four-tier schema carries:",o:["No real risk","The highest risk if breached","Only moderate risk","Public-level exposure"],a:1,e:"Company Confidential Data (contracts, customer business data) is the highest-risk class."}
+ ],
+ "5.3":[
+  {c:"Power Terms",q:"A momentary period of high voltage is a:",o:["Sag","Spike","Brownout","Blackout"],a:1,e:"A spike is momentary high voltage; a surge is prolonged high voltage; sag/brownout are low voltage."},
+  {c:"Fire Suppression",q:"Which gas agent is lethal to humans and thus suited only to unmanned areas?",o:["FM200","CO2","Dry powder","Water mist"],a:1,e:"CO2 starves oxygen and is lethal, so it is used in unmanned spaces or portable extinguishers."},
+  {c:"Physical Controls",q:"Bonding of personnel primarily:",o:["Improves physical security directly","Reduces the financial impact of misuse","Prevents piggybacking","Encrypts stored data"],a:1,e:"A financial bond limits the monetary impact of misuse; it does not itself improve security."}
+ ],
+ "5.4":[
+  {c:"Biometrics",q:"As biometric sensitivity is increased, FAR and FRR:",o:["Both rise together","Move in opposite directions","Both fall together","Remain unchanged"],a:1,e:"FAR and FRR are inversely related, so raising sensitivity lowers FAR but raises FRR."},
+  {c:"Authentication Factors",q:"A fingerprint is an example of which authentication factor?",o:["Something you know","Something you have","Something you are","Something you do offline"],a:2,e:"A biometric like a fingerprint is 'something you are'. Passwords are 'know'; tokens are 'have'."},
+  {c:"SSO",q:"Kerberos authenticates users by issuing time-limited:",o:["Passwords","Tickets","Certificates","Cookies"],a:1,e:"Kerberos issues time-limited tickets via a trusted server, using multiple servers to avoid a single point of failure."}
+ ],
+ "5.5":[
+  {c:"PKI",q:"A digital certificate binding a public key to an identity is signed by a:",o:["Data owner","Certifying Authority","System administrator","End user"],a:1,e:"A trusted Certifying Authority signs digital certificates; self-generated ones are not legally acceptable."},
+  {c:"Networks",q:"Relative to a firewall, an extranet is designed to exist:",o:["Behind the firewall","Outside the firewall with controlled access","Without any network at all","Inside the database tier"],a:1,e:"An extranet exists outside the firewall with authenticated access, unlike an intranet which sits behind it."}
+ ]
+},
+"6":{
+ "6.1":[
+  {c:"Deep Learning",q:"Deep Learning is characterised by neural networks that have:",o:["A single processing layer","Many hidden layers","No training data","Only fixed rules"],a:1,e:"Deep learning uses many hidden layers to learn complex patterns like images and speech."},
+  {c:"Problem Types",q:"Predicting a numeric value such as a price is which AI problem type?",o:["Classification","Continuous estimation","Clustering","Anomaly detection"],a:1,e:"Predicting a number is continuous estimation; classification sorts into categories and clustering groups items."}
+ ],
+ "6.2":[
+  {c:"Blockchain",q:"Each block in a blockchain is linked to the previous one through its:",o:["Timestamp","Hash","IP address","Owner name"],a:1,e:"Each block stores the previous block's hash, so altering old data breaks the chain."},
+  {c:"Blockchain Risk",q:"A distinctive risk of a public proof-of-work blockchain is:",o:["Abuse by a central admin","Very high processing power and energy use","Records being easily edited","Instant reversibility of transactions"],a:1,e:"Consensus by proof-of-work consumes large processing power. There is no central admin, and records are not easily edited or reversible."}
+ ],
+ "6.3":[
+  {c:"Cloud Responsibility",q:"In a SaaS model, the customer is mainly responsible for:",o:["The operating system","Their own data and how they use the app","The physical servers","The virtualization layer"],a:1,e:"In SaaS the provider manages nearly everything; the customer manages only its data and usage."}
+ ],
+ "6.4":[
+  {c:"Fraud Analytics",q:"Benford's Law spots anomalies by examining:",o:["The highest versus the lowest value","The frequency of the leading digits","Duplicate vendor names","Simple record counts"],a:1,e:"Benford's Law checks whether leading digits follow their natural distribution; deviations suggest manipulation."},
+  {c:"Process Steps",q:"The first step in the data-analytics process (CP-AID) is to:",o:["Profile the data","Curate/cleanse the data","Analyse the data","Document the audit trail"],a:1,e:"CP-AID begins with Curate/Cleanse, then Profile, Analyse, Investigate, Document."}
+ ],
+ "6.5":[
+  {c:"IoT",q:"A 'digital twin' in IoT is:",o:["A spare backup device","A live digital model of a physical asset","A duplicate user password","A second network gateway"],a:1,e:"A digital twin is a live digital model built from real-time data to cut downtime."},
+  {c:"IoT Privacy",q:"A privacy concern specific to IoT is that aggregated data can:",o:["Reduce device battery life","Reveal sensitive personal habits","Speed up the network","Lower device cost"],a:1,e:"Small fragments of IoT data, combined, can reveal sensitive personal information such as habits or health."}
+ ],
+ "6.6":[
+  {c:"RPA",q:"RPA is best suited to tasks that are:",o:["Creative and judgement-heavy","Rule-based, repetitive and high-volume","One-off and unique","Physically manual"],a:1,e:"RPA automates rule-based, repetitive, high-volume tasks; it cannot handle creative judgement on its own."},
+  {c:"RPA Governance",q:"Establishing a Center of Excellence (COE) in RPA mainly helps to:",o:["Remove the need for change management","Accelerate enterprise-wide adoption","Eliminate all human oversight","Guarantee bots never fail"],a:1,e:"A COE speeds enterprise adoption and maximises value; it does not remove controls or guarantee zero failure."}
+ ]
+}
+};
+
 /* which module is active */
 let ACTIVEMOD=null;
 const _MODCACHE={};
 function buildModule(n){
  if(_MODCACHE[n])return _MODCACHE[n];
- if(n===1){_MODCACHE[1]=MODULE1;return MODULE1;}
- const src=(typeof NOTES!=='undefined')?NOTES[n]:null; if(!src)return null;
+ const src=(typeof NOTES!=='undefined')?NOTES[n]:null;
+ if(!src){return n===1?MODULE1:null;}
  const bank=(typeof MCQBANK!=='undefined')?(MCQBANK[n]||{}):{};
  const chapters=src.chapters.map(c=>{
    let q=[];
    if(n===6){const mc=MODULE6.chapters.find(x=>x.id===c.id);q=mc?mc.q:[];}
+   else if(n===1){const mc=MODULE1.chapters.find(x=>x.id===c.id);q=mc?mc.q:[];}
    else{q=bank[c.id]||[];}
-   return {id:c.id,name:c.name,html:c.html,q:q};
+   const ex=(typeof MCQADD!=='undefined'&&MCQADD[n]&&MCQADD[n][c.id])?MCQADD[n][c.id]:[];
+   return {id:c.id,name:c.name,html:c.html,q:q.concat(ex)};
  });
  const m={n:src.n,title:src.title,chapters};
  _MODCACHE[n]=m;return m;
@@ -1214,16 +1406,16 @@ function openReader(ci){
 }
 function closeReader(){const r=document.getElementById('reader');r.classList.remove('on');READER_ON=false;document.body.style.overflow='';}
 
-/* content-protection: block copy, cut, context menu, and save/print/copy shortcuts while reading */
-document.addEventListener('copy',e=>{if(READER_ON){e.preventDefault();}});
-document.addEventListener('cut',e=>{if(READER_ON){e.preventDefault();}});
-document.addEventListener('contextmenu',e=>{if(READER_ON){e.preventDefault();}});
-document.addEventListener('dragstart',e=>{if(READER_ON){e.preventDefault();}});
+/* content-protection: block copy, cut, right-click, save/print across the WHOLE site (allow typing in fields) */
+function inField(){const el=document.activeElement;return el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA'||el.isContentEditable);}
+document.addEventListener('copy',e=>{if(!inField())e.preventDefault();});
+document.addEventListener('cut',e=>{if(!inField())e.preventDefault();});
+document.addEventListener('contextmenu',e=>{e.preventDefault();});
+document.addEventListener('dragstart',e=>{e.preventDefault();});
 document.addEventListener('keydown',e=>{
  if(e.key==='Escape'&&READER_ON){closeReader();return;}
- if(!READER_ON)return;
  const k=(e.key||'').toLowerCase();
- if((e.ctrlKey||e.metaKey)&&['c','x','s','p','u','a'].includes(k)){e.preventDefault();}
+ if(!inField()&&(e.ctrlKey||e.metaKey)&&['c','x','s','p','u'].includes(k)){e.preventDefault();toast('Copying / saving is disabled');}
  if(k==='f12'){e.preventDefault();}
 });
 
@@ -1245,7 +1437,8 @@ function renderQ(){
   <div class="qtext">${item.q}</div>
   <div id="opts">${item.o.map((o,i)=>`<button class="opt" onclick="answer(${i})"><span class="k">${'ABCD'[i]}</span>${o}</button>`).join('')}</div>
   <div class="explain" id="exp"><b>Why:</b> ${item.e}</div>
-  <div class="qnav"><button class="btn ghost" onclick="chapMenu()">← Chapters</button><button class="btn grad" id="nextb" style="visibility:hidden" onclick="nextQ()">Next →</button></div>`);
+  <div class="qnav"><button class="btn ghost" onclick="chapMenu()">← Chapters</button><button class="btn grad" id="nextb" style="visibility:hidden" onclick="nextQ()">Next →</button></div>
+  <div class="madelove" style="margin-top:16px">Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a> 💜</div>`);
 }
 function answer(i){
  if(qAnswered)return;qAnswered=true;
@@ -1264,7 +1457,8 @@ function quizResult(){
   ${ring(pct,pass)}
   <div class="result"><div class="verdict" style="color:${pass?'var(--good)':'var(--bad)'}">${pass?'Nice work! 🎉':'Keep grinding 💪'}</div>
   <p style="color:var(--muted)">You scored ${qScore}/${total}.</p></div>
-  <div class="qnav" style="margin-top:22px"><button class="btn ghost" onclick="startQuiz(${set.idx})">Retry</button><button class="btn grad" onclick="chapMenu()">Other chapters →</button></div>`);
+  <div class="qnav" style="margin-top:22px"><button class="btn ghost" onclick="startQuiz(${set.idx})">Retry</button><button class="btn grad" onclick="chapMenu()">Other chapters →</button></div>
+  <div class="madelove" style="margin-top:16px">Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a> 💜</div>`);
 }
 
 /* ---------- TIMED MOCK ---------- */
@@ -1327,7 +1521,7 @@ function confettiBurst(){for(let i=0;i<80;i++)setTimeout(()=>spawnConfetti(),i*8
 function pop6(){for(let i=0;i<16;i++)setTimeout(()=>spawnConfetti(),i*10);}
 function spawnConfetti(){
  const c=document.createElement('div');c.className='confetti';
- const cols=['#7c3aed','#c026d3','#c6ff3d','#34d399','#fb7185','#a855f7'];
+ const cols=['#4f46e5','#7c3aed','#10b981','#34d399','#fb7185','#6366f1'];
  c.style.background=cols[Math.floor(Math.random()*cols.length)];
  c.style.left=Math.random()*100+'vw';c.style.borderRadius=Math.random()>.5?'50%':'2px';
  document.body.appendChild(c);
@@ -1339,7 +1533,7 @@ function spawnConfetti(){
 
 
 /* ================= THEME ================= */
-function initTheme(){try{if(localStorage.getItem('disa_theme')==='light')document.body.classList.add('light');}catch(e){}updThemeBtn();}
+function initTheme(){try{var t=localStorage.getItem('disa_theme')||'light';if(t==='light')document.body.classList.add('light');}catch(e){document.body.classList.add('light');}updThemeBtn();}
 function toggleTheme(){document.body.classList.toggle('light');try{localStorage.setItem('disa_theme',document.body.classList.contains('light')?'light':'dark');}catch(e){}updThemeBtn();}
 function updThemeBtn(){const b=document.getElementById('themeBtn');if(b)b.textContent=document.body.classList.contains('light')?'🌙':'☀️';}
 
@@ -1352,38 +1546,24 @@ function saveUsers(u){try{localStorage.setItem('disa_users',JSON.stringify(u));}
 function currentUser(){try{const e=localStorage.getItem('disa_session');if(!e)return null;return users()[e]||null;}catch(e){return null;}}
 function setSession(e){localStorage.setItem('disa_session',e);updNav();}
 function logout(){localStorage.removeItem('disa_session');updNav();closeModal();toast('Logged out');}
-function saveUser(u){const all=users();all[u.email]=u;saveUsers(all);}
+function saveUser(u){const all=users();all[u.email]=u;saveUsers(all);try{mirrorStudent(u);}catch(e){}}
 
 const GSVG='<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.3 0 24 0 14.6 0 6.4 5.4 2.5 13.3l7.9 6.1C12.3 13.2 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.1 5.3-4.6 6.9l7.1 5.5c4.2-3.9 6.6-9.6 6.6-16.4z"/><path fill="#FBBC05" d="M10.4 28.6c-.5-1.4-.8-2.9-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.3 0 11.6-2.1 15.5-5.7l-7.1-5.5c-2 1.3-4.5 2.1-8.4 2.1-6.3 0-11.7-3.7-13.6-9.1l-7.9 6.1C6.4 42.6 14.6 48 24 48z"/></svg>';
 
-function openAuth(mode){mode=mode||'login';
- if(mode==='login'){
-  showModal(`<div class="modal-head"><div><h3>Welcome back 👋</h3><div class="sub">Log in to save progress and take the exam.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-   <button class="gbtn" onclick="googleStub()">${GSVG} Continue with Google</button>
-   <div class="orline">or with email</div>
-   <input class="fld" id="lgEmail" placeholder="Email" type="email" autocomplete="email">
-   <input class="fld" id="lgPass" placeholder="Password" type="password">
-   <div class="errmsg" id="authErr"></div>
-   <button class="btn grad" style="width:100%" onclick="doLogin()">Log in</button>
-   <div class="authswitch">New to DISA Saarthi? <a onclick="openAuth('register')">Create your free account</a></div>`);
- }else{
-  showModal(`<div class="modal-head"><div><h3>Create your account 🚀</h3><div class="sub">Free for this attempt. Takes a minute.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
-   <button class="gbtn" onclick="googleStub()">${GSVG} Sign up with Google</button>
-   <div class="orline">or fill in your details</div>
-   <label class="flbl">Full name</label><input class="fld" id="rgName" placeholder="As per ICAI records">
-   <label class="flbl">Email</label><input class="fld" id="rgEmail" placeholder="you@example.com" type="email">
-   <div class="frow"><div style="flex:1"><label class="flbl">ICAI Membership No. (6 digits)</label><input class="fld" id="rgMem" placeholder="e.g. 123456" maxlength="6" inputmode="numeric"></div>
-     <div style="flex:1"><label class="flbl">Phone (+91)</label><input class="fld" id="rgPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric"></div></div>
-   <label class="flbl">Address</label><input class="fld" id="rgAddr" placeholder="City, State">
-   <div class="frow"><div style="flex:1"><label class="flbl">Password</label><input class="fld" id="rgPass" placeholder="Min 6 characters" type="password"></div>
-     <div style="flex:1"><label class="flbl">Confirm password</label><input class="fld" id="rgPass2" placeholder="Repeat password" type="password"></div></div>
-   <div class="errmsg" id="authErr"></div>
-   <button class="btn grad" style="width:100%" onclick="doRegister()">Create account</button>
-   <div class="authswitch">Already registered? <a onclick="openAuth('login')">Log in</a></div>`);
- }
+function openAuth(mode){
+ showModal(`<div class="modal-head"><div><h3>Sign in to DISA Saarthi</h3><div class="sub">Your Google account is your login.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <p style="color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:14px">Accounts are created only through Google - one click and you are in. We fetch your name, email and photo, then ask a couple of details the first time.</p>
+  <div id="gbox" class="gbox"></div>
+  <div class="errmsg" id="authErr"></div>
+  ${GOOGLE_CLIENT_ID?'':`<div class="orline">testing only</div><button class="btn ghost" style="width:100%" onclick="devLogin()">Preview without Google (dev)</button><p style="color:var(--muted);font-size:12px;margin-top:10px;text-align:center">This test button disappears automatically once your Google Client ID is added.</p>`}
+  <p style="color:var(--muted);font-size:12px;margin-top:14px;text-align:center">By continuing you agree to our <a class="namelink" onclick="closeModal();openPrivacy()">Privacy Policy</a>.</p>`);
+}
+function devLogin(){
+ const email='test@disasaarthi.local';const all=users();let u=all[email];
+ if(!u){u={name:'Test Student',email,membership:'000000',phone:'+910000000000',address:'Test City',pass:null,provider:'dev',photo:null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};saveUser(u);}
+ setSession(email);closeModal();toast('Logged in as Test Student (dev)');
 }
 function authErr(m){const e=document.getElementById('authErr');if(e)e.textContent=m;}
-function googleStub(){authErr('');toast('Google sign-in activates once the site is hosted. Use email for now.');}
 function doLogin(){
  const email=(document.getElementById('lgEmail').value||'').trim().toLowerCase();
  const pass=document.getElementById('lgPass').value||'';
@@ -1443,10 +1623,35 @@ function recordExam(score){const u=currentUser();if(!u)return;u.exams=u.exams||[
 /* ================= 200-MARK TIMED EXAM ================= */
 let EX=null,exTimer=null;
 function hhmmss(s){const h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;}
+const EXAM_MIN_ANSWERED=80, EXAM_MIN_MIN=70, EXAM_TOTAL_MIN=240;
 function startExam(){
- if(!currentUser()){toast('Please log in to take the exam');return openAuth('login');}
+ const u=currentUser();
+ if(!u){toast('Please log in to take the exam');return openAuth('login');}
+ if(u.exams&&u.exams.length)return examAlready(u);
  if(typeof EXAMPOOL==='undefined'||!EXAMPOOL.length){return toast('Exam pool not loaded');}
- EX={q:EXAMPOOL.map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:240*60,done:false};
+ examNotice();
+}
+function examAlready(u){const best=Math.max(...u.exams.map(e=>e.score)),pass=best>=120;
+ showModal(`<div class="modal-head"><div><h3>Exam already taken</h3><div class="sub">This exam can be attempted only once.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <div class="note-block">You have used your one attempt. Your score: <b>${best} / 200</b> - ${pass?'Passed 🎉':'Not cleared'}.</div>
+  <p style="color:var(--muted);font-size:14px">Keep revising the notes and chapter tests to stay sharp.</p>
+  <button class="btn grad" style="width:100%" onclick="closeModal()">Close</button>`);
+}
+function examNotice(){
+ showModal(`<div class="modal-head"><div><h3>Before you begin ⚠️</h3><div class="sub">Please read carefully.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <div class="note-block" style="border-left-color:var(--bad)"><b>You can take this exam only ONE time.</b> Make sure you are ready and will not be disturbed.</div>
+  <ul style="color:var(--ink);font-size:14.5px;line-height:1.85;margin:6px 0 14px 18px">
+   <li>200 questions, 1 mark each. Duration: <b>4 hours (240 minutes)</b>.</li>
+   <li>You <b>cannot submit before 70 minutes</b> have passed.</li>
+   <li>You must answer <b>at least 80 questions</b> to get a result.</li>
+   <li>Pass mark is <b>120 / 200</b>. The timer auto-submits at zero.</li>
+   <li>Copying, printing and downloading are disabled.</li>
+  </ul>
+  <div class="qnav"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn grad" onclick="beginExam()">I understand, start now</button></div>`);
+}
+function beginExam(){
+ closeModal();
+ EX={q:EXAMPOOL.map(prep),ans:new Array(EXAMPOOL.length).fill(-1),fl:new Array(EXAMPOOL.length).fill(false),i:0,t:EXAM_TOTAL_MIN*60,done:false};
  renderExam();clearInterval(exTimer);exTimer=setInterval(exTick,1000);
 }
 function exTick(){if(!EX||EX.done)return;EX.t--;const el=document.getElementById('extimer');if(el){el.textContent=hhmmss(EX.t);if(EX.t<=300)el.classList.add('warn');}if(EX.t<=0){clearInterval(exTimer);submitExam(true);}}
@@ -1456,10 +1661,11 @@ function renderExam(){
   <div class="exbar"><div class="extitle">🥷 DISA Saarthi · Full Mock Exam (200 marks)</div>
     <div style="display:flex;gap:10px;align-items:center"><span class="extimer" id="extimer">${hhmmss(EX.t)}</span>
     <button class="btn grad" onclick="confirmSubmit()">Submit exam</button></div></div>
+  <div class="exbrand">🥷 Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a></div>
   <div class="exwrap">
     <aside class="expalette"><div style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:1px">QUESTION PALETTE</div>
       <div class="pgrid200" id="pgrid"></div>
-      <div class="palegend"><span><b style="background:linear-gradient(135deg,#7c3aed,#c026d3)"></b>Answered</span><br>
+      <div class="palegend"><span><b style="background:linear-gradient(135deg,#4f46e5,#7c3aed)"></b>Answered</span><br>
       <span><b style="background:transparent;outline:2px solid #fbbf24"></b>Marked for review</span></div></aside>
     <main class="exmain">
       <div style="display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;margin-bottom:12px">
@@ -1467,6 +1673,7 @@ function renderExam(){
         <button class="icobtn" style="width:auto;padding:5px 12px;font-size:13px" onclick="flagQ()">${EX.fl[EX.i]?'🚩 Marked':'⚑ Mark for review'}</button></div>
       <div class="exq"><span class="qn">Q${EX.i+1}.</span>${item.q}</div>
       <div id="exopts">${item.o.map((o,k)=>`<button class="opt ${EX.ans[EX.i]===k?'sel':''}" onclick="pickEx(${k})"><span class="k">${'ABCD'[k]}</span>${o}</button>`).join('')}</div>
+      <div class="exbrand" style="margin-top:28px">Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a> 💜</div>
     </main></div>
   <div class="exnav"><button class="btn ghost" onclick="navEx(-1)" ${EX.i===0?'disabled style=opacity:.4':''}>← Prev</button>
     <span style="align-self:center;color:var(--muted);font-size:13px">Answered ${EX.ans.filter(a=>a>=0).length} / ${total}</span>
@@ -1481,7 +1688,14 @@ function pickEx(k){EX.ans[EX.i]=k;document.querySelectorAll('#exopts .opt').forE
 function navEx(d){const n=EX.i+d;if(n>=0&&n<EX.q.length){EX.i=n;renderExam();}}
 function jumpEx(k){EX.i=k;renderExam();}
 function flagQ(){EX.fl[EX.i]=!EX.fl[EX.i];renderExam();}
-function confirmSubmit(){const un=EX.ans.filter(a=>a<0).length;if(confirm(`Submit your exam?\n\n${un} question(s) still unanswered.\nOnce submitted you cannot change your answers.`))submitExam(false);}
+function confirmSubmit(){
+ const answered=EX.ans.filter(a=>a>=0).length;
+ const elapsed=EXAM_TOTAL_MIN*60-EX.t;
+ if(elapsed<EXAM_MIN_MIN*60){const left=Math.ceil((EXAM_MIN_MIN*60-elapsed)/60);return toast('You can submit only after 70 minutes ('+left+' min left)');}
+ if(answered<EXAM_MIN_ANSWERED){return toast('Answer at least 80 questions to get a result (you have '+answered+')');}
+ const un=EX.q.length-answered;
+ if(confirm('Submit your exam?\n\n'+un+' question(s) still unanswered.\nThis is your ONE attempt and cannot be undone.'))submitExam(false);
+}
 function submitExam(auto){EX.done=true;clearInterval(exTimer);let s=0;EX.q.forEach((q,k)=>{if(EX.ans[k]===q.a)s++;});EX.score=s;recordExam(s);showCertificate(s,auto);}
 function showCertificate(score,auto){
  const u=currentUser(),pass=score>=120,ex=document.getElementById('exam');
@@ -1562,6 +1776,82 @@ function openLogin(){openAuth('login');}
 /* record chapter score into profile after each chapter test */
 if(typeof quizResult==='function'){const _qr=quizResult;quizResult=function(){try{if(currentUser()&&typeof CUR!=='undefined'&&CUR){recordChapter(CUR.mod,CUR.chId,Math.round(qScore/CUR.q.length*100));}}catch(e){}return _qr.apply(this,arguments);};}
 initTheme();updNav();
+
+
+/* ================= GOOGLE SIGN-IN (Google Identity Services) =================
+   TO GO LIVE: paste your OAuth Web Client ID below (from Google Cloud Console).
+   Leave it blank and the site falls back to email/password only.            */
+const GOOGLE_CLIENT_ID="76181770954-hojtm8562ugqvecn8piskmv0d8fpv2f9.apps.googleusercontent.com"; /* e.g. "1234567890-abcd.apps.googleusercontent.com" */
+
+function stubBtn(){return `<button class="gbtn" onclick="googleStub()">${GSVG} Continue with Google</button>`;}
+function googleStub(){toast(GOOGLE_CLIENT_ID?'Google is loading, try again in a moment':'Google sign-in turns on once your Client ID is added (see setup)');}
+function mountGoogle(){
+ const box=document.getElementById('gbox'); if(!box)return;
+ if(GOOGLE_CLIENT_ID && window.google && google.accounts && google.accounts.id){
+   try{
+     google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:onGoogle});
+     google.accounts.id.renderButton(box,{theme:document.body.classList.contains('light')?'outline':'filled_blue',size:'large',text:'continue_with',shape:'pill',width:320});
+   }catch(e){box.innerHTML=stubBtn();}
+ }else{box.innerHTML=stubBtn();}
+}
+function decodeJwt(t){try{const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+ const json=decodeURIComponent(atob(p).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+ return JSON.parse(json);}catch(e){return null;}}
+function onGoogle(resp){
+ const d=decodeJwt(resp.credential); if(!d||!d.email)return toast('Google sign-in failed, use email instead');
+ const email=d.email.toLowerCase(), all=users(), u=all[email];
+ if(u){ if(d.picture&&!u.photo){u.photo=d.picture;saveUser(u);} setSession(email); closeModal(); toast('Welcome back, '+(u.name.split(' ')[0]||'')+'!'); return; }
+ window._gpending={name:d.name||'',email,photo:d.picture||null};
+ completeProfile();
+}
+function completeProfile(){
+ const g=window._gpending||{};
+ showModal(`<div class="modal-head"><div><h3>Almost there ✨</h3><div class="sub">Complete your DISA Saarthi profile.</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
+  <div class="pcard"><div class="pphoto">${g.photo?`<img src="${g.photo}" style="width:100%;height:100%;object-fit:cover;border-radius:20px">`:(g.name[0]||'S').toUpperCase()}</div>
+   <div class="pinfo"><b>${g.name||'Student'}</b><span>${g.email}</span></div></div>
+  <div class="frow"><div style="flex:1"><label class="flbl">ICAI Membership No. (6 digits)</label><input class="fld" id="gpMem" maxlength="6" inputmode="numeric" placeholder="e.g. 123456"></div>
+    <div style="flex:1"><label class="flbl">Phone (+91)</label><input class="fld" id="gpPhone" maxlength="10" inputmode="numeric" placeholder="10-digit number"></div></div>
+  <label class="flbl">Address</label><input class="fld" id="gpAddr" placeholder="City, State">
+  <div class="errmsg" id="authErr"></div>
+  <button class="btn grad" style="width:100%" onclick="finishGoogle()">Finish & enter</button>`);
+}
+function finishGoogle(){
+ const g=window._gpending||{};
+ const mem=(document.getElementById('gpMem').value||'').trim();
+ const phone=(document.getElementById('gpPhone').value||'').trim();
+ const addr=(document.getElementById('gpAddr').value||'').trim();
+ if(!/^\d{6}$/.test(mem))return authErr('Membership number must be exactly 6 digits.');
+ if(!/^\d{10}$/.test(phone))return authErr('Phone must be a 10-digit number.');
+ if(!addr)return authErr('Please enter your address.');
+ const u={name:g.name||'Student',email:g.email,membership:mem,phone:'+91'+phone,address:addr,pass:null,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
+ saveUser(u);setSession(u.email);closeModal();toast('Welcome, '+u.name.split(' ')[0]+'!');openProfile();
+}
+/* make the auth modal render the Google button */
+if(typeof openAuth==='function'){const _oa=openAuth;openAuth=function(m){_oa(m);setTimeout(mountGoogle,60);};}
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer>
+/* ---------- FIREBASE (cloud sync of students, for the admin dashboard) ---------- */
+const FIREBASE_CONFIG={
+  apiKey: "AIzaSyCWPyv3BZa10M7B-jz7hcC3fw0Iuxf2RII",
+  authDomain: "disa-3a0ac.firebaseapp.com",
+  projectId: "disa-3a0ac",
+  storageBucket: "disa-3a0ac.firebasestorage.app",
+  messagingSenderId: "76181770954",
+  appId: "1:76181770954:web:08df00e6997e8b3dbf9a33",
+  measurementId: "G-4QL1NPVWQQ"
+}; /* paste your Firebase config object here to enable cloud sync */
+let SDB=null,SFB=false;
+function ensureFB(){if(SFB)return true;try{if(!FIREBASE_CONFIG||!window.firebase)return false;if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);SDB=firebase.firestore();SFB=true;return true;}catch(e){return false;}}
+function mirrorStudent(u){
+ if(!u||!u.email||!ensureFB())return;
+ try{
+  const done=Object.values(u.chapters||{}).filter(p=>p>=60).length;
+  const best=(u.exams&&u.exams.length)?Math.max.apply(null,u.exams.map(e=>e.score)):null;
+  SDB.collection('students').doc(u.email).set({name:u.name||'',email:u.email,membership:u.membership||'',phone:u.phone||'',address:u.address||'',provider:u.provider||'email',joined:u.joined||'',chaptersDone:done,bestScore:best,examCount:(u.exams||[]).length,exams:u.exams||[],lastActive:new Date().toISOString()},{merge:true}).catch(function(){});
+ }catch(e){}
+}
 
 </script>
 </body>

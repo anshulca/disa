@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DISA Saarthi - Admin Dashboard</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234f46e5'/%3E%3Cstop offset='1' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Ctext x='50' y='68' font-size='52' font-weight='900' text-anchor='middle' fill='%2310b981' font-family='Segoe UI,sans-serif'%3EA%3C/text%3E%3C/svg%3E">
+
+<!-- ============================================================= -->
+<!--  SETUP: paste your keys below (see the checklist Anshul gave). -->
+<!-- ============================================================= -->
+<script>
+/* 1) Firebase config - from Firebase console > Project settings > Web app */
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCWPyv3BZa10M7B-jz7hcC3fw0Iuxf2RII",
+  authDomain: "disa-3a0ac.firebaseapp.com",
+  projectId: "disa-3a0ac",
+  storageBucket: "disa-3a0ac.firebasestorage.app",
+  messagingSenderId: "76181770954",
+  appId: "1:76181770954:web:08df00e6997e8b3dbf9a33",
+  measurementId: "G-4QL1NPVWQQ"
+}; /* replace null with your { apiKey:"...", ... } object */
+
+/* 2) Admin passcode - choose any secret; you type this to open the dashboard */
+const ADMIN_PASSCODE = "changeme123";
+
+/* 3) Email: sending is done by the Zoho script "disa_emailer.py" (you run it on your PC).
+      From this dashboard you Export the list (CSV) and Download your message, then run the script. */
+</script>
+
+<style>
+:root{
+ --bg:#f5f7fc;--card:#ffffff;--card2:#eef1f9;--ink:#0f172a;--muted:#5b6478;
+ --grad:linear-gradient(135deg,#4f46e5,#6366f1 55%,#7c3aed);--acc:#059669;--acc-soft:#d1fae5;
+ --ring:rgba(79,70,229,.22);--shadow:0 18px 44px -22px rgba(79,70,229,.28);
+ --good:#16a34a;--bad:#e11d48;--amber:#d97706;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+a{color:#4f46e5}
+button{font-family:inherit;cursor:pointer;border:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.btn{background:var(--grad);color:#fff;font-weight:800;padding:10px 18px;border-radius:11px;transition:.15s;font-size:14px}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ring)}
+.btn.acc{background:var(--acc)}
+.btn.sm{padding:6px 12px;font-size:12.5px;border-radius:9px}
+
+/* gate */
+#gate{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(800px 500px at 80% -10%,#e9ecff,transparent),var(--bg);z-index:50}
+.gatebox{background:#fff;border:1px solid var(--ring);border-radius:22px;padding:34px;max-width:380px;width:92%;box-shadow:var(--shadow);text-align:center}
+.gatebox .mk{width:56px;height:56px;border-radius:16px;background:var(--grad);display:grid;place-items:center;margin:0 auto 14px;font-size:26px;color:#10b981;font-weight:900}
+.gatebox h1{font-size:22px;font-weight:900;margin-bottom:4px}
+.gatebox p{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+.fld{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--ring);font-size:15px;margin-bottom:12px;font-family:inherit}
+.fld:focus{outline:none;border-color:var(--acc)}
+
+/* app */
+#app{display:none}
+header.top{background:#fff;border-bottom:1px solid var(--ring);position:sticky;top:0;z-index:20}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}
+.logo .mk{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;color:#10b981;font-weight:900}
+.logo b{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:11px;font-weight:800;color:var(--acc);background:var(--acc-soft);padding:3px 9px;border-radius:999px;margin-left:6px}
+
+section{padding:26px 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:#fff;border:1px solid var(--ring);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.stat .n{font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{color:var(--muted);font-size:13px;font-weight:600;margin-top:2px}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search{flex:1;min-width:200px;padding:11px 14px;border-radius:12px;border:1.5px solid var(--ring);font-size:14px;font-family:inherit}
+.search:focus{outline:none;border-color:var(--acc)}
+
+.tablewrap{background:#fff;border:1px solid var(--ring);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:11px 13px;text-align:left;border-bottom:1px solid #eef1f9;white-space:nowrap}
+th{background:#f7f8fd;color:var(--muted);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:64px}
+tr:hover td{background:#fafbff}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.pill.pass{background:#dcfce7;color:#15803d}
+.pill.fail{background:#ffe4e6;color:#be123c}
+.pill.none{background:#eef1f9;color:#64748b}
+.scroller{max-height:60vh;overflow:auto}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+.overlay.on{display:flex}
+.modal{background:#fff;border-radius:20px;max-width:600px;width:100%;max-height:88vh;overflow:auto;padding:26px;box-shadow:var(--shadow)}
+.modal h3{font-size:20px;font-weight:900;margin-bottom:4px}
+.modal .sub{color:var(--muted);font-size:13px;margin-bottom:16px}
+.flbl{font-size:12px;font-weight:800;color:var(--muted);display:block;margin:8px 0 5px}
+textarea.fld{min-height:140px;resize:vertical}
+.row{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+.count{font-size:13px;color:var(--muted)}
+.banner{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:18px;line-height:1.6}
+.sendlog{font-size:12.5px;color:var(--muted);margin-top:10px;max-height:120px;overflow:auto}
+.mini{color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+
+<!-- passcode gate -->
+<div id="gate">
+  <div class="gatebox">
+    <div class="mk">🔐</div>
+    <h1>Admin access</h1>
+    <p>DISA Saarthi dashboard - enter your passcode.</p>
+    <input class="fld" id="pc" type="password" placeholder="Passcode" onkeydown="if(event.key==='Enter')tryGate()">
+    <div id="gateErr" style="color:var(--bad);font-size:13px;min-height:16px;margin-bottom:8px"></div>
+    <button class="btn" style="width:100%" onclick="tryGate()">Enter dashboard</button>
+  </div>
+</div>
+
+<!-- dashboard -->
+<div id="app">
+  <header class="top"><div class="wrap">
+    <div class="logo"><span class="mk">🥷</span> DISA <b>Saarthi</b> <span class="tag">ADMIN</span></div>
+    <div style="display:flex;gap:10px">
+      <button class="btn ghost sm" onclick="loadStudents()">↻ Refresh</button>
+      <button class="btn acc sm" onclick="openBulk()">✉ Bulk email</button>
+      <button class="btn ghost sm" onclick="exportCSV()">⭳ Export CSV</button>
+    </div>
+  </div></header>
+
+  <section><div class="wrap">
+    <div id="cfgBanner"></div>
+    <div class="stats" id="stats"></div>
+    <div class="toolbar">
+      <input class="search" id="search" placeholder="Search by name, email, membership, phone or city..." oninput="render()">
+      <span class="count" id="count"></span>
+    </div>
+    <div class="tablewrap"><div class="scroller">
+      <table><thead><tr>
+        <th>Name</th><th>Email</th><th>Membership</th><th>Phone</th><th>City</th>
+        <th>Joined</th><th>Chapters</th><th>Best score</th><th>Status</th><th></th>
+      </tr></thead><tbody id="rows"></tbody></table>
+    </div></div>
+    <p class="mini" style="margin-top:14px">Data source: Firebase Firestore collection <b>students</b>. This dashboard only reads it.</p>
+  </div></section>
+</div>
+
+<!-- email modal -->
+<div class="overlay" id="ov" onclick="if(event.target===this)closeOv()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+let STUDENTS=[], DB=null, FB_ON=false;
+
+/* ---- gate ---- */
+function tryGate(){
+ const v=document.getElementById('pc').value;
+ if(v===ADMIN_PASSCODE){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';initApp();}
+ else document.getElementById('gateErr').textContent='Wrong passcode.';
+}
+
+/* ---- init ---- */
+function initApp(){
+ const b=document.getElementById('cfgBanner');
+ if(!FIREBASE_CONFIG){
+   b.innerHTML='<div class="banner">⚙ <b>Firebase not connected yet.</b> Paste your Firebase config at the top of this file to see live student data. Showing a demo row for now.</div>';
+   STUDENTS=[{name:'Demo Student',email:'demo@example.com',membership:'123456',phone:'+919999999999',address:'Mumbai',joined:'2026-08-01',chaptersDone:6,bestScore:132,examCount:1}];
+   computeAndRender();return;
+ }
+ try{ firebase.initializeApp(FIREBASE_CONFIG); DB=firebase.firestore(); FB_ON=true; loadStudents(); }
+ catch(e){ b.innerHTML='<div class="banner">Could not connect to Firebase: '+e.message+'</div>'; }
+}
+function loadStudents(){
+ if(!FB_ON){initApp();return;}
+ DB.collection('students').get().then(snap=>{
+   STUDENTS=snap.docs.map(d=>d.data());
+   computeAndRender();
+ }).catch(e=>{document.getElementById('cfgBanner').innerHTML='<div class="banner">Read failed: '+e.message+' - check your Firestore rules allow reads.</div>';});
+}
+
+/* ---- stats + table ---- */
+function computeAndRender(){
+ const n=STUDENTS.length;
+ const withExam=STUDENTS.filter(s=>s.bestScore!=null);
+ const passed=withExam.filter(s=>s.bestScore>=120).length;
+ const avg=withExam.length?Math.round(withExam.reduce((a,s)=>a+s.bestScore,0)/withExam.length):0;
+ const exams=STUDENTS.reduce((a,s)=>a+(s.examCount||0),0);
+ document.getElementById('stats').innerHTML=`
+  ${stat(n,'Registered students')}
+  ${stat(withExam.length,'Attempted exam')}
+  ${stat(passed,'Passed (120+)')}
+  ${stat(avg+' / 200','Average score')}
+  ${stat(exams,'Total exam attempts')}`;
+ render();
+}
+function stat(n,l){return `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`;}
+function render(){
+ const q=(document.getElementById('search').value||'').toLowerCase();
+ const list=STUDENTS.filter(s=>!q||[s.name,s.email,s.membership,s.phone,s.address].join(' ').toLowerCase().includes(q));
+ document.getElementById('count').textContent=list.length+' of '+STUDENTS.length+' shown';
+ const rows=list.map(s=>{
+   const st=s.bestScore==null?'<span class="pill none">Not attempted</span>':(s.bestScore>=120?'<span class="pill pass">Passed</span>':'<span class="pill fail">Not cleared</span>');
+   return `<tr>
+     <td><b>${esc(s.name||'-')}</b></td><td>${esc(s.email||'-')}</td><td>${esc(s.membership||'-')}</td>
+     <td>${esc(s.phone||'-')}</td><td>${esc(s.address||'-')}</td><td>${esc(s.joined||'-')}</td>
+     <td>${s.chaptersDone!=null?s.chaptersDone:'-'}</td><td>${s.bestScore!=null?s.bestScore+' / 200':'-'}</td>
+     <td>${st}</td><td><button class="btn acc sm" onclick="emailOne('${esc(s.email)}','${esc((s.name||'').replace(/'/g,''))}')">Email</button></td></tr>`;}).join('');
+ document.getElementById('rows').innerHTML=rows||'<tr><td colspan="10" class="empty">No students yet.</td></tr>';
+}
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+/* ---- CSV export ---- */
+function exportCSV(){
+ const head=['Name','Email','Membership','Phone','City','Joined','ChaptersDone','BestScore','ExamAttempts'];
+ const lines=[head.join(',')].concat(STUDENTS.map(s=>[s.name,s.email,s.membership,s.phone,s.address,s.joined,s.chaptersDone,s.bestScore,s.examCount].map(v=>`"${String(v==null?'':v).replace(/"/g,'""')}"`).join(',')));
+ const blob=new Blob([lines.join('\n')],{type:'text/csv'});const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download='disa-students.csv';a.click();
+}
+
+/* ---- email ---- */
+function emailOne(email,name){window.location.href="mailto:"+email;}
+function openBulk(preset){
+ const q=(document.getElementById('search')?document.getElementById('search').value:'').toLowerCase();
+ const filtered=STUDENTS.filter(s=>!q||[s.name,s.email,s.membership,s.phone,s.address].join(' ').toLowerCase().includes(q));
+ const recips=filtered.map(s=>s.email).filter(Boolean);
+ document.getElementById('modal').innerHTML=`
+   <h3>Bulk email students</h3>
+   <div class="sub">${recips.length} recipient(s) ${q?'(current search filter)':'(all students)'}.</div>
+   <div class="banner"><b>How sending works (free, via your Zoho):</b><br>1) Click <b>Export list</b> to save disa-students.csv.<br>2) Type your subject + message below and click <b>Download message</b>.<br>3) Put both files next to <b>disa_emailer.py</b> and run it - it emails everyone from your Zoho account.</div>
+   <label class="flbl">Subject</label><input class="fld" id="mSub" placeholder="e.g. New mock exam is live on DISA Saarthi">
+   <label class="flbl">Message (use {name} to personalise each email)</label><textarea class="fld" id="mBody" placeholder="Hi {name}, ..."></textarea>
+   <div class="row">
+     <button class="btn ghost" onclick="exportCSV()">1 · Export list (CSV)</button>
+     <button class="btn acc" onclick="downloadMsg()">2 · Download message</button>
+     <button class="btn ghost" onclick="closeOv()">Close</button></div>`;
+ document.getElementById('ov').classList.add('on');
+}
+function downloadMsg(){
+ const sub=document.getElementById('mSub').value.trim(), body=document.getElementById('mBody').value.trim();
+ if(!sub||!body)return alert('Please enter a subject and message.');
+ const txt='SUBJECT: '+sub+'\n\n'+body;
+ const blob=new Blob([txt],{type:'text/plain'});const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob);a.download='message.txt';a.click();
+ alert('Saved message.txt. Put it next to disa_emailer.py and run the script to send.');
+}
+function closeOv(){document.getElementById('ov').classList.remove('on');}
+</script>
+</body>
+</html>
