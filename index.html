@@ -141,7 +141,7 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:900;margin:8px 0 6px;letter-
 .modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;gap:16px}
 .modal h3{font-size:23px;font-weight:900;line-height:1.15}
 .modal .sub{color:var(--muted);font-size:14px;margin-top:4px}
-.closeb{background:rgba(255,255,255,.08);width:36px;height:36px;border-radius:10px;color:#fff;font-size:18px;flex-shrink:0}
+.closeb{background:rgba(99,102,241,.14);width:36px;height:36px;border-radius:10px;color:var(--ink);font-size:18px;flex-shrink:0;border:1px solid var(--ring)}
 .closeb:hover{background:rgba(255,255,255,.16)}
 
 /* notes */
@@ -718,30 +718,30 @@ Controls - learn to smell them, not memorise them. Preventive stops the problem 
 
 And remember the mindset: risk-based. You spend audit effort where residual risk is highest, not where you are most comfortable. Independence is non-negotiable - that is why audit reports to the audit committee, not to the head of the function it is checking.`,
   q:[
-   {c:"Audit Charter", q:"An entity is drafting the document that will authorise its audit function. Whose approval gives that document its standing?",
-    o:["The head of internal audit","The audit committee of the board","The information security head","The IT steering committee"],a:1,
-    e:"The audit charter derives authority from the board, exercised through the audit committee. The head of audit operates under it, so cannot approve it; IT security and the steering committee are outside its approval chain."},
-   {c:"Audit Charter", q:"Which of these is the charter's core purpose, as distinct from the audit plan?",
-    o:["To schedule the year's audit assignments","To list the code of conduct for auditors","To fix the authority and responsibility of the function","To estimate the resources each audit will need"],a:2,
-    e:"The charter defines scope, authority and responsibility. Scheduling, conduct and resourcing are handled by the plan and engagement documents, not the charter."},
-   {c:"Independence", q:"The audit function reports directly to the audit committee mainly to protect:",
-    o:["Its access to specialised tools","Its independence from the functions it audits","Its priority over other departments","Its control over the audit budget"],a:1,
-    e:"Direct reporting preserves independence and unfiltered access to the board. The other options are operational conveniences, not the reason for the reporting line."},
-   {c:"Risk-based Audit", q:"When planning on a risk basis, the auditor's very first move is to:",
-    o:["Fix the audit budget and timeline","Identify the high-risk processes","List every stakeholder's expectation","Decide the sampling method to be used"],a:1,
-    e:"Risk-based planning starts by locating where risk concentrates. Budget, stakeholders and sampling follow once the risk map exists."},
-   {c:"Control Types", q:"A subroutine detects a data error and repairs it before the run continues. This control is best classed as:",
-    o:["A detective control","A preventive control","A corrective control","A compensating control"],a:2,
-    e:"It acts after detection to remedy the fault, so it is corrective. Detective only flags; preventive stops beforehand; compensating fills a control gap."},
-   {c:"Control Types", q:"Segregation of duties works chiefly by:",
-    o:["Recording every action for later review","Removing the need for supervisory checks","Stopping one person from both committing and hiding an act","Signalling that misuse has already occurred"],a:2,
-    e:"SoD is preventive - it splits a transaction so wrongdoing needs collusion. Recording and signalling describe detective controls."},
-   {c:"Control Types", q:"An echo check in a telecom link is an example of which control?",
-    o:["A preventive control","A detective control","A deterrent control","A corrective control"],a:1,
-    e:"An echo confirms after the fact whether data arrived intact, so it detects errors. It neither prevents, discourages nor repairs them."},
-   {c:"Roles & Governance", q:"An IS auditor reviews the organisation chart primarily to:",
-    o:["Map how data moves between systems","Understand individuals' authority and responsibility","Count IT assets held by each team","Compare staffing across departments"],a:1,
-    e:"The chart reveals lines of authority and responsibility, which drive control expectations. Data flow, asset counts and staffing come from other sources."}
+   {c:"Audit Charter", q:"An entity is drafting the document that fixes the scope and authority of its audit function. Whose approval gives that document its formal standing?",
+    o:["The chief information security officer","The audit committee of the board","The head of the internal audit team","The IT steering committee of management"],a:1,
+    e:"A charter draws its authority from the board through the audit committee. The head of audit works under it, and the CISO and steering committee sit outside its approval chain."},
+   {c:"Audit Charter", q:"Which of the following is a purpose of the audit charter rather than the annual audit plan?",
+    o:["Scheduling every audit assignment for the coming year","Defining the function's authority and responsibility","Listing the professional code of conduct for auditors","Estimating the resources each review will consume"],a:1,
+    e:"The charter defines mandate, authority and responsibility; scheduling, conduct and resource estimates belong to the plan and engagement papers."},
+   {c:"Independence", q:"An IS audit function reports directly to the audit committee. The primary reason for this reporting line is to protect its:",
+    o:["access to specialised audit tools","independence from areas it audits","priority over other support teams","control of the annual audit budget"],a:1,
+    e:"Direct reporting preserves independence and unfiltered board access. Tool access, priority and budget control are not the reason for the line."},
+   {c:"Risk-based Audit", q:"Adopting a risk-based audit approach, which of these does the auditor establish first?",
+    o:["The staffing and time budget","The high-risk areas to target","The sampling method to apply","The stakeholders to interview"],a:1,
+    e:"Risk-based planning begins by locating where residual risk concentrates; budget, sampling and interviews follow the risk map."},
+   {c:"Control Types", q:"During a run, a routine spots a corrupted record and repairs it before processing continues. This control is best classified as:",
+    o:["a detective control","a preventive control","a corrective control","a deterrent control"],a:2,
+    e:"Acting after detection to remedy the fault makes it corrective; detective only flags, preventive stops beforehand, deterrent merely discourages."},
+   {c:"Control Types", q:"Segregation of duties reduces the risk of fraud mainly because it:",
+    o:["records each action for a later review","needs collusion to commit and conceal","removes the need for any supervisor check","signals that a misuse has already begun"],a:1,
+    e:"SoD splits a transaction so wrongdoing requires collusion, which is preventive. Recording and signalling describe detective controls."},
+   {c:"Control Types", q:"In a telecommunication link, an echo check is an example of which type of control?",
+    o:["a preventive control","a detective control","a corrective control","a compensating control"],a:1,
+    e:"An echo confirms after transmission whether data arrived intact, so it detects errors rather than preventing or correcting them."},
+   {c:"Roles & Governance", q:"An IS auditor studies the organisation chart mainly to understand the:",
+    o:["way data flows between the systems","lines of authority and duty","IT assets that each team holds","staff numbers within the departments"],a:1,
+    e:"The chart reveals authority and reporting lines, which shape control expectations; data flow, assets and headcount come from other sources."}
   ]
  },
  {
@@ -1474,37 +1474,34 @@ function chapMenu(){
   <div class="chlist">${chs}</div>`);
 }
 let CUR=null,qi=0,qScore=0,qAnswered=false;
-function startQuiz(i){if(!currentUser())return gateLogin();const m=ACTIVEMOD,c=m.chapters[i];CUR={mod:m.n,chId:c.id,ch:c.name,idx:i,q:c.q.map(prep)};qi=0;qScore=0;qAnswered=false;renderQ();}
+function startQuiz(i){if(!currentUser())return gateLogin();const m=ACTIVEMOD,c=m.chapters[i];CUR={mod:m.n,chId:c.id,ch:c.name,idx:i,q:c.q.map(prep)};CUR.sel=new Array(CUR.q.length).fill(-1);qi=0;renderQ();}
+function quizScore(){return CUR.sel.reduce((a,s,idx)=>a+((s>=0&&s===CUR.q[idx].a)?1:0),0);}
 function renderQ(){
- const set=CUR,item=set.q[qi],total=set.q.length;
+ const set=CUR,item=set.q[qi],total=set.q.length,sel=set.sel[qi],answered=sel>=0;
  showBranded(`${M1BRAND}<div class="modal-head"><div><div class="eyebrow">Module ${set.mod} · Ch ${set.chId} · ${set.ch}</div><h3>Chapter Test</h3></div><button class="closeb" onclick="closeModal()">✕</button></div>
-  <div class="qprog"><i style="width:${qi/total*100}%"></i></div>
-  <div class="qmeta"><span>Q ${qi+1} of ${total}${item.c?` · <span class="concept">${item.c}</span>`:''}</span><span>Score: ${qScore}</span></div>
+  <div class="qprog"><i style="width:${(qi+1)/total*100}%"></i></div>
+  <div class="qmeta"><span>Q ${qi+1} of ${total}${item.c?` · <span class="concept">${item.c}</span>`:''}</span><span>Score: ${quizScore()}</span></div>
   <div class="qtext">${item.q}</div>
-  <div id="opts">${item.o.map((o,i)=>`<button class="opt" onclick="answer(${i})"><span class="k">${'ABCD'[i]}</span>${o}</button>`).join('')}</div>
-  <div class="explain" id="exp"><b>Why:</b> ${item.e}</div>
-  <div class="qnav"><button class="btn ghost" onclick="chapMenu()">← Chapters</button><button class="btn grad" id="nextb" style="visibility:hidden" onclick="nextQ()">Next →</button></div>
+  <div id="opts">${item.o.map((o,idx)=>{let cls='';if(answered){if(idx===item.a)cls=' correct';else if(idx===sel)cls=' wrong';}return `<button class="opt${cls}"${answered?' style=pointer-events:none':''} onclick="answer(${idx})"><span class="k">${'ABCD'[idx]}</span>${o}</button>`;}).join('')}</div>
+  <div class="explain${answered?' on':''}" id="exp"><b>Why:</b> ${item.e}</div>
+  <div class="qnav">
+    <button class="btn ghost" onclick="prevQ()"${qi===0?' disabled style=opacity:.4':''}>← Prev</button>
+    <button class="btn ghost" onclick="chapMenu()">Chapters</button>
+    <button class="btn grad" onclick="nextQ()">${qi===total-1?'See result →':'Next →'}</button></div>
   <div class="madelove" style="margin-top:16px">Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a> 💜</div>`);
 }
-function answer(i){
- if(qAnswered)return;qAnswered=true;
- const item=CUR.q[qi],opts=document.querySelectorAll('#opts .opt');
- opts.forEach((b,idx)=>{b.style.pointerEvents='none';if(idx===item.a)b.classList.add('correct');if(idx===i&&i!==item.a)b.classList.add('wrong')});
- if(i===item.a){qScore++;pop6();}
- document.getElementById('exp').classList.add('on');
- const nb=document.getElementById('nextb');nb.style.visibility='visible';
- nb.textContent=(qi===CUR.q.length-1)?'See result →':'Next →';
-}
-function nextQ(){qAnswered=false;if(qi<CUR.q.length-1){qi++;renderQ();}else{quizResult();}}
+function answer(i){const set=CUR;if(set.sel[qi]>=0)return;set.sel[qi]=i;if(i===set.q[qi].a)pop6();renderQ();}
+function prevQ(){if(qi>0){qi--;renderQ();}}
+function nextQ(){if(qi<CUR.q.length-1){qi++;renderQ();}else{quizResult();}}
 function quizResult(){
- const set=CUR,total=set.q.length,pct=Math.round(qScore/total*100),pass=pct>=60;
+ const set=CUR,total=set.q.length,score=quizScore(),pct=Math.round(score/total*100),pass=pct>=60;
  try{if(currentUser())recordChapter(set.mod,set.chId,pct);}catch(e){}
  if(pass)confettiBurst();
  showBranded(`${M1BRAND}<div class="modal-head"><div><h3>Chapter Test done!</h3><div class="sub">${set.ch}</div></div><button class="closeb" onclick="closeModal()">✕</button></div>
   ${ring(pct,pass)}
   <div class="result"><div class="verdict" style="color:${pass?'var(--good)':'var(--bad)'}">${pass?'Nice work! 🎉':'Keep grinding 💪'}</div>
-  <p style="color:var(--muted)">You scored ${qScore}/${total}.</p></div>
-  <div class="qnav" style="margin-top:22px"><button class="btn ghost" onclick="startQuiz(${set.idx})">Retry</button><button class="btn grad" onclick="chapMenu()">Other chapters →</button></div>
+  <p style="color:var(--muted)">You scored ${score}/${total}.</p></div>
+  <div class="qnav" style="margin-top:22px"><button class="btn ghost" onclick="qi=0;renderQ()">← Review answers</button><button class="btn ghost" onclick="startQuiz(${set.idx})">Retry</button><button class="btn grad" onclick="chapMenu()">Other chapters →</button></div>
   <div class="madelove" style="margin-top:16px">Made with love by <a href="${M1LINK}" target="_blank" rel="noopener">CA Anshul Karwa</a> 💜</div>`);
 }
 
