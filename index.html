@@ -465,7 +465,7 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
 .ex-hdr-r span{cursor:default}
 .ex-exit{background:#c0392b;color:#fff;border:none;font-size:12px;font-weight:700;padding:5px 12px;border-radius:3px;cursor:pointer}
 .ex-band{display:flex;align-items:stretch;justify-content:space-between;background:#3a6ea5;color:#fff;border-top:1px solid #2c5580}
-.ex-secbtn{display:inline-flex;align-items:center;gap:8px;background:#2f6fc0;color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border:none;border-right:1px solid #24568f}
+.ex-secbtn{display:inline-flex;align-items:center;gap:8px;background:#2f6fc0;color:#fff;font-size:12px;font-weight:700;padding:8px 14px;border:none;border-right:1px solid #24568f;cursor:pointer}
 .ex-secbtn .i{background:#1c3f6e;border-radius:50%;width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-style:italic}
 .ex-candbar{background:#dfe8f3;color:#1c3f6e;font-weight:700;font-size:13px;min-width:200px;display:flex;align-items:center;padding:0 16px;border-left:1px solid #c3d2e6}
 .ex-rowsec{display:flex;justify-content:space-between;align-items:center;background:#e9edf2;color:#333;padding:6px 14px;font-size:13px;border-bottom:1px solid #d6dbe2}
@@ -473,7 +473,7 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
 .ex-time{font-weight:700}
 .ex-sectab{background:#f2f4f7;padding:6px 14px;border-bottom:1px solid #d6dbe2;display:flex;align-items:center;gap:0}
 .ex-arw{background:#dbe3ee;color:#2f6fc0;border:1px solid #c3d2e6;padding:6px 9px;font-size:12px;cursor:default}
-.ex-marks{text-align:right;font-size:12px;color:#333;padding:5px 14px;border-bottom:1px solid #d6dbe2;background:#fff}
+.ex-marks{text-align:right;font-size:12px;color:#333;padding:5px 14px;border-bottom:1px solid #d6dbe2;background:#fff;font-weight:600}
 .ex-body{flex:1;display:flex;overflow:hidden;background:#fff}
 .ex-main{flex:1;overflow-y:auto;padding:14px 18px}
 .ex-qno{font-size:15px;font-weight:700;color:#1c3f6e;margin-bottom:10px}
@@ -495,30 +495,160 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
 .cnt.nv{background:#c9cfd7;color:#333;border-radius:3px}
 .cnt.mrk{background:#8e44ad;border-radius:50%}
 .cnt.amr{background:#8e44ad;border-radius:50%;position:relative}
-.cnt.amr::after{content:"✓";position:absolute;right:-3px;bottom:-3px;font-size:9px;color:#2ecc71;background:#fff;border-radius:50%;width:11px;height:11px;line-height:11px;text-align:center}
+.cnt.amr::after{content:"\2713";position:absolute;right:-3px;bottom:-3px;font-size:9px;color:#2ecc71;background:#fff;border-radius:50%;width:11px;height:11px;line-height:11px;text-align:center}
 .ex-legend .full{grid-column:1/-1;display:flex;align-items:center;gap:6px}
 .ex-secstrip{background:#3a6ea5;color:#fff;font-weight:700;font-size:12px;padding:6px 10px;margin:0 -10px 8px}
 .ex-choose{font-size:12px;color:#333;margin-bottom:8px}
 .ex-pal{display:grid;grid-template-columns:repeat(4,1fr);gap:9px 8px}
-.pgi{height:34px;font-weight:700;font-size:12px;color:#333;background:#d7dbe0;border:none;position:relative;cursor:pointer;border-radius:4px}
+.pgi{height:34px;font-weight:700;font-size:12px;color:#333;background:#d7dbe0;border:none;position:relative;cursor:pointer;border-radius:4px;transition:background .15s}
+.pgi:hover{opacity:.85}
 .pgi.ans{background:#4caf50;color:#fff;border-radius:4px 4px 13px 13px}
 .pgi.nans{background:#e05a4f;color:#fff;border-radius:13px 13px 4px 4px}
 .pgi.nv{background:#eef0f3;color:#333;border:1px solid #c3c9d2}
 .pgi.mrk{background:#8e44ad;color:#fff;border-radius:50%}
 .pgi.amr{background:#8e44ad;color:#fff;border-radius:50%}
-.pgi.amr::before{content:"✓";position:absolute;right:0;bottom:-2px;font-size:9px;color:#2ecc71;background:#fff;border-radius:50%;width:11px;height:11px;line-height:11px;text-align:center}
+.pgi.amr::before{content:"\2713";position:absolute;right:0;bottom:-2px;font-size:9px;color:#2ecc71;background:#fff;border-radius:50%;width:11px;height:11px;line-height:11px;text-align:center}
 .pgi.cur{background:#2f6fc0;color:#fff;border-radius:4px;box-shadow:0 0 0 2px #1c3f6e}
 .pgi .stq{position:absolute;top:-2px;right:2px;color:#c0392b;font-size:10px;font-weight:900}
 .ex-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:9px 14px;background:#e9edf2;border-top:1px solid #cfd6df}
 .ex-footl,.ex-footr{display:flex;gap:8px;flex-wrap:wrap}
-.exbtn{padding:8px 14px;border-radius:3px;font-weight:700;font-size:12.5px;cursor:pointer;border:1px solid #b7c0cc;background:#f6f8fb;color:#222}
+.exbtn{padding:8px 14px;border-radius:3px;font-weight:700;font-size:12.5px;cursor:pointer;border:1px solid #b7c0cc;background:#f6f8fb;color:#222;transition:background .12s}
+.exbtn:hover{background:#e8ecf1}
 .exbtn.blue{background:#2f6fc0;color:#fff;border-color:#24568f}
+.exbtn.blue:hover{background:#265da6}
 .exbtn.sub{background:#2f6fc0;color:#fff;border-color:#24568f}
+.exbtn.sub:hover{background:#265da6}
 .exbtn[disabled]{opacity:.5;cursor:default}
-.ex-ver{text-align:center;font-size:11px;color:#666;background:#3a6ea5;color:#dbe7f5;padding:3px}
+.ex-ver{text-align:center;font-size:11px;background:#3a6ea5;color:#dbe7f5;padding:3px}
 .exbrand{text-align:center;font-weight:700;font-size:12px;color:#1c3f6e;padding:10px}
 .exbrand a{color:#2f6fc0}
-@media(max-width:800px){.ex-side{width:190px}.ex-pal{grid-template-columns:repeat(3,1fr)}.ex-candbar{display:none}}
+@media(max-width:800px){.ex-side{width:190px}.ex-pal{grid-template-columns:repeat(3,1fr)}.ex-candbar{display:none}.ex-band{flex-wrap:wrap}.ex-hdr{flex-wrap:wrap;gap:6px}.ex-hdr-r{gap:8px}}
+@media(max-width:480px){.ex-side{display:none}.ex-main{padding:10px 12px}.ex-qtext{font-size:14px}.ex-foot{flex-direction:column}.ex-footl,.ex-footr{width:100%}.ex-footl{justify-content:center}.ex-footr{justify-content:center}.exbtn{flex:1;text-align:center}}
+
+/* ================= ABOUT DEVELOPER ================= */
+.dev-card{display:flex;gap:32px;align-items:flex-start;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid rgba(99,102,241,.16);border-radius:22px;padding:32px;transition:.2s}
+.dev-card:hover{box-shadow:var(--shadow)}
+.dev-photo-wrap{flex-shrink:0;width:180px;height:210px;border-radius:18px;overflow:hidden;background:var(--grad);position:relative}
+.dev-photo{width:100%;height:100%;object-fit:cover;display:block}
+.dev-photo-fallback{width:100%;height:100%;display:grid;place-items:center;font-size:48px;font-weight:900;color:#fff;background:var(--grad)}
+.dev-info{flex:1;min-width:0}
+.dev-quals{color:var(--muted);font-size:13px;font-weight:600;margin:4px 0 16px;line-height:1.6;letter-spacing:.3px}
+.dev-areas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 16px}
+.dev-area{display:flex;gap:10px;align-items:flex-start;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.14);border-radius:12px;padding:10px 12px}
+.dev-area-ic{font-size:20px;flex-shrink:0;margin-top:2px}
+.dev-area b{display:block;font-size:13px;font-weight:800;color:var(--ink);margin-bottom:1px}
+.dev-area span{font-size:12px;color:var(--muted);line-height:1.4}
+.dev-desc{color:var(--muted);font-size:14px;line-height:1.65;margin:0}
+@media(max-width:700px){.dev-card{flex-direction:column;align-items:center;text-align:center;padding:24px 18px}.dev-photo-wrap{width:150px;height:180px}.dev-areas{grid-template-columns:1fr}.dev-info .eyebrow,.dev-info .title{text-align:center}}
+
+/* ================= FULL MOBILE OPTIMIZATION ================= */
+@media(max-width:640px){
+  .wrap{padding:0 14px}
+  nav .wrap{height:56px}
+  .logo{font-size:17px;gap:8px}
+  .logo .mark{width:30px;height:30px;border-radius:9px;font-size:16px}
+  .logo .byline{font-size:9px}
+  .nav-links a:not(.btn){display:none}
+  header.hero{padding:40px 0 24px}
+  .hero h1{font-size:clamp(28px,8vw,42px);letter-spacing:-1px}
+  .hero p.sub{font-size:15px;line-height:1.55;margin-top:16px}
+  .hero .cta{flex-direction:column;align-items:center;gap:10px;margin-top:24px}
+  .hero .cta .btn{width:100%;max-width:320px;text-align:center;padding:12px 18px}
+  .stats{gap:14px;margin-top:32px}
+  .stat b{font-size:26px}
+  .stat span{font-size:12px}
+  section{padding:30px 0}
+  .eyebrow{font-size:11px}
+  h2.title{font-size:clamp(22px,5.5vw,32px)}
+  .lead{font-size:14px;line-height:1.6}
+  .grid{grid-template-columns:1fr;gap:14px}
+  .mod{padding:18px}
+  .mod h3{font-size:16px}
+  .mod .meta{font-size:12px}
+  .mod .chips{gap:5px}
+  .chip{font-size:10px;padding:3px 7px}
+  .mod .row{flex-direction:column;gap:6px}
+  .mod .row button{padding:10px;font-size:13px}
+  .feats{grid-template-columns:1fr;gap:12px}
+  .feat{padding:18px}
+  .feat h4{font-size:15px}
+  .feat p{font-size:13px}
+  .price{grid-template-columns:1fr;gap:14px}
+  .plan{padding:22px}
+  .plan .amt{font-size:36px}
+  footer{padding:28px 0;font-size:13px}
+  /* Modal responsive */
+  .modal{border-radius:18px;max-height:92vh;padding:20px;margin:10px}
+  .modal h3{font-size:20px}
+  .pgrid{grid-template-columns:1fr 1fr !important}
+  .pcell .v{font-size:13px}
+  /* Exam responsive */
+  .ex-main{padding:10px 12px}
+  .ex-qtext{font-size:14px;line-height:1.5}
+  .ex-opt{font-size:13px}
+  .ex-mand{font-size:11.5px;padding:8px 10px}
+  .exbtn{padding:7px 10px;font-size:11.5px}
+  .ex-marks{font-size:11px;padding:4px 10px}
+  .ex-pal{grid-template-columns:repeat(5,1fr);gap:6px}
+  .pgi{height:30px;font-size:11px}
+  .ex-legend{font-size:10px;gap:6px 4px}
+  .cnt{min-width:20px;height:18px;font-size:10px}
+  /* Reader responsive */
+  .rbar{padding:10px 12px;gap:8px}
+  .rclose{width:34px;height:34px;font-size:16px}
+  .rbrand{font-size:10px}
+  .rtitle{font-size:12px}
+  .rlock{display:none}
+  .rtabs{padding:8px 12px;gap:5px}
+  .rtab{width:36px;height:28px;font-size:11px}
+  .rpaper{padding:20px 16px 50px}
+  .rhead{padding:22px 20px 16px}
+  .rhead h1{font-size:22px}
+  .rhtml{padding:10px 20px 4px}
+  .rhtml p{font-size:15px;line-height:1.7}
+  .rhtml h2{font-size:18px}
+  .rhtml h3{font-size:15px}
+  .rhtml li{font-size:14px}
+  .rhtml table{font-size:12px}
+  .rhtml th,.rhtml td{padding:5px 6px}
+  .rnav{padding:10px 12px;gap:8px;flex-wrap:wrap;justify-content:center}
+  .rnav .btn{font-size:12px;padding:8px 12px}
+  .rcount{font-size:11px;width:100%;text-align:center}
+  /* Forms responsive */
+  .frow{flex-direction:column;gap:0}
+  .frow .fld{margin-bottom:10px}
+  .gbox{min-height:40px}
+  .gbtn{font-size:13px;padding:10px}
+  /* Profile responsive */
+  .pcard{flex-direction:column;align-items:center;text-align:center}
+  .pphoto{width:64px;height:64px;border-radius:16px;font-size:24px}
+  .pinfo b{font-size:17px}
+  .pgrid{grid-template-columns:1fr !important;gap:8px}
+  .progwrap .progrow{flex-direction:column;align-items:flex-start;gap:4px}
+  .progrow .pl{width:auto}
+  .progrow .pbar{width:100%}
+}
+@media(max-width:360px){
+  .hero h1{font-size:26px}
+  .stats{gap:10px}
+  .stat b{font-size:22px}
+  .mod{padding:14px}
+  .mod h3{font-size:15px}
+  .plan{padding:18px}
+  .plan .amt{font-size:30px}
+  .dev-photo-wrap{width:120px;height:150px}
+  .dev-areas{gap:8px}
+  .dev-area{padding:8px 10px}
+  .dev-area-ic{font-size:16px}
+  .dev-area b{font-size:12px}
+  .dev-area span{font-size:11px}
+}
+@media(min-width:641px) and (max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .feats{grid-template-columns:repeat(2,1fr)}
+  .price{grid-template-columns:repeat(2,1fr)}
+  .dev-photo-wrap{width:160px;height:190px}
+}
 </style>
 </head>
 <body>
@@ -532,6 +662,7 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
     <a href="#" onclick="if(currentUser()){startExam()}else{openAuth('login')};return false">Exam</a>
     <a href="#" onclick="openPlanner();return false">Planner</a>
     <a href="#pricing" id="navPricing">Pricing</a>
+    <a href="#developer">Developer</a>
     <button class="icobtn" id="themeBtn" onclick="toggleTheme()" title="Day / night">☀️</button>
     <span id="authArea"></span>
   </div>
@@ -600,6 +731,27 @@ body.light .mini,body.light .rcount,body.light .rby{color:#5b6478}
     <div class="plan"><h4>Mentor Plus</h4><div class="amt"><s>Rs 3099</s></div><div class="blessing">Your blessings / good wishes are enough for me 🙏</div>
       <ul><li>Everything in Full</li><li>Doubt-solving support</li><li>Passing certificate</li></ul>
       <button class="btn ghost" style="width:100%" onclick="openPay()">Go Plus free</button></div>
+  </div>
+</div></section>
+
+<section id="developer" style="padding:50px 0"><div class="wrap">
+  <div class="dev-card">
+    <div class="dev-photo-wrap">
+      <img src="developer-photo.jpeg" alt="CA Anshul Karwa" class="dev-photo" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=dev-photo-fallback>AK</div>'">
+    </div>
+    <div class="dev-info">
+      <div class="eyebrow">About the Developer</div>
+      <h2 class="title" style="margin-bottom:4px">Anshul Karwa</h2>
+      <p class="dev-quals">CA &middot; LLB &middot; BCA &middot; DISA &middot; FAFD &middot; AUTHOR &middot; SaaS Founder &amp; Developer &middot; Tax Technology Enabler</p>
+      <div class="dev-areas">
+        <div class="dev-area"><span class="dev-area-ic">&#128188;</span><div><b>CA</b><span>Tax &middot; GST &middot; Income Tax &middot; Litigation</span></div></div>
+        <div class="dev-area"><span class="dev-area-ic">&#128187;</span><div><b>Developer</b><span>Tools &middot; Apps &middot; Calculators &middot; Automation</span></div></div>
+        <div class="dev-area"><span class="dev-area-ic">&#128200;</span><div><b>Markets</b><span>Stocks &middot; SME &middot; IPO &middot; Capital Markets</span></div></div>
+        <div class="dev-area"><span class="dev-area-ic">&#128161;</span><div><b>Technology</b><span>Web Apps &middot; AI &middot; Digital Products</span></div></div>
+      </div>
+      <p class="dev-desc">Built DISA Saarthi from the ground up - writing every note, crafting every MCQ, and coding the entire platform. A study companion made by someone who actually cleared DISA, for those who want to do the same.</p>
+      <a href="https://www.linkedin.com/in/anshulkarwa" target="_blank" rel="noopener" class="btn grad" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-top:10px">&#128279; Connect on LinkedIn</a>
+    </div>
   </div>
 </div></section>
 
@@ -1769,25 +1921,25 @@ function examAlready(u){const best=(u.exams&&u.exams.length)?Math.max.apply(null
   <div class="qnav"><button class="btn grad" onclick="closeModal();openContact()">Contact us to appear again</button><button class="btn ghost" onclick="closeModal()">Close</button></div>`);
 }
 function examNotice(used,allowed){
- const nm=(currentUser()&&currentUser().name)||'Candidate';
- showModal(`<div style="margin:-28px -26px 16px;background:linear-gradient(90deg,#0e8a8a,#15b3b3);color:#fff;padding:18px 24px;border-radius:24px 24px 0 0">
+  const nm=(currentUser()&&currentUser().name)||'Candidate';
+  showModal(`<div style="margin:-28px -26px 16px;background:linear-gradient(90deg,#1c3f6e,#2f6fc0);color:#fff;padding:18px 24px;border-radius:24px 24px 0 0">
     <div style="font-size:18px;font-weight:800">ISA 3.0 Mock Assessment</div>
     <div style="font-size:12px;opacity:.9">DISA Saarthi &middot; by CA Anshul Karwa</div></div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
-    <div style="background:var(--card2);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">TOTAL MARKS</div><div style="font-size:22px;font-weight:900">200</div></div>
-    <div style="background:var(--card2);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">DURATION</div><div style="font-size:22px;font-weight:900">240 min</div></div>
-    <div style="background:var(--card2);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">ATTEMPT</div><div style="font-size:22px;font-weight:900">${(used||0)+1} / 1</div></div>
+    <div style="background:var(--card2);border:1px solid var(--ring);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">TOTAL MARKS</div><div style="font-size:22px;font-weight:900">200</div></div>
+    <div style="background:var(--card2);border:1px solid var(--ring);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">DURATION</div><div style="font-size:22px;font-weight:900">240 min</div></div>
+    <div style="background:var(--card2);border:1px solid var(--ring);border-radius:12px;padding:12px;text-align:center"><div style="font-size:11px;color:var(--muted);font-weight:700">ATTEMPT</div><div style="font-size:22px;font-weight:900">${(used||0)+1} / 1</div></div>
   </div>
-  <div style="font-weight:800;margin-bottom:6px">General Instructions</div>
-  <ol style="color:var(--ink);font-size:13.5px;line-height:1.75;margin:0 0 12px 18px">
+  <div style="font-weight:800;margin-bottom:6px;font-size:14px">General Instructions</div>
+  <ol style="color:var(--ink);font-size:13px;line-height:1.75;margin:0 0 12px 18px">
    <li>The countdown timer at the top-right shows the time remaining. The exam auto-submits when it reaches zero.</li>
-   <li>The question palette on the right shows the status of each question: <b style="color:#16a34a">Green</b> = Answered, <b style="color:#e5484d">Red</b> = Not Answered, <b style="color:#64748b">Grey</b> = Not Visited, <b style="color:#7c3aed">Purple</b> = Marked for Review.</li>
+   <li>The question palette on the right shows the status of each question: <b style="color:#4caf50">Green</b> = Answered, <b style="color:#e05a4f">Red</b> = Not Answered, <b style="color:#64748b">Grey</b> = Not Visited, <b style="color:#8e44ad">Purple</b> = Marked for Review.</li>
    <li>Use <b>Save &amp; Next</b> to save your answer and move on, <b>Mark for Review &amp; Next</b> to flag a question, and <b>Clear Response</b> to deselect.</li>
    <li>You <b>cannot submit before 70 minutes</b>, and must answer <b>at least 80 questions</b> to get a result.</li>
    <li>Pass mark is <b>120 / 200</b>. This is your <b>only attempt</b>. Copying/printing is disabled.</li>
   </ol>
   <label style="display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--ink);margin-bottom:14px;cursor:pointer"><input type="checkbox" id="exAgree" style="margin-top:3px;width:16px;height:16px"><span>I have read and understood the instructions and am ready to begin.</span></label>
-  <div class="qnav"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn grad" onclick="if(!document.getElementById('exAgree').checked){toast('Please tick the instructions box');return;}beginExam()">I am ready to begin →</button></div>`);
+  <div class="qnav"><button class="btn ghost" onclick="closeModal()">Cancel</button><button class="btn grad" style="background:linear-gradient(135deg,#2f6fc0,#1c3f6e);color:#fff" onclick="if(!document.getElementById('exAgree').checked){toast('Please tick the instructions box');return;}beginExam()">I am ready to begin &#8594;</button></div>`);
 }
 function exitExam(){if(confirm('Exit the test?\n\nYou will NOT be able to see the answers unless you attempt and submit the whole test.\nExiting now does NOT count as an attempt.'))closeExam();}
 function beginExam(){
@@ -1962,6 +2114,7 @@ initTheme();updNav();
 /* ================= GOOGLE SIGN-IN via FIREBASE AUTHENTICATION ================= */
 function clearLocalUser(email){try{const all=users();delete all[email];saveUsers(all);if(localStorage.getItem('disa_session')===email)localStorage.removeItem('disa_session');updNav();}catch(e){}}
 function ageFromDob(dob){const b=new Date(dob);if(isNaN(b.getTime()))return null;const t=new Date();let a=t.getFullYear()-b.getFullYear();const m=t.getMonth()-b.getMonth();if(m<0||(m===0&&t.getDate()<b.getDate()))a--;return a;}
+function getMaxDob(){const t=new Date();t.setFullYear(t.getFullYear()-18);return t.toISOString().slice(0,10);}
 function fbGoogleLogin(){
  if(!ensureFB()||!firebase.auth){authErr('Sign-in is still loading, please try again in a moment.');return;}
  const provider=new firebase.auth.GoogleAuthProvider();
@@ -1991,13 +2144,14 @@ function completeProfile(){
    <div class="pinfo"><b>${g.name||'Student'}</b><span>${g.email}</span></div></div>
   <div class="frow"><div style="flex:1"><label class="flbl">ICAI Membership No. (6 digits)</label><input class="fld" id="gpMem" maxlength="6" inputmode="numeric" placeholder="e.g. 123456"></div>
     <div style="flex:1"><label class="flbl">Phone (+91)</label><input class="fld" id="gpPhone" maxlength="10" inputmode="numeric" placeholder="10-digit number"></div></div>
-  <div class="frow"><div style="flex:1"><label class="flbl">Date of birth</label><input class="fld" id="gpDob" type="date"></div>
+  <div class="frow"><div style="flex:1"><label class="flbl">Date of birth</label><input class="fld" id="gpDob" type="date" max=""></div>
     <div style="flex:1"><label class="flbl">City / Address</label><input class="fld" id="gpAddr" placeholder="City, State"></div></div>
   <label style="display:flex;gap:9px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin:6px 0 12px;cursor:pointer">
     <input type="checkbox" id="gpAgree" style="margin-top:3px;width:16px;height:16px;flex-shrink:0">
     <span>I accept the <a class="namelink" onclick="openPrivacy()">Privacy Policy &amp; Terms</a> and understand that DISA Saarthi (by CA Anshul Karwa) is a study aid only and is <b>not liable</b> for exam outcomes, accuracy, or any decisions I take based on it.</span></label>
   <div class="errmsg" id="authErr"></div>
   <button class="btn grad" style="width:100%" onclick="finishGoogle()">Finish & enter</button>`);
+  setTimeout(function(){var dobEl=document.getElementById('gpDob');if(dobEl)dobEl.setAttribute('max',getMaxDob());},50);
 }
 function finishGoogle(){
  const g=window._gpending||{};
@@ -2008,7 +2162,7 @@ function finishGoogle(){
  if(!/^\d{6}$/.test(mem))return authErr('Membership number must be exactly 6 digits.');
  if(!/^\d{10}$/.test(phone))return authErr('Phone must be a 10-digit number.');
  if(!dob)return authErr('Please select your date of birth.');
- var _age=ageFromDob(dob); if(_age===null||_age<18)return authErr('Sorry, we are unable to register this account with the details provided.');
+  var _age=ageFromDob(dob); if(_age===null||_age<18)return authErr('You must be at least 18 years old.');
  if(!addr)return authErr('Please enter your city / address.');
  if(!document.getElementById('gpAgree').checked)return authErr('Please accept the Privacy Policy & Terms to continue.');
  const u={uid:g.uid,name:g.name||'Student',email:(g.email||'').toLowerCase(),membership:mem,phone:'+91'+phone,address:addr,dob:dob,provider:'google',photo:g.photo||null,chapters:{},exams:[],joined:new Date().toISOString().slice(0,10)};
@@ -2024,7 +2178,7 @@ function finishGoogle(){
 /* ---------- FIREBASE (cloud sync of students, for the admin dashboard) ---------- */
 const FIREBASE_CONFIG={
   apiKey: "AIzaSyCWPyv3BZa10M7B-jz7hcC3fw0Iuxf2RII",
-  authDomain: "disa-3a0ac.firebaseapp.com",
+  authDomain: "disa.studyfromnotes.com",
   projectId: "disa-3a0ac",
   storageBucket: "disa-3a0ac.firebasestorage.app",
   messagingSenderId: "76181770954",
