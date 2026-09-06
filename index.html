@@ -217,7 +217,7 @@ footer{position:relative;z-index:1;padding:40px 0;text-align:center;color:var(--
 .notebody p{margin-bottom:12px;line-height:1.7;color:#e7e0ff;font-size:14.5px}
 
 /* ================= PROTECTED STUDY READER ================= */
-#reader{position:fixed;inset:0;z-index:200;display:none;flex-direction:column;
+#reader{position:fixed;inset:0;z-index:230;display:none;flex-direction:column;
   background:radial-gradient(900px 500px at 80% -5%,#1e1b4b 0%,transparent 55%),var(--bg);
   -webkit-user-select:none;-moz-user-select:none;user-select:none}
 #reader.on{display:flex}
@@ -681,6 +681,7 @@ body.light .plan .amt small{color:#6b7280}
   .price{grid-template-columns:repeat(2,1fr)}
   .dev-photo-wrap{width:170px;height:170px}
 }
+@media print{body*,body{display:none!important;visibility:hidden!important;height:0!important;overflow:hidden!important}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -1727,6 +1728,8 @@ document.addEventListener('keydown',e=>{
  if(!inField()&&(e.ctrlKey||e.metaKey)&&['c','x','s','p','u'].includes(k)){e.preventDefault();toast('Copying / saving is disabled');}
  if(k==='f12'){e.preventDefault();}
 });
+window.print=function(){toast('Printing is disabled');};
+window.addEventListener('beforeprint',e=>e.preventDefault());
 
 /* ===================== CHAPTER QUIZ (modal) ===================== */
 function chapMenu(){
@@ -2052,12 +2055,38 @@ function renderExam(){
 }
 function buildPalette(){const g=document.getElementById('pgrid');if(!g)return;
  g.innerHTML=EX.q.map((_,k)=>{const a=EX.ans[k]>=0,mk=EX.marked[k],vi=EX.visited[k];let cls=a&&mk?'amr':mk?'mrk':a?'ans':vi?'nans':'nv';return `<button class="pgi ${cls} ${k===EX.i?'cur':''}" onclick="jumpEx(${k})"><span class="stq">*</span>${k+1}</button>`;}).join('');}
+function jumpToQuestion(k){
+ EX.i=k;EX.visited[k]=true;
+ const item=EX.q[k];
+ const qno=document.querySelector('.ex-qno');
+ const qtxt=document.querySelector('.ex-qtext');
+ const opts=document.getElementById('exopts');
+ const timerEl=document.querySelector('.extimer');
+ if(qno)qno.innerHTML=`<span class="star">*</span> Question No. ${k+1}`;
+ if(qtxt)qtxt.innerHTML=item.q;
+ if(opts)opts.innerHTML=item.o.map((o,idx)=>`<label class="ex-opt ${EX.ans[k]===idx?'on':''}" onclick="pickEx(${idx})"><span class="ex-radio"></span><span>${o}</span></label>`).join('');
+ if(timerEl){timerEl.style.display='block';}
+ const prev=document.querySelector('.ex-footr .exbtn:first-child');
+ if(prev)prev.disabled=(k===0);
+ buildPalette();updateCounts();
+}
 function pickEx(k){EX.ans[EX.i]=k;document.querySelectorAll('#exopts .ex-opt').forEach((b,i)=>b.classList.toggle('on',i===k));buildPalette();}
-function saveNext(){if(EX.i<EX.q.length-1){EX.i++;renderExam();}else{toast('This is the last question. Use Submit when ready.');}}
-function markReviewNext(){EX.marked[EX.i]=true;if(EX.i<EX.q.length-1){EX.i++;renderExam();}else{buildPalette();}}
-function clearResp(){EX.ans[EX.i]=-1;renderExam();}
-function navEx(d){const n=EX.i+d;if(n>=0&&n<EX.q.length){EX.i=n;renderExam();}}
-function jumpEx(k){const m=document.querySelector('.ex-main');const sy=m?m.scrollTop:0;EX.i=k;renderExam();if(m){const nm=document.querySelector('.ex-main');if(nm)nm.scrollTop=sy;}}
+function saveNext(){if(EX.i<EX.q.length-1){jumpToQuestion(EX.i+1);}else{toast('This is the last question. Use Submit when ready.');}}
+function markReviewNext(){EX.marked[EX.i]=true;if(EX.i<EX.q.length-1){jumpToQuestion(EX.i+1);}else{buildPalette();}}
+function clearResp(){EX.ans[EX.i]=-1;jumpToQuestion(EX.i);}
+function navEx(d){const n=EX.i+d;if(n>=0&&n<EX.q.length){jumpToQuestion(n);}}
+function jumpEx(k){jumpToQuestion(k);}
+function updateCounts(){
+ const c=examCounts();
+ const lg=document.querySelector('.ex-legend');
+ if(!lg)return;
+ const shapes=lg.querySelectorAll('.leg-shape');
+ if(shapes[0])shapes[0].textContent=c.A;
+ if(shapes[1])shapes[1].textContent=c.NA;
+ if(shapes[2])shapes[2].textContent=c.NV;
+ if(shapes[3])shapes[3].textContent=c.M;
+ if(shapes[4])shapes[4].textContent=c.AM;
+}
 function confirmSubmit(){
  const answered=EX.ans.filter(a=>a>=0).length;
  if(answered<EXAM_MIN_ANSWERED){return toast('Answer at least 80 questions to get a result (you have '+answered+')');}
