@@ -801,7 +801,7 @@ body.light .plan .amt small{color:#6b7280}
 <!-- MODAL -->
 <div id="reader"></div>
 <div id="exam"></div>
-<div id="devFloat" onclick="openDevModal()" style="position:fixed;bottom:24px;right:24px;z-index:200;display:flex;align-items:center;gap:10px;background:#1a1a2e;color:#fff;padding:8px 18px 8px 8px;border-radius:999px;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.35);transition:transform .2s;font-family:Arial,sans-serif" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
+<div id="devFloat" onclick="openDevModal()" style="position:fixed;bottom:24px;right:24px;z-index:250;display:flex;align-items:center;gap:10px;background:#1a1a2e;color:#fff;padding:8px 18px 8px 8px;border-radius:999px;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.35);transition:transform .2s;font-family:Arial,sans-serif" onmouseenter="this.style.transform='scale(1.05)'" onmouseleave="this.style.transform='scale(1)'">
  <img src="developer-photo.jpeg" onerror="this.style.display='none'" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.3)">
  <span style="font-weight:700;font-size:13px;white-space:nowrap">About Developer</span></div>
 <div id="plannerView" style="position:fixed;inset:0;z-index:220;display:none;flex-direction:column;background:#fff">
@@ -2056,7 +2056,7 @@ function saveNext(){if(EX.i<EX.q.length-1){EX.i++;renderExam();}else{toast('This
 function markReviewNext(){EX.marked[EX.i]=true;if(EX.i<EX.q.length-1){EX.i++;renderExam();}else{buildPalette();}}
 function clearResp(){EX.ans[EX.i]=-1;renderExam();}
 function navEx(d){const n=EX.i+d;if(n>=0&&n<EX.q.length){EX.i=n;renderExam();}}
-function jumpEx(k){EX.i=k;renderExam();}
+function jumpEx(k){const m=document.querySelector('.ex-main');const sy=m?m.scrollTop:0;EX.i=k;renderExam();if(m){const nm=document.querySelector('.ex-main');if(nm)nm.scrollTop=sy;}}
 function confirmSubmit(){
  const answered=EX.ans.filter(a=>a>=0).length;
  if(answered<EXAM_MIN_ANSWERED){return toast('Answer at least 80 questions to get a result (you have '+answered+')');}
@@ -2127,8 +2127,8 @@ function reviewExam(){
     const tag=idx===q.a?' · correct answer':((idx===sel&&sel!==q.a)?' · your answer':'');
     return `<div class="rvo ${cls}"><b>${'ABCD'[idx]}.</b> ${o}<span style="color:var(--muted);font-size:12px">${tag}</span></div>`;}).join('')}${sel<0?'<div style="color:var(--muted);font-size:12px">You did not answer this question.</div>':''}</div>`;}).join('');
  ex.innerHTML=`<div class="exbar"><div class="extitle">🥷 Review · You scored ${EX.score} / 200</div><div style="display:flex;gap:8px"><button class="btn grad" onclick="showCertificate(EX.score,false)">← Back to result</button></div></div>
-  <div class="exmain">${items}
-   <div style="text-align:center;font-weight:700;font-size:12px;color:#1c3f6e;padding:16px 0">Made with &#10084; by <a href="${M1LINK}" target="_blank" rel="noopener" style="color:#2f6fc0;text-decoration:none">CA Anshul Karwa</a></div>
+  <div class="exmain" style="position:relative"><div style="position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.04;background:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27330%27 height=%27150%27%3E%3Ctext x=%278%27 y=%2795%27 font-family=%27Segoe UI,sans-serif%27 font-size=%2719%27 font-weight=%27800%27 fill=%27%23222%27 transform=%27rotate(-18 165 75)%27%3ECreated by CA Anshul Karwa%3C/text%3E%3C/svg%3E')"></div>${items}
+   <div style="position:relative;z-index:1;text-align:center;font-weight:700;font-size:12px;color:#1c3f6e;padding:16px 0">Made with &#10084; by <a href="${M1LINK}" target="_blank" rel="noopener" style="color:#2f6fc0;text-decoration:none">CA Anshul Karwa</a></div>
   <div style="height:40px"></div></div>
   <div class="ex-ver">Version : DISA Saarthi v1.0</div>`;
  ex.classList.add('on');document.body.style.overflow='hidden';
