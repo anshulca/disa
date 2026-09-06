@@ -2048,6 +2048,7 @@ function renderExam(){
   <div class="ex-submitbar"><button class="exbtn sub" onclick="confirmSubmit()">Submit</button></div>
   <div class="ex-ver">Version : DISA Saarthi v1.0</div>`;
  ex.classList.add('on');document.body.style.overflow='hidden';buildPalette();
+ const df=document.getElementById('devFloat');if(df)df.style.display='none';
 }
 function buildPalette(){const g=document.getElementById('pgrid');if(!g)return;
  g.innerHTML=EX.q.map((_,k)=>{const a=EX.ans[k]>=0,mk=EX.marked[k],vi=EX.visited[k];let cls=a&&mk?'amr':mk?'mrk':a?'ans':vi?'nans':'nv';return `<button class="pgi ${cls} ${k===EX.i?'cur':''}" onclick="jumpEx(${k})"><span class="stq">*</span>${k+1}</button>`;}).join('');}
@@ -2108,6 +2109,7 @@ function showCertificate(score,auto){
   </div>
   <div class="ex-ver">Version : DISA Saarthi v1.0</div>`;
  ex.classList.add('on');document.body.style.overflow='hidden';
+ const df=document.getElementById('devFloat');if(df)df.style.display='flex';
 }
 function downloadCert(){
  const box=document.getElementById('certBox');
@@ -2132,6 +2134,7 @@ function reviewExam(){
   <div style="height:40px"></div></div>
   <div class="ex-ver">Version : DISA Saarthi v1.0</div>`;
  ex.classList.add('on');document.body.style.overflow='hidden';
+ const df=document.getElementById('devFloat');if(df)df.style.display='flex';
  const m=document.querySelector('.exmain');if(m)m.scrollTop=0;
 }
 function closeExam(){const e=document.getElementById('exam');e.classList.remove('on');document.body.style.overflow='';EX=null;clearInterval(exTimer);updNav();}
